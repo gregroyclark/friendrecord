@@ -71,3 +71,12 @@ model VerificationToken {
 
     @@unique([identifier, token])
 }
+
+model Friend {
+    id              Int         @id     @default(autoincrement())
+    firstName       String
+    lastName        String
+    phoneNumber     String
+    email           String
+    notes           String
+}
