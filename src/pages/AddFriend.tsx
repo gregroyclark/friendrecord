@@ -37,9 +37,17 @@ const AddFriend: React.FC = () => {
     event.preventDefault();
 
     try {
-      const response = await createFriend(formData);
+      const response = await fetch("/api/addFriend", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (!response.ok) {
+        throw new Error("Error adding friend");
+      }
+      const data = await response.json();
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      console.log("Response:", response);
+      console.log("Response:", data);
     } catch (error) {
       console.error("Error adding friend:", error);
     }
