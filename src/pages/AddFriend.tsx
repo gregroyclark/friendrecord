@@ -90,6 +90,8 @@ const AddFriend: React.FC = () => {
             onChange={handleChange}
           />
         </label>
+
+        <button type="submit">Add Friend</button>
       </form>
     </>
   );
