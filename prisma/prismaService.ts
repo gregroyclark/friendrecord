@@ -14,6 +14,20 @@ export const getFriends = async () => {
   }
 };
 
+export const getFriend = async (id: number) => {
+  try {
+    const friend = await prisma.friend.findUnique({
+      where: {
+        id,
+      },
+    });
+    return friend;
+  } catch (error) {
+    console.error("Error finding friend:", error);
+    throw error;
+  }
+};
+
 export const createFriend = async (data: {
   firstName: string;
   lastName: string;
