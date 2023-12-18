@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { type NextApiRequest, type NextApiResponse } from "next";
+
+import db from "../../../prisma/db";
 import { createFriend } from "prisma/prismaService";
 
 export default async function handler(
@@ -16,7 +18,7 @@ export default async function handler(
         email,
         notes,
       });
-      res.status(201).json(newFriend);
+      res.status(200).json(newFriend);
     } catch (error) {
       console.error("Error adding friend:", error);
       res.status(500).json({ error: "Internal Server Error" });
