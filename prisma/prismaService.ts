@@ -23,3 +23,25 @@ export const createFriend = async (data: {
     throw error;
   }
 };
+
+export const updateFriend = async (
+  friendId: number,
+  data: {
+    firstName?: string;
+    lastName?: string;
+    phoneNumber?: string;
+    email?: string;
+    notes?: string;
+  },
+) => {
+  try {
+    const updatedFriend = await prisma.friend.update({
+      where: { id: friendId },
+      data,
+    });
+    return updatedFriend;
+  } catch (error) {
+    console.error("Error updating friend:", error);
+    throw error;
+  }
+};
