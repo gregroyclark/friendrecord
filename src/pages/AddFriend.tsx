@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import axios, { type AxiosResponse } from "axios";
+import axios from "axios";
 
-interface FriendInfo {
+type FriendInfo = {
   firstName: string;
   lastName: string;
   phoneNumber: string;
   email: string;
   notes: string;
-}
+};
 
 const AddFriend: React.FC = () => {
   const [formData, setFormData] = useState<FriendInfo>({
@@ -33,11 +33,18 @@ const AddFriend: React.FC = () => {
     event.preventDefault();
 
     try {
-      const response: AxiosResponse<FriendInfo | undefined> = await axios.post<
-        FriendInfo | undefined
+      const response = await axios.post<
+        FriendInfo,
+        {
+          firstName: string;
+          lastName: string;
+          phoneNumber: string;
+          email: string;
+          notes: string;
+        }
       >("/api/addFriend", formData);
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      console.log("Response:", response.data);
+      console.log("Response:", response);
     } catch (error) {
       console.error("Error adding friend:", error);
     }
