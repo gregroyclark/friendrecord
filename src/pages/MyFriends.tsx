@@ -7,8 +7,16 @@ import React, { useState, useEffect } from "react";
 import Layout from "~/components/Layout";
 import { getFriends } from "prisma/prismaService";
 
+interface Friend {
+  id: number;
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  email: string;
+  notes: string;
+}
 const MyFriends = () => {
-  const [friends, setFriends] = useState([]);
+  const [friends, setFriends] = useState<Friend[]>([]);
 
   useEffect(() => {
     const fetchFriends = async () => {
