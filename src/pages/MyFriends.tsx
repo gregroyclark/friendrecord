@@ -5,7 +5,7 @@
 import React, { useState, useEffect } from "react";
 
 import Layout from "~/components/Layout";
-import { getFriends } from "prisma/prismaService";
+import Link from "next/link";
 
 interface Friend {
   id: number;
@@ -52,6 +52,7 @@ const MyFriends = () => {
               <th className="border-b p-2">Phone Number</th>
               <th className="border-b p-2">Email</th>
               <th className="border-b p-2">Notes</th>
+              <th className="border-b p-2">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -62,6 +63,14 @@ const MyFriends = () => {
                 <th className="border-b p-2">{friend.phoneNumber}</th>
                 <th className="border-b p-2">{friend.email}</th>
                 <th className="border-b p-2">{friend.notes}</th>
+                <th>
+                  <button>
+                    <Link href={"/showFriend/${friend.id}"}>Show</Link>
+                  </button>
+                  <button>
+                    <Link href={"/updateFriend/${friend.id}"}>edit</Link>
+                  </button>
+                </th>
               </tr>
             ))}
           </tbody>
