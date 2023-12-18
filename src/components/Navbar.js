@@ -6,7 +6,9 @@ const Navbar = () => {
     <div className="fixed z-[100] flex h-24 w-full items-center bg-[#f8f8f8]">
       <div className="flex h-full w-full items-center justify-between p-4 shadow-md 2xl:px-16">
         <Link href={"/"}>
-          <h1 className="m-2 flex items-center justify-center">MyFriendBook</h1>
+          <h1 className="m-2 flex items-center justify-center font-semibold">
+            MyFriendBook
+          </h1>
         </Link>
         <div className="flex items-center">
           <ul className="flex flex-row">
