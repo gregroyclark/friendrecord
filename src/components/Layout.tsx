@@ -1,5 +1,5 @@
 import React, { type ReactElement } from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "./Navbar";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Layout = ({ children }: { children: ReactElement }) => {
