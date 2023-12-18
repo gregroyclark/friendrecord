@@ -11,7 +11,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <div className="max-w-m mx-auto mt-8 bg-white p-4 shadow-md">
+        <div className="max-w-m m-4 mt-8 bg-white p-4 shadow-md">
           <h1 className="m-4 flex justify-center text-lg font-semibold text-gray-600">
             Welcome to MyFriendBook!
           </h1>

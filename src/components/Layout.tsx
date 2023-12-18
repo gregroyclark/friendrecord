@@ -5,9 +5,9 @@ import Navbar from "./Navbar";
 const Layout = ({ children }: { children: ReactElement }) => {
   return (
     <html lang="en">
-      <body>
+      <body className="min-h-screen">
         <Navbar />
-        {children}
+        <main className="m-8">{children}</main>
       </body>
     </html>
     // <div>
