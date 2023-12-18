@@ -6,6 +6,16 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+export const getFriends = async () => {
+  try {
+    const friends = await prisma.friend.findMany();
+    return friends;
+  } catch (error) {
+    console.error("Error finding friends:", error);
+    throw error;
+  }
+};
+
 export const createFriend = async (data: {
   firstName: string;
   lastName: string;
