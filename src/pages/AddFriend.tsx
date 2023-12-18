@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React, { useState } from "react";
 import axios from "axios";
 
-type FriendInfo = {
+import { createFriend } from "prisma/prismaService";
+
+type FormData = {
   firstName: string;
   lastName: string;
   phoneNumber: string;
@@ -10,7 +13,7 @@ type FriendInfo = {
 };
 
 const AddFriend: React.FC = () => {
-  const [formData, setFormData] = useState<FriendInfo>({
+  const [formData, setFormData] = useState<FormData>({
     firstName: "",
     lastName: "",
     phoneNumber: "",
@@ -33,16 +36,7 @@ const AddFriend: React.FC = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post<
-        FriendInfo,
-        {
-          firstName: string;
-          lastName: string;
-          phoneNumber: string;
-          email: string;
-          notes: string;
-        }
-      >("/api/addFriend", formData);
+      const response = await createFriend(formData);
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       console.log("Response:", response);
     } catch (error) {
@@ -50,48 +44,54 @@ const AddFriend: React.FC = () => {
     }
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        item
-        <input
-          type="text"
-          name="firstName"
-          value={formData.firstName}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        item
-        <input
-          type="text"
-          name="lastName"
-          value={formData.lastName}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        item
-        <input
-          type="text"
-          name="phoneNumber"
-          value={formData.phoneNumber}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        item
-        <input
-          type="text"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        item
-        <textarea name="notes" value={formData.notes} onChange={handleChange} />
-      </label>
-    </form>
+    <>
+      <form onSubmit={handleSubmit}>
+        <label>
+          item
+          <input
+            type="text"
+            name="firstName"
+            value={formData.firstName}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          item
+          <input
+            type="text"
+            name="lastName"
+            value={formData.lastName}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          item
+          <input
+            type="text"
+            name="phoneNumber"
+            value={formData.phoneNumber}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          item
+          <input
+            type="text"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          item
+          <textarea
+            name="notes"
+            value={formData.notes}
+            onChange={handleChange}
+          />
+        </label>
+      </form>
+    </>
   );
 };
 
