@@ -24,7 +24,7 @@ const MyFriends = () => {
 
   return (
     <Layout>
-      <div className="mx-auto mt-8 max-w-md bg-white p-4 shadow-md">
+      <div className="mx-auto mt-8 bg-white p-4 shadow-md">
         <h1 className="mb-4 flex justify-center text-lg font-semibold text-gray-600">
           My Friends
         </h1>
