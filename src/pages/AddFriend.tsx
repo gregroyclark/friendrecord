@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React, { useState } from "react";
-import axios from "axios";
 
 import { createFriend } from "prisma/prismaService";
 
@@ -44,56 +43,80 @@ const AddFriend: React.FC = () => {
     }
   };
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <label>
-          item
-          <input
-            type="text"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          item
-          <input
-            type="text"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          item
-          <input
-            type="text"
-            name="phoneNumber"
-            value={formData.phoneNumber}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          item
-          <input
-            type="text"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          item
-          <textarea
-            name="notes"
-            value={formData.notes}
-            onChange={handleChange}
-          />
-        </label>
+    <div className="mx-auto mt-8 max-w-md bg-white p-4 shadow-md">
+      <h1 className="mb-4 flex justify-center text-lg font-semibold text-gray-600">
+        Add a new friend!
+      </h1>
+      <hr className="mb-4" />
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="flex flex-col">
+          <label className="mb-1 flex flex-col text-sm font-semibold text-gray-600">
+            First Name
+            <input
+              type="text"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+              className="rounded-md border border-gray-300 p-2"
+            />
+          </label>
+        </div>
+        <div className="flex flex-col">
+          <label className="mb-1 flex flex-col text-sm font-semibold text-gray-600">
+            Last Name
+            <input
+              type="text"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              className="rounded-md border border-gray-300 p-2"
+            />
+          </label>
+        </div>
+        <div>
+          <label className="mb-1 flex flex-col text-sm font-semibold text-gray-600">
+            Phone Number
+            <input
+              type="text"
+              name="phoneNumber"
+              value={formData.phoneNumber}
+              onChange={handleChange}
+              className="rounded-md border border-gray-300 p-2"
+            />
+          </label>
+        </div>
+        <div className="flex flex-col">
+          <label className="mb-1 flex flex-col text-sm font-semibold text-gray-600">
+            Email
+            <input
+              type="text"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              className="rounded-md border border-gray-300 p-2"
+            />
+          </label>
+        </div>
+        <div className="flex flex-col">
+          <label className="mb-1 flex flex-col text-sm font-semibold text-gray-600">
+            Notes
+            <textarea
+              name="notes"
+              value={formData.notes}
+              onChange={handleChange}
+              className="rounded-md border border-gray-300 p-2"
+            />
+          </label>
+        </div>
 
-        <button type="submit">Add Friend</button>
+        <button
+          type="submit"
+          className="rounded-md bg-blue-700 p-2 text-white hover:bg-blue-800"
+        >
+          Add Friend
+        </button>
       </form>
-    </>
+    </div>
   );
 };
 
