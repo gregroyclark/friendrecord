@@ -1,10 +1,11 @@
 import React from "react";
+import Layout from "~/components/Layout";
 
 const UpdateFriend = () => {
   return (
-    <div>
+    <Layout>
       <div>Update Friend</div>
-    </div>
+    </Layout>
   );
 };
 
