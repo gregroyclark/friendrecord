@@ -65,10 +65,10 @@ const MyFriends = () => {
                 <th className="border-b p-2">{friend.notes}</th>
                 <th>
                   <button className="p-2">
-                    <Link href={"/showFriend/${friend.id}"}>Show</Link>
+                    <Link href={`/showFriend/${friend.id}`}>Show</Link>
                   </button>
                   <button className="p-2">
-                    <Link href={"/updateFriend/${friend.id}"}>edit</Link>
+                    <Link href={`/updateFriend/${friend.id}`}>edit</Link>
                   </button>
                 </th>
               </tr>
