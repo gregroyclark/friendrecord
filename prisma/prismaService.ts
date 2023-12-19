@@ -15,12 +15,14 @@ export const getFriends = async () => {
 };
 
 export const getFriend = async (id: number) => {
+  console.log("getFriend id: ", id);
   try {
     const friend = await prisma.friend.findUnique({
       where: {
         id,
       },
     });
+    console.log(friend);
     return friend;
   } catch (error) {
     console.error("Error finding friend:", error);
