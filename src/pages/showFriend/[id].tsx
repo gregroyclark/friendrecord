@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 import { type Friend } from "@prisma/client";
-import { getFriend } from "prisma/prismaService";
 
 const ShowFriend = () => {
   const [friend, setFriend] = useState<Friend | null>(null);
@@ -13,7 +12,11 @@ const ShowFriend = () => {
 
   useEffect(() => {
     const fetchFriend = async () => {
-      const friendData = await getFriend(friendId);
+      const response = await fetch(`/api/getFriend/${friendId}`);
+      if (!response.ok) {
+        throw new Error("Error fetching friend");
+      }
+      const friendData = (await response.json()) as Friend | null;
       setFriend(friendData);
     };
     void fetchFriend();
