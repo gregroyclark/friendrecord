@@ -15,6 +15,7 @@ interface Friend {
   email: string;
   notes: string;
 }
+
 const MyFriends = () => {
   const [friends, setFriends] = useState<Friend[]>([]);
 
@@ -65,7 +66,7 @@ const MyFriends = () => {
                 <th className="border-b p-2">{friend.notes}</th>
                 <th>
                   <button className="p-2">
-                    <Link href={`/showFriend/${friend.id}`}>Show</Link>
+                    <Link href={`/showFriend/${friend.id}`}>show</Link>
                   </button>
                   <button className="p-2">
                     <Link href={`/updateFriend/${friend.id}`}>edit</Link>
