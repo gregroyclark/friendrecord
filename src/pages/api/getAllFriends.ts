@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { type NextApiRequest, type NextApiResponse } from "next";
 
 import { getAllFriends } from "prisma/prismaService";
