@@ -17,14 +17,6 @@ const Layout = ({ children }: { children: ReactElement }) => {
         <main className="m-8 flex items-center justify-center">{children}</main>
       </body>
     </html>
-    // <div>
-    //   <Navbar />
-    //   <main className="absolute left-0 top-0 flex min-h-screen w-full bg-white/10">
-    //     <div className="m-auto h-full w-full max-w-[700px] flex-col items-start justify-center">
-    //       {children}
-    //     </div>
-    //   </main>
-    // </div>
   );
 };
 
