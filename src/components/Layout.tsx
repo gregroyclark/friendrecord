@@ -7,7 +7,9 @@ const Layout = ({ children }: { children: ReactElement }) => {
     <html lang="en">
       <body className="min-h-screen">
         <Navbar />
-        <main className="m-8 flex items-center justify-center">{children}</main>
+        <main className="m-8 flex h-screen items-center justify-center">
+          {children}
+        </main>
       </body>
     </html>
     // <div>
