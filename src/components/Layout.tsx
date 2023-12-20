@@ -12,11 +12,9 @@ const Layout = ({ children }: { children: ReactElement }) => {
         <meta name="description" content="Welcome to MyFriendBook" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <body className="min-h-screen">
+      <body className="">
         <Navbar />
-        <main className="m-8 flex h-screen items-center justify-center">
-          {children}
-        </main>
+        <main className="m-8 flex items-center justify-center">{children}</main>
       </body>
     </html>
     // <div>
