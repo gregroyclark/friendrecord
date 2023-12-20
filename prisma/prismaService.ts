@@ -14,7 +14,7 @@ export const getFriends = async () => {
   }
 };
 
-export const getFriend = async (id: number) => {
+export const getFriend = async (id) => {
   console.log("getFriend id: ", id);
   try {
     const friend = await prisma.friend.findUnique({
