@@ -5,8 +5,6 @@
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 
-import Layout from "~/components/Layout";
-
 interface Friend {
   id: number;
   firstName: string;
@@ -40,7 +38,7 @@ const MyFriends = () => {
   }, []);
 
   return (
-    <Layout>
+    <>
       <div className="m-2 mt-8 bg-white p-4 shadow-md">
         <h1 className="mb-4 flex justify-center text-lg font-semibold text-gray-600">
           My Friends
@@ -88,7 +86,7 @@ const MyFriends = () => {
           </tbody>
         </table>
       </div>
-    </Layout>
+    </>
   );
 };
 

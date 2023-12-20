@@ -44,11 +44,7 @@ const ShowFriend = () => {
 
   if (!id) {
     console.log("no id");
-    return (
-      <Layout>
-        <div className="flex items-center justify-center">Loading...</div>
-      </Layout>
-    );
+    return <div className="flex items-center justify-center">Loading...</div>;
   }
 
   console.log("showFriend id, after loading: ", typeof id, id);
@@ -56,8 +52,8 @@ const ShowFriend = () => {
   console.log("showFriend friendId, after loading: ", typeof id, id);
 
   return (
-    <Layout>
-      <div className="m-4 rounded-md border p-4">
+    <>
+      <div className="m-4 w-auto rounded-md border p-4">
         <h1 className="font-semibold">Friend</h1>
         <hr />
         <h2 className="m-4">First Name: {friend?.firstName}</h2>
@@ -75,7 +71,7 @@ const ShowFriend = () => {
           delete
         </button>
       </div>
-    </Layout>
+    </>
   );
 };
 

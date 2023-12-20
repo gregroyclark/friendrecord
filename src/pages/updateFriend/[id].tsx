@@ -52,11 +52,7 @@ const UpdateFriend = () => {
   };
 
   if (!friend) {
-    return (
-      <Layout>
-        <div className="flex justify-center">Loading...</div>
-      </Layout>
-    );
+    return <div className="flex justify-center">Loading...</div>;
   }
 
   return (

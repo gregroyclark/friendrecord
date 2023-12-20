@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React, { useState } from "react";
 
-import { createFriend } from "prisma/prismaService";
-import Layout from "~/components/Layout";
 import Link from "next/link";
 
 type FormData = {
@@ -53,7 +51,7 @@ const AddFriend: React.FC = () => {
     }
   };
   return (
-    <Layout>
+    <>
       <div className="mx-auto w-full bg-white p-4 shadow-md md:w-2/3">
         <h1 className="mb-4 flex justify-center text-lg font-semibold text-gray-600">
           Add a new friend!
@@ -133,7 +131,7 @@ const AddFriend: React.FC = () => {
           </Link>
         </form>
       </div>
-    </Layout>
+    </>
   );
 };
 
