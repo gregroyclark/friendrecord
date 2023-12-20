@@ -11,8 +11,9 @@ export default async function handler(
 ) {
   const { id } = req.query;
   console.log("getFriend id", id);
+  const friendId = Array.isArray(id) ? Number(id[0]) : Number(id);
   try {
-    const friend = await getFriend(Number(id));
+    const friend = await getFriend(Number(friendId));
     console.log("getFriend Friend: ", typeof friend, friend);
     res.status(200).json(friend);
   } catch (error) {
