@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <>
       <Layout>
-        <div className="m-4 mt-8 flex flex-col items-center justify-center space-y-4 bg-white p-4 shadow-md">
+        <div className="m-4 flex flex-col items-center justify-center space-y-4 bg-white p-4 shadow-md">
           <h1 className="m-4 flex justify-center text-lg font-semibold text-gray-600">
             Welcome to MyFriendBook!
           </h1>
