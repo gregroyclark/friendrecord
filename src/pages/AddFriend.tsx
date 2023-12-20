@@ -54,7 +54,7 @@ const AddFriend: React.FC = () => {
   };
   return (
     <Layout>
-      <div className="mx-auto mt-8 max-w-md bg-white p-4 shadow-md">
+      <div className="mx-auto mt-8 w-full bg-white p-4 shadow-md">
         <h1 className="mb-4 flex justify-center text-lg font-semibold text-gray-600">
           Add a new friend!
         </h1>
