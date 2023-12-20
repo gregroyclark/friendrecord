@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -14,23 +16,24 @@ interface Friend {
 }
 
 const ShowFriend = () => {
-  const [friend, setFriend] = useState<Friend | null>();
+  const [friend, setFriend] = useState<Friend | null>(null);
 
   const router = useRouter();
   const { id } = router.query;
   console.log("id: ", id);
 
   const friendId = Array.isArray(id) ? Number(id[0]) : Number(id);
-  console.log("friendId: ", friendId);
+  console.log("friendId: ", id);
 
   useEffect(() => {
     const fetchFriend = async () => {
       const response = await fetch(`/api/getFriend/${friendId}`);
+      console.log(response);
       if (!response.ok) {
         throw new Error("Error fetching friend");
       }
-      const friendData = (await response.json()) as Friend | null;
-      console.log(friendData);
+      const friendData = await response.json();
+      console.log("friendData: ", friendData);
       setFriend(friendData);
     };
     void fetchFriend();
