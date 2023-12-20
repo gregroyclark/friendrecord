@@ -4,6 +4,24 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import prisma from "./prisma";
 
+export const createFriend = async (data: {
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  email: string;
+  notes: string;
+}) => {
+  try {
+    const newFriend = await prisma.friend.create({
+      data,
+    });
+    return newFriend;
+  } catch (error) {
+    console.error("Error creating friend:", error);
+    throw error;
+  }
+};
+
 export const getAllFriends = async () => {
   try {
     const friends = await prisma.friend.findMany();
@@ -26,24 +44,6 @@ export const getFriend = async (id: number) => {
     return friend;
   } catch (error) {
     console.error("Error finding friend:", error);
-    throw error;
-  }
-};
-
-export const createFriend = async (data: {
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
-  email: string;
-  notes: string;
-}) => {
-  try {
-    const newFriend = await prisma.friend.create({
-      data,
-    });
-    return newFriend;
-  } catch (error) {
-    console.error("Error creating friend:", error);
     throw error;
   }
 };
