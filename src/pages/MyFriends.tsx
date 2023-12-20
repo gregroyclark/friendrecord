@@ -2,10 +2,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
+import Link from "next/link";
 import React, { useState, useEffect } from "react";
 
 import Layout from "~/components/Layout";
-import Link from "next/link";
 
 interface Friend {
   id: number;
