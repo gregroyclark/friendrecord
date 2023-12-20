@@ -20,18 +20,22 @@ const ShowFriend = () => {
 
   const router = useRouter();
   const { id } = router.query;
-  console.log("id: ", typeof id, id);
+  console.log("showFriend id: ", typeof id, id);
 
   const friendId = Array.isArray(id) ? Number(id[0]) : Number(id);
-  console.log("friendId: ", typeof friendId, id);
+  console.log(
+    "showFriend friendId, before useEffect: ",
+    typeof friendId,
+    friendId,
+  );
 
   useEffect(() => {
     const fetchFriend = async () => {
       const response = await fetch(`/api/getFriend/${friendId}`);
       console.log(response);
-      if (!response.ok) {
-        throw new Error("Error fetching friend");
-      }
+      // if (!response.ok) {
+      //   throw new Error("Error fetching friend");
+      // }
       const friendData = await response.json();
       console.log("friendData: ", friendData);
       setFriend(friendData);
@@ -39,7 +43,15 @@ const ShowFriend = () => {
     void fetchFriend();
   }, [id]);
 
-  if (!friend) {
+  // const friendId = Array.isArray(id) ? Number(id[0]) : Number(id);
+  console.log(
+    "showFriend friendId, before loading: ",
+    typeof friendId,
+    friendId,
+  );
+
+  if (!id || !friendId) {
+    console.log("no id or friendId");
     return (
       <Layout>
         <div className="flex items-center justify-center">Loading...</div>
@@ -47,15 +59,26 @@ const ShowFriend = () => {
     );
   }
 
+  console.log("showFriend id, after loading: ", typeof id, id);
+
+  console.log(
+    "showFriend friendId, after loading: ",
+    typeof friendId,
+    friendId,
+  );
+
   return (
-    <div>
-      <h1>
-        {friend.firstName} {friend.lastName}
-      </h1>
-      <p>Phone Number: {friend.phoneNumber}</p>
-      <p>Email: {friend.email}</p>
-      <p>Notes: {friend.notes}</p>
-    </div>
+    <Layout>
+      <div className="m-4 rounded-md border p-4">
+        <h1 className="font-semibold">Friend</h1>
+        <hr />
+        <h2 className="m-4">First Name: {friend?.firstName}</h2>
+        <h2 className="m-4">Last Name: {friend?.lastName}</h2>
+        <p className="m-4">Phone Number: {friend?.phoneNumber}</p>
+        <p className="m-4">Email: {friend?.email}</p>
+        <p className="m-4">Notes: {friend?.notes}</p>
+      </div>
+    </Layout>
   );
 };
 
