@@ -65,6 +65,15 @@ const ShowFriend = () => {
         <p className="m-4">Phone Number: {friend?.phoneNumber}</p>
         <p className="m-4">Email: {friend?.email}</p>
         <p className="m-4">Notes: {friend?.notes}</p>
+        <hr />
+        <button
+          className="p-2"
+          onClick={() => {
+            void fetch(`api/deleteFriend${friend?.id}`, { method: "DELETE" });
+          }}
+        >
+          delete
+        </button>
       </div>
     </Layout>
   );
