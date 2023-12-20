@@ -72,6 +72,16 @@ const MyFriends = () => {
                   <button className="hidden p-2">
                     <Link href={`/updateFriend/${friend.id}`}>edit</Link>
                   </button>
+                  <button
+                    className="p-2"
+                    onClick={() => {
+                      void fetch(`deleteFriend${friend?.id}`, {
+                        method: "DELETE",
+                      });
+                    }}
+                  >
+                    delete
+                  </button>
                 </th>
               </tr>
             ))}
