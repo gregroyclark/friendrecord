@@ -1,8 +1,17 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-import { type Friend } from "@prisma/client";
+// import { type Friend } from "@prisma/client";
 import Layout from "~/components/Layout";
+
+interface Friend {
+  id: number;
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  email: string;
+  notes: string;
+}
 
 const ShowFriend = () => {
   const [friend, setFriend] = useState<Friend | null>();
