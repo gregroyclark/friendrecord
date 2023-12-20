@@ -1,9 +1,9 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-// import { type Friend } from "@prisma/client";
 import Layout from "~/components/Layout";
 
 interface Friend {
@@ -20,10 +20,10 @@ const ShowFriend = () => {
 
   const router = useRouter();
   const { id } = router.query;
-  console.log("id: ", id);
+  console.log("id: ", typeof id, id);
 
   const friendId = Array.isArray(id) ? Number(id[0]) : Number(id);
-  console.log("friendId: ", id);
+  console.log("friendId: ", typeof friendId, id);
 
   useEffect(() => {
     const fetchFriend = async () => {
