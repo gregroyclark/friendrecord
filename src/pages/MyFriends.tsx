@@ -69,7 +69,7 @@ const MyFriends = () => {
                   <button className="p-2">
                     <Link href={`/showFriend/${friend.id}`}>show</Link>
                   </button>
-                  <button className="p-2">
+                  <button className="hidden p-2">
                     <Link href={`/updateFriend/${friend.id}`}>edit</Link>
                   </button>
                 </th>
