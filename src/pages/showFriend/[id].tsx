@@ -22,19 +22,30 @@ const ShowFriend = () => {
   const { id } = router.query;
   console.log("showFriend id: ", typeof id, id);
 
-  Array.isArray(id) ? Number(id[0]) : Number(id);
-  console.log("showFriend friendId, before useEffect: ", typeof id, id);
+  const friendId = Array.isArray(id) ? Number(id[0]) : Number(id);
+  console.log(
+    "showFriend friendId, before useEffect: ",
+    typeof friendId,
+    friendId,
+  );
 
   useEffect(() => {
     const fetchFriend = async () => {
-      const response = await fetch(`/api/getFriend/${id}`);
-      console.log(response);
-      // if (!response.ok) {
-      //   throw new Error("Error fetching friend");
-      // }
-      const friendData = await response.json();
-      console.log("friendData: ", friendData);
-      setFriend(friendData);
+      try {
+        const response = await fetch(`/api/getFriend/${friendId}`, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        });
+        console.log(response);
+        if (!response.ok) {
+          throw new Error("Error fetching friend");
+        }
+        const friendData = await response.json();
+        console.log("friendData: ", friendData);
+        setFriend(friendData);
+      } catch (error) {
+        console.error("Error fetching friend: ", error);
+      }
     };
     void fetchFriend();
   }, [id]);
