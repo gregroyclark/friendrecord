@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Create T3 App</title>
+        <title>MyFriendBook</title>
         <meta name="description" content="Welcome to MyFriendBook" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
