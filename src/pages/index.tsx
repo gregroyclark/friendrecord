@@ -1,15 +1,9 @@
-import Head from "next/head";
 import Link from "next/link";
 import Layout from "~/components/Layout";
 
 export default function Home() {
   return (
     <>
-      <Head>
-        <title>MyFriendBook</title>
-        <meta name="description" content="Welcome to MyFriendBook" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <Layout>
         <div className="m-4 mt-8 w-2/3 space-y-4 bg-white p-4 shadow-md">
           <h1 className="m-4 flex justify-center text-lg font-semibold text-gray-600">
