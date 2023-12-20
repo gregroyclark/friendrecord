@@ -14,7 +14,7 @@ export const getAllFriends = async () => {
   }
 };
 
-export const getFriend = async (id) => {
+export const getFriend = async (id: number) => {
   console.log("getFriend id: ", id);
   try {
     const friend = await prisma.friend.findUniqueOrThrow({
@@ -52,7 +52,6 @@ export const updateFriend = async (
   // friendId: number,
   id: number,
   data: {
-    id?: number;
     firstName?: string;
     lastName?: string;
     phoneNumber?: string;
@@ -69,6 +68,17 @@ export const updateFriend = async (
     return updatedFriend;
   } catch (error) {
     console.error("Error updating friend:", error);
+    throw error;
+  }
+};
+
+export const deleteFriend = async (id: number) => {
+  try {
+    await prisma.friend.delete({
+      where: { id },
+    });
+  } catch (error) {
+    console.error("error deleting friend: ", error);
     throw error;
   }
 };
