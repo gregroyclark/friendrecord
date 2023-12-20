@@ -10,8 +10,10 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   const { id } = req.query;
+  console.log("getFriend id", id);
   try {
     const friend = await getFriend(id);
+    console.log("getFriend Friend: ", typeof friend, friend);
     res.status(200).json(friend);
   } catch (error) {
     res.status(500).json({ error: "Error fetching friend" });
