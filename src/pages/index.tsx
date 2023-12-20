@@ -11,10 +11,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <div className="max-w-m m-4 mt-8 bg-white p-4 shadow-md">
+        <div className="m-4 mt-8 w-2/3 space-y-4 bg-white p-4 shadow-md">
           <h1 className="m-4 flex justify-center text-lg font-semibold text-gray-600">
             Welcome to MyFriendBook!
           </h1>
+          <hr />
           <div className="m-8 flex flex-row items-center justify-around">
             <Link
               href={"/AddFriend"}
@@ -24,7 +25,7 @@ export default function Home() {
             </Link>
             <Link
               href={"/MyFriends"}
-              className="rounded-md bg-gray-500 p-2 text-white hover:bg-gray-600"
+              className="m-4 rounded-md bg-gray-500 p-2 text-white hover:bg-gray-600"
             >
               View Friends List
             </Link>
