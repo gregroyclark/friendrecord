@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import prisma from "./prisma";
 
-export const getFriends = async () => {
+export const getAllFriends = async () => {
   try {
     const friends = await prisma.friend.findMany();
     return friends;
@@ -17,9 +17,9 @@ export const getFriends = async () => {
 export const getFriend = async (id) => {
   console.log("getFriend id: ", id);
   try {
-    const friend = await prisma.friend.findUnique({
+    const friend = await prisma.friend.findUniqueOrThrow({
       where: {
-        id,
+        id: id,
       },
     });
     console.log(friend);
@@ -49,8 +49,10 @@ export const createFriend = async (data: {
 };
 
 export const updateFriend = async (
-  friendId: number,
+  // friendId: number,
+  id: number,
   data: {
+    id?: number;
     firstName?: string;
     lastName?: string;
     phoneNumber?: string;
@@ -60,9 +62,10 @@ export const updateFriend = async (
 ) => {
   try {
     const updatedFriend = await prisma.friend.update({
-      where: { id: friendId },
+      where: { id },
       data,
     });
+    console.log(updatedFriend);
     return updatedFriend;
   } catch (error) {
     console.error("Error updating friend:", error);
