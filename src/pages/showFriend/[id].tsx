@@ -4,8 +4,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-import Layout from "~/components/Layout";
-
 interface Friend {
   id: number;
   firstName: string;
@@ -76,7 +74,9 @@ const ShowFriend = () => {
         <button
           className="p-2"
           onClick={() => {
-            void fetch(`api/deleteFriend${friend?.id}`, { method: "DELETE" });
+            void fetch(`api/deleteFriend${friend?.id}`, {
+              method: "DELETE",
+            });
           }}
         >
           delete
