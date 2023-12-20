@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { type NextApiRequest, type NextApiResponse } from "next";
 
-// import db from "../../../prisma/db";
 import { getAllFriends } from "prisma/prismaService";
 
 export default async function handler(
