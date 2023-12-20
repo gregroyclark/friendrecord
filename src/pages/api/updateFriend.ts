@@ -13,7 +13,7 @@ export default async function handler(
     try {
       const { id, firstName, lastName, phoneNumber, email, notes } = req.body;
       console.log(req.body);
-      const updatedFriend = await updateFriend(id, {
+      const updatedFriend = await updateFriend(Number(id), {
         firstName,
         lastName,
         phoneNumber,

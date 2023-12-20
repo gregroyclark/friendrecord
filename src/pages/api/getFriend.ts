@@ -12,7 +12,7 @@ export default async function handler(
   const { id } = req.query;
   console.log("getFriend id", id);
   try {
-    const friend = await getFriend(id);
+    const friend = await getFriend(Number(id));
     console.log("getFriend Friend: ", typeof friend, friend);
     res.status(200).json(friend);
   } catch (error) {
