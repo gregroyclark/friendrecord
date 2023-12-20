@@ -10,6 +10,7 @@ export default async function handler(
   if (req.method === "GET") {
     try {
       const friends = await getAllFriends();
+      console.log("getAllFriends.ts", friends);
       res.status(200).json(friends);
     } catch (error) {
       console.error("Error fetching friends:", error);

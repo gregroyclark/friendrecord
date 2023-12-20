@@ -10,7 +10,7 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   const { id } = req.query;
-  console.log("getFriend id", id);
+  console.log("getFriend.ts id", id);
   const friendId = Array.isArray(id) ? Number(id[0]) : Number(id);
   try {
     const friend = await getFriend(Number(friendId));
