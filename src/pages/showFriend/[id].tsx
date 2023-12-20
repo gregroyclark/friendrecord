@@ -22,16 +22,12 @@ const ShowFriend = () => {
   const { id } = router.query;
   console.log("showFriend id: ", typeof id, id);
 
-  const friendId = Array.isArray(id) ? Number(id[0]) : Number(id);
-  console.log(
-    "showFriend friendId, before useEffect: ",
-    typeof friendId,
-    friendId,
-  );
+  Array.isArray(id) ? Number(id[0]) : Number(id);
+  console.log("showFriend friendId, before useEffect: ", typeof id, id);
 
   useEffect(() => {
     const fetchFriend = async () => {
-      const response = await fetch(`/api/getFriend/${friendId}`);
+      const response = await fetch(`/api/getFriend/${id}`);
       console.log(response);
       // if (!response.ok) {
       //   throw new Error("Error fetching friend");
@@ -44,14 +40,10 @@ const ShowFriend = () => {
   }, [id]);
 
   // const friendId = Array.isArray(id) ? Number(id[0]) : Number(id);
-  console.log(
-    "showFriend friendId, before loading: ",
-    typeof friendId,
-    friendId,
-  );
+  console.log("showFriend friendId, before loading: ", typeof id, id);
 
-  if (!id || !friendId) {
-    console.log("no id or friendId");
+  if (!id) {
+    console.log("no id");
     return (
       <Layout>
         <div className="flex items-center justify-center">Loading...</div>
@@ -61,11 +53,7 @@ const ShowFriend = () => {
 
   console.log("showFriend id, after loading: ", typeof id, id);
 
-  console.log(
-    "showFriend friendId, after loading: ",
-    typeof friendId,
-    friendId,
-  );
+  console.log("showFriend friendId, after loading: ", typeof id, id);
 
   return (
     <Layout>

@@ -11,9 +11,9 @@ export default async function handler(
 ) {
   if (req.method === "PUT") {
     try {
-      const { friendId, firstName, lastName, phoneNumber, email, notes } =
-        req.body;
-      const updatedFriend = await updateFriend(friendId, {
+      const { id, firstName, lastName, phoneNumber, email, notes } = req.body;
+      console.log(req.body);
+      const updatedFriend = await updateFriend(id, {
         firstName,
         lastName,
         phoneNumber,
@@ -21,6 +21,7 @@ export default async function handler(
         notes,
       });
       res.status(200).json(updatedFriend);
+      console.log(updatedFriend);
     } catch (error) {
       console.error("Error updating friend:", error);
       res.status(500).json({ error: "Internal Server Error" });
