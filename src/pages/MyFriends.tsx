@@ -51,8 +51,8 @@ const MyFriends = () => {
             <tr>
               <th className="border-b p-2">First Name</th>
               <th className="border-b p-2">Last Name</th>
-              <th className="border-b p-2">Phone Number</th>
-              <th className="border-b p-2">Email</th>
+              <th className="hidden border-b p-2">Phone Number</th>
+              <th className="hidden border-b p-2">Email</th>
               <th className="border-b p-2">Notes</th>
               <th className="border-b p-2">Actions</th>
             </tr>
@@ -62,8 +62,8 @@ const MyFriends = () => {
               <tr key={friend.id}>
                 <th className="border-b p-2">{friend.firstName}</th>
                 <th className="border-b p-2">{friend.lastName}</th>
-                <th className="border-b p-2">{friend.phoneNumber}</th>
-                <th className="border-b p-2">{friend.email}</th>
+                <th className="hidden border-b p-2">{friend.phoneNumber}</th>
+                <th className="hidden border-b p-2">{friend.email}</th>
                 <th className="border-b p-2">{friend.notes}</th>
                 <th>
                   <button className="p-2">
