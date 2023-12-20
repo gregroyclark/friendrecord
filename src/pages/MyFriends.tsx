@@ -22,7 +22,7 @@ const MyFriends = () => {
   useEffect(() => {
     const fetchFriends = async () => {
       try {
-        const response = await fetch("api/myFriends", {
+        const response = await fetch("api/getAllFriends", {
           method: "GET",
           headers: { "Content-Type": "application/json" },
         });
@@ -30,6 +30,7 @@ const MyFriends = () => {
           throw new Error("Error fetching friends");
         }
         const friendsData = await response.json();
+        console.log("getAllFriends: ", friendsData);
         setFriends(friendsData);
       } catch (error) {
         console.error("Error fetching friends:", error);
