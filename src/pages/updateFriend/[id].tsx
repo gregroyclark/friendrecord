@@ -150,28 +150,30 @@ const UpdateFriend: React.FC = () => {
         </label>
       </div>
 
-      <button
-        type="submit"
-        className="rounded-md bg-blue-700 p-2 text-white hover:bg-blue-800"
-      >
-        Update Friend
-      </button>
-      <button
-        className="m-4 rounded-md bg-red-500 p-2 text-white hover:bg-red-600"
-        onClick={async () => {
-          try {
-            void (await fetch(`/api/deleteFriend?id=${friendId}`, {
-              method: "DELETE",
-            }));
-            console.log("Successfully deleted friend");
-            void router.push("/MyFriends");
-          } catch (error) {
-            console.error("Error deleting friend: ", error);
-          }
-        }}
-      >
-        Delete Friend
-      </button>
+      <div className="flex justify-center">
+        <button
+          type="submit"
+          className="m-2 rounded-md bg-blue-700 p-2 text-white hover:bg-blue-800"
+        >
+          Update Friend
+        </button>
+        <button
+          className="m-2 rounded-md bg-red-500 p-2 text-white hover:bg-red-600"
+          onClick={async () => {
+            try {
+              void (await fetch(`/api/deleteFriend?id=${friendId}`, {
+                method: "DELETE",
+              }));
+              console.log("Successfully deleted friend");
+              void router.push("/MyFriends");
+            } catch (error) {
+              console.error("Error deleting friend: ", error);
+            }
+          }}
+        >
+          Delete Friend
+        </button>
+      </div>
     </form>
   );
 };

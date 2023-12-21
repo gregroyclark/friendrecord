@@ -123,17 +123,19 @@ const AddFriend: React.FC = () => {
             </label>
           </div>
 
-          <button
-            type="submit"
-            className="rounded-md bg-blue-700 p-2 text-white hover:bg-blue-800"
-          >
-            Add Friend
-          </button>
-          <Link href={"/"}>
-            <button className="m-4 rounded-md bg-gray-500 p-2 text-white hover:bg-gray-600">
-              Home Page
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              className="m-2 rounded-md bg-blue-700 p-2 text-white hover:bg-blue-800"
+            >
+              Add Friend
             </button>
-          </Link>
+            <Link href={"/"}>
+              <button className="m-2 rounded-md bg-gray-500 p-2 text-white hover:bg-gray-600">
+                Home Page
+              </button>
+            </Link>
+          </div>
         </form>
       </div>
     </>
