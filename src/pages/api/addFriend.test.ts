@@ -2,11 +2,23 @@ import handler from "./addFriend";
 import { createFriend } from "../../../prisma/prismaService";
 import { type NextApiRequest, type NextApiResponse } from "next";
 
+/*
+    ==========================================
+
+    test suites for addFriend.ts
+    API route to hit prismaService, addFriend
+    should create a friend object of type Friend
+
+    ==========================================
+
+  */
+
 // create a mock function for createFriend
 jest.mock("../../../prisma/prismaService", () => ({
   createFriend: jest.fn(),
 }));
 describe("addFriend.ts", () => {
+  // happy path, addFriend.ts API call
   it("should return a new friend when the request is valid", async () => {
     const mockFriend = {
       firstName: "John",
@@ -34,9 +46,38 @@ describe("addFriend.ts", () => {
       status: jest.fn().mockReturnThis(),
       json: jest.fn(),
     };
+
     await handler(req as NextApiRequest, res as NextApiResponse);
 
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith(mockFriend);
   });
+
+  // edge case, invalid request
+  it("should return an error when the request is invalid", async () => {
+    (createFriend as jest.Mock).mockRejectedValue(
+      new Error("Test error - invalid request"),
+    );
+
+    const req: Partial<NextApiRequest> = {
+      method: "POST",
+      body: {},
+    };
+
+    const res: Partial<NextApiResponse> = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+
+    await handler(req as NextApiRequest, res as NextApiResponse);
+
+    expect(res.status).toHaveBeenCalledWith(500);
+    expect(res.json).toHaveBeenCalledWith({ error: "Internal Server Error" });
+  });
+
+  // edge case, method is not POST
+
+  // edge case, body is missing required fields
+
+  // edge case, createFriend throws an error
 });
