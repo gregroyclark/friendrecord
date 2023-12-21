@@ -107,6 +107,7 @@ void describe("prismaService", async () => {
   */
 
   void describe("getFriend", async () => {
+    // happy path for getFriend service
     it("should get a friend", async () => {
       // mock the prisma.friend.findUniqueOrThrow function
       prisma.friend.findUniqueOrThrow = jest.fn().mockResolvedValue({
@@ -131,14 +132,14 @@ void describe("prismaService", async () => {
       );
     });
 
-    // edge case for when query is null
+    // edge case, query is null
     it("should return null when friend does not exist", async () => {
       prisma.friend.findUniqueOrThrow = jest.fn().mockResolvedValue(null);
       const friend = await getFriend(1);
       expect(friend).toBeNull();
     });
 
-    // test of edge case when id is NaN
+    // edge case, id is NaN
     it("should return an error when id is not a number", async () => {
       try {
         await getFriend("invalidId");
@@ -147,7 +148,7 @@ void describe("prismaService", async () => {
       }
     });
 
-    // test of edge case, database error
+    // edge case, database error
     it("should return an error when there is a database error", async () => {
       prisma.friend.findUniqueOrThrow = jest
         .fn()
@@ -159,6 +160,7 @@ void describe("prismaService", async () => {
       expect(error).toBeInstanceOf(Error);
     }
   });
+
   /*
     ==========================================
 
@@ -167,4 +169,21 @@ void describe("prismaService", async () => {
     ==========================================
 
   */
+
+  void describe("updateFriend", async () => {
+    // test cases
+  });
+
+  /*
+    ==========================================
+
+    test suites for deletesFriend prismaService
+
+    ==========================================
+
+  */
+
+  void describe("deleteFriend", async () => {
+    // test cases
+  });
 });
