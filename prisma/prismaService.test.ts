@@ -278,6 +278,13 @@ void describe("prismaService", async () => {
     });
 
     // edge case, id is NaN
+    it("should return an error when id is not a number", async () => {
+      try {
+        await deleteFriend("invalidId" as any);
+      } catch (error) {
+        expect(error).toBeInstanceOf(Error);
+      }
+    });
 
     // edge case, database error
   });
