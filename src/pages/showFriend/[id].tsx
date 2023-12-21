@@ -1,6 +1,9 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/no-redundant-type-constituents */
+
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -30,7 +33,7 @@ const ShowFriend = () => {
   useEffect(() => {
     const fetchFriend = async () => {
       try {
-        const response = await fetch(`/api/getFriend/${friendId}`, {
+        const response = await fetch(`/api/getFriend?id=${friendId}`, {
           method: "GET",
           headers: { "Content-Type": "application/json" },
         });
