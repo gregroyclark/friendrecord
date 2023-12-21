@@ -2,9 +2,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { describe } from "node:test";
-// import { expect, jest } from "@jest/globals";
 
+import { describe } from "node:test";
+
+import prisma from "./prisma";
 import {
   createFriend,
   getAllFriends,
@@ -13,12 +14,11 @@ import {
   deleteFriend,
 } from "./prismaService";
 
-import prisma from "./prisma";
-
 /*
     ==========================================
 
     test suites for prismaService.ts
+    separated by service
 
     ==========================================
 
@@ -245,6 +245,29 @@ void describe("prismaService", async () => {
   */
 
   void describe("deleteFriend", async () => {
-    // test cases
+    // happy path for deleteFriend service
+
+    it("should delete a friend", async () => {
+      // have to create a friend first, not connected to db
+      const newFriend = await createFriend({
+        firstName: "John",
+        lastName: "Doe",
+        phoneNumber: "1234567890",
+        email: "john.doe@email.com",
+        notes: "This is John Doe.",
+      });
+
+      // delete the friend
+      await deleteFriend(newFriend.id);
+
+      // check if the friend was deleted
+      try {
+        await getFriend(newFriend.id);
+      } catch (error) {
+        expect(error).toBeInstanceOf(Error);
+      }
+    });
+
+    // edge cases for deleteFriend
   });
 });
