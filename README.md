@@ -19,7 +19,7 @@ My prismaService.test.ts test suites prove that all my prisma services work corr
 Database CRUD functions written with [Prisma](https://www.prisma.io/) ORM on top of MySQL.
 Prod db provisioned courtesy of [Planetscale](https://planetscale.com/).
 
-Currently troubleshooting findUnique, PUT, and DESTROY API routes.
+Currently writing unit tests to troubleshoot findUnique, PUT, and DESTROY API routes.
 
 ---
 
