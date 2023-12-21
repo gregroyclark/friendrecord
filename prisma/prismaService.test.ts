@@ -287,5 +287,15 @@ void describe("prismaService", async () => {
     });
 
     // edge case, database error
+    it("should return an error when there is a database error", async () => {
+      prisma.friend.delete = jest
+        .fn()
+        .mockRejectedValue(new Error("Database error"));
+      try {
+        await deleteFriend(1);
+      } catch (error) {
+        expect(error).toBeInstanceOf(Error);
+      }
+    });
   });
 });
