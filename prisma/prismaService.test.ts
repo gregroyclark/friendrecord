@@ -51,19 +51,19 @@ void describe("prismaService", async () => {
 
     // edge case, missing data
     // fields aren't currently required - this test is just for fun
-    it("should return an error when data is missing", async () => {
-      try {
-        await createFriend({
-          firstName: "",
-          lastName: "",
-          phoneNumber: "",
-          email: "",
-          notes: "",
-        });
-      } catch (error) {
-        expect(error).toBeInstanceOf(Error);
-      }
-    });
+    // it("should return an error when data is missing", async () => {
+    //   try {
+    //     await createFriend({
+    //       firstName: "",
+    //       lastName: "",
+    //       phoneNumber: "",
+    //       email: "",
+    //       notes: "",
+    //     });
+    //   } catch (error) {
+    //     expect(error).toBeInstanceOf(Error);
+    //   }
+    // });
 
     // edge case, database error
     it("should return an error when there is a database error", async () => {
