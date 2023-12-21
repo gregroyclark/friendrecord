@@ -81,6 +81,7 @@ const ShowFriend = () => {
               void (await fetch(`/api/deleteFriend?id=${friendId}`, {
                 method: "DELETE",
               }));
+              console.log("Successfully deleted friend");
               void router.push("/MyFriends");
             } catch (error) {
               console.error("Error deleting friend: ", error);
