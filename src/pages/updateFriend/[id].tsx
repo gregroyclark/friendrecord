@@ -1,10 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-import { type Friend } from "@prisma/client";
+// import { type friend } from "@prisma/client";
+
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-import Layout from "~/components/Layout";
+interface Friend {
+  id: number;
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  email: string;
+  notes: string;
+}
 
 const UpdateFriend = () => {
   const [friend, setFriend] = useState<Friend | null>(null);
