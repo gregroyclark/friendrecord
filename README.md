@@ -1,5 +1,10 @@
 # myfriendbook
 
+MyFriendBook is a full stack TypeScript contact info app demonstrating basic CRUD, clean UI, and TDD.
+Tools used include Next.js/React, TailwindCSS, Node.js, MySQL w/Prisma ORM, and test driven development with Jest.
+Prod MySQL db provisioned by Planetscale.
+Deployed to Vercel.
+
 ## UI/UX & functionality:
 
 Sign up or log in and add a new friend, update someone's info, or clear out some old contacts & notes.
