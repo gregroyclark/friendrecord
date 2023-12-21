@@ -11,11 +11,11 @@ const Navbar = () => {
           </h1>
         </Link>
         <div className="flex items-center justify-end">
-          <ul className="flex flex-row justify-between">
-            <li className="m-4 ml-10 flex items-center justify-center text-sm uppercase hover:border-b">
+          <ul className="flex flex-row items-center justify-between">
+            <li className="m-4 ml-10 flex items-center justify-center rounded-md border p-2 font-medium shadow-sm hover:border-b">
               <Link href={"/AddFriend"}>Add Friend</Link>
             </li>
-            <li className="m-4 ml-10 flex items-center justify-center text-sm uppercase hover:border-b">
+            <li className="m-4 ml-10 flex items-center justify-center rounded-md border p-2 font-medium shadow-sm hover:border-b">
               <Link href={"/FriendList"}>My Friends</Link>
             </li>
           </ul>

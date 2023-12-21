@@ -66,7 +66,7 @@ const ShowFriend = () => {
 
   return (
     <>
-      <div className="m-2 w-full rounded-md border p-4 md:w-1/3">
+      <div className="m-2 w-full rounded-md border p-4 shadow-sm md:w-1/3">
         <h1 className="mb-4 flex justify-center text-lg font-semibold text-gray-600">
           Friend
         </h1>
@@ -88,11 +88,11 @@ const ShowFriend = () => {
         </p>
         <hr />
         <div className="mt-4 flex justify-center">
-          <button className="m-4 rounded-md bg-blue-500 p-4 text-white hover:bg-blue-600">
+          <button className="m-4 rounded-md bg-blue-500 p-4 text-white shadow-sm hover:bg-blue-600">
             <Link href={`/updateFriend/${friendId}`}>Update</Link>
           </button>
           <button
-            className="m-4 rounded-md bg-red-500 p-4 text-white hover:bg-red-600"
+            className="m-4 rounded-md bg-red-500 p-4 text-white shadow-sm hover:bg-red-600"
             onClick={async () => {
               try {
                 void (await fetch(`/api/deleteFriend?id=${friendId}`, {
