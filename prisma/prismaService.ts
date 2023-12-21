@@ -32,7 +32,7 @@ export const getAllFriends = async () => {
   }
 };
 
-export const getFriend = async (id: number) => {
+export const getFriend = async (id) => {
   console.log("getFriend id: ", id);
   try {
     const friend = await prisma.friend.findUniqueOrThrow({
@@ -72,10 +72,10 @@ export const updateFriend = async (
   }
 };
 
-export const deleteFriend = async (id: number) => {
+export const deleteFriend = async (id) => {
   try {
     await prisma.friend.delete({
-      where: { id },
+      where: { id: id },
     });
   } catch (error) {
     console.error("error deleting friend: ", error);
