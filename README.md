@@ -9,7 +9,9 @@ Deployed to Vercel.
 
 ## UI/UX & functionality:
 
-Sign up or log in and add a new friend, view all your friends, update someone's info, or clear out some old contacts & notes.
+Add a new friend, view all your friends or a single friend, update someone's info, or clear out some old contacts & notes.
+
+Soon: sign up or log in. Each user will have their own private data table.
 
 ---
 
@@ -27,6 +29,13 @@ The primary purpose of this project is to demonstrate proficiency with backend s
 
 Database CRUD functions written with [Prisma](https://www.prisma.io/) ORM on top of MySQL.
 
+Available CRUD operations:
+
+- CREATE a friend record
+- READ full table, or grab a single record
+- UPDATE/PUT a record
+- DELETE a record
+
 Prod db provisioned courtesy of [Planetscale](https://planetscale.com/).
 
 Currently writing unit tests to troubleshoot findUnique, PUT, and DESTROY API routes.
@@ -39,11 +48,7 @@ Currently writing unit tests to troubleshoot findUnique, PUT, and DESTROY API ro
 
 ## To Do
 
-Implement full suite of unit tests to troubleshoot why these CRUD operations have bugs:
-
-- findUniqueOrThrow() (showFriend)
-- update (updateFrind)
-- delete (deleteFriend)
+Continue building out test suite, starting with src/pages/api.
 
 Implement authorization & authentication.
 
