@@ -17,6 +17,7 @@ import { type NextApiRequest, type NextApiResponse } from "next";
 jest.mock("../../../prisma/prismaService", () => ({
   createFriend: jest.fn(),
 }));
+
 describe("addFriend.ts", () => {
   // happy path, addFriend.ts API call
   it("should return a new friend when the request is valid", async () => {
