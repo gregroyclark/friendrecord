@@ -8,7 +8,7 @@ Sign up or log in and add a new friend, update someone's info, or clear out some
 
 ## TDD
 
-MyFriendBook follows test driven development to enhance development speed and stability.
+MyFriendBook follows test driven development to enhance development speed & debugging and ensure application stability.
 
 My prismaService.test.ts test suites prove that all my prisma services work correctly.
 
