@@ -13,7 +13,7 @@ import {
 
 import prisma from "./prisma";
 
-void describe("prismaService", () => {
+void describe("prismaService", async () => {
   it("should create a friend", async () => {
     const friendData = {
       firstName: "Greg",
@@ -104,4 +104,15 @@ void describe("prismaService", () => {
       expect(error).toBeInstanceOf(error);
     }
   });
+
+  it("should return an error when there is a database error", async () => {
+    prisma.friend.findUniqueOrThrow = jest
+      .fn()
+      .mockResolvedValue(new Error("Database error"));
+  });
+  try {
+    await getFriend(1);
+  } catch (error) {
+    expect(error).toBeInstanceOf(Error);
+  }
 });
