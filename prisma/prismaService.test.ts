@@ -115,7 +115,7 @@ void describe("prismaService", async () => {
           lastName: "Doe",
           phoneNumber: "1234567890",
           email: "john.doe@email.com",
-          notes: "This is John Doe.",
+          notes: "This is John Doe. unit test",
         },
         {
           id: 2,
@@ -123,7 +123,7 @@ void describe("prismaService", async () => {
           lastName: "Doe",
           phoneNumber: "0987654321",
           email: "jane.doe@email.com",
-          notes: "This is Jane Doe.",
+          notes: "This is Jane Doe. unit test",
         },
       ]);
 
