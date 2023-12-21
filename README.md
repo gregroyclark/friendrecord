@@ -39,7 +39,7 @@ Currently writing unit tests to troubleshoot findUnique, PUT, and DESTROY API ro
 
 ## TODO
 
-Implement full suite of unit tests to troubleshoot why these CRUD operations have bugs
+Implement full suite of unit tests to troubleshoot why these CRUD operations have bugs:
 
 - findUniqueOrThrow() (showFriend)
 - update (updateFrind)
