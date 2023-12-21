@@ -16,6 +16,7 @@ interface Friend {
 
 const MyFriends = () => {
   const [friends, setFriends] = useState<Friend[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchFriends = async () => {
@@ -30,12 +31,17 @@ const MyFriends = () => {
         const friendsData = await response.json();
         console.log("getAllFriends: ", friendsData);
         setFriends(friendsData);
+        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching friends:", error);
       }
     };
     void fetchFriends();
   }, []);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
