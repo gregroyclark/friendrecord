@@ -171,7 +171,36 @@ void describe("prismaService", async () => {
   */
 
   void describe("updateFriend", async () => {
-    // test cases
+    // happy path for updateFriend service
+    it("should update a friend", async () => {
+      // have to create a friend first, not connected to db
+      const newFriend = await createFriend({
+        firstName: "John",
+        lastName: "Doe",
+        phoneNumber: "1234567890",
+        email: "john.doe@email.com",
+        notes: "This is John Doe.",
+      });
+
+      // update the friend
+      const updatedFriend = await updateFriend(newFriend.id, {
+        firstName: "Jane",
+        lastName: "Doe",
+        email: "jane.doe@email.com",
+        notes: "This is Jane Doe.",
+      });
+
+      // check if the friend was updated
+      expect(updatedFriend).toEqual(
+        expect.objectContaining({
+          firstName: "Jane",
+          lastName: "Doe",
+          phoneNumber: "1234567890",
+          email: "jane.doe@email.com",
+          notes: "This is Jane Doe.",
+        }),
+      );
+    });
   });
 
   /*
