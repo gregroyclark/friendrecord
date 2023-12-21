@@ -76,6 +76,22 @@ describe("addFriend.ts", () => {
   });
 
   // edge case, method is not POST
+  it("should return a 405 status code when the request method is not POST", async () => {
+    const req: Partial<NextApiRequest> = {
+      method: "GET",
+      body: {},
+    };
+
+    const res: Partial<NextApiResponse> = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+
+    await handler(req as NextApiRequest, res as NextApiResponse);
+
+    expect(res.status).toHaveBeenCalledWith(405);
+    expect(res.json).toHaveBeenCalledWith({ error: "Method Not Allowed" });
+  });
 
   // edge case, body is missing required fields
 
