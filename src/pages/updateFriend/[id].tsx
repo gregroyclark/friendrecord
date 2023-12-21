@@ -85,7 +85,7 @@ const UpdateFriend: React.FC = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="mx-auto w-full space-y-4 bg-white p-4 shadow-md md:w-2/3"
+      className="m-2 w-full space-y-4 bg-white p-4 shadow-md md:w-1/2"
     >
       <h1 className="mb-4 flex justify-center text-lg font-semibold text-gray-600">
         Update friend
