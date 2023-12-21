@@ -37,7 +37,7 @@ Currently writing unit tests to troubleshoot findUnique, PUT, and DESTROY API ro
 
 // add description
 
-## TODO
+## To Do
 
 Implement full suite of unit tests to troubleshoot why these CRUD operations have bugs:
 
