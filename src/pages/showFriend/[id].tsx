@@ -4,6 +4,7 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-redundant-type-constituents */
 
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -86,6 +87,9 @@ const ShowFriend = () => {
           Notes: {friend?.notes}
         </p>
         <hr />
+        <button className="m-4 rounded-md bg-blue-500 p-2 text-white hover:bg-blue-600">
+          <Link href={`/updateFriend/${friendId}`}>Update Friend</Link>
+        </button>
         <button
           className="m-4 rounded-md bg-red-500 p-2 text-white hover:bg-red-600"
           onClick={async () => {
