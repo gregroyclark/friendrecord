@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { describe } from "node:test";
@@ -201,12 +203,42 @@ void describe("prismaService", async () => {
         }),
       );
     });
+
+    // edge case, friend does not exist
+    it("should return an error when friend does not exist", async () => {
+      try {
+        await updateFriend(1, { firstName: "Jane" });
+      } catch (error) {
+        expect(error).toBeInstanceOf(Error);
+      }
+    });
+
+    //edge case, id is NaN
+    it("should return an error when id is not a number", async () => {
+      try {
+        await updateFriend("invalidId" as any, { firstName: "Jane" });
+      } catch (error) {
+        expect(error).toBeInstanceOf(Error);
+      }
+    });
+
+    // edge case, database error
+    it("should return an error when there is a database error", async () => {
+      prisma.friend.update = jest
+        .fn()
+        .mockRejectedValue(new Error("Database error"));
+      try {
+        await updateFriend(1, { firstName: "Jane" });
+      } catch (error) {
+        expect(error).toBeInstanceOf(Error);
+      }
+    });
   });
 
   /*
     ==========================================
 
-    test suites for deletesFriend prismaService
+    test suites for deleteFriend prismaService
 
     ==========================================
 
