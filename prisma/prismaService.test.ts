@@ -66,4 +66,28 @@ void describe("prismaService", () => {
       }),
     ]);
   });
+
+  it("should get a friend", async () => {
+    // mock the prisma.friend.findUniqueOrThrow function
+    prisma.friend.findUniqueOrThrow = jest.fn().mockResolvedValue({
+      id: 1,
+      firstName: "John",
+      lastName: "Doe",
+      phoneNumber: "1234567890",
+      email: "john.doe@email.com",
+      notes: "This is John Doe.",
+    });
+
+    const friend = await getFriend(1);
+    expect(friend).toEqual(
+      expect.objectContaining({
+        id: 1,
+        firstName: "John",
+        lastName: "Doe",
+        phoneNumber: "1234567890",
+        email: "john.doe@email.com",
+        notes: "This is John Doe.",
+      }),
+    );
+  });
 });
