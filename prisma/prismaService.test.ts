@@ -90,4 +90,18 @@ void describe("prismaService", () => {
       }),
     );
   });
+
+  it("should return null when friend does not exist", async () => {
+    prisma.friend.findUniqueOrThrow = jest.fn().mockResolvedValue(null);
+    const friend = await getFriend(1);
+    expect(friend).toBeNull();
+  });
+
+  it("should return an error when id is not a number", async () => {
+    try {
+      await getFriend("invalidId");
+    } catch (error) {
+      expect(error).toBeInstanceOf(error);
+    }
+  });
 });
