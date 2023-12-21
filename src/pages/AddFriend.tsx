@@ -57,7 +57,7 @@ const AddFriend: React.FC = () => {
   };
   return (
     <>
-      <div className="mx-auto w-full bg-white p-4 shadow-md md:w-2/3">
+      <div className="m-2 mt-8 w-full bg-white p-4 shadow-md md:w-1/2">
         <h1 className="mb-4 flex justify-center text-lg font-semibold text-gray-600">
           Add a new friend!
         </h1>
@@ -130,9 +130,9 @@ const AddFriend: React.FC = () => {
             >
               Add Friend
             </button>
-            <Link href={"/"}>
+            <Link href={"/FriendList"}>
               <button className="m-2 rounded-md bg-gray-500 p-2 text-white hover:bg-gray-600">
-                Home Page
+                Friend List
               </button>
             </Link>
           </div>
