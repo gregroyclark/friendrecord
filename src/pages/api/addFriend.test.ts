@@ -94,6 +94,31 @@ describe("addFriend.ts", () => {
   });
 
   // edge case, body is missing required fields
+  // no fields are currently required (this will eventually change)
 
   // edge case, createFriend throws an error
+  it("should return an error when createFriend throws an error", async () => {
+    (createFriend as jest.Mock).mockRejectedValue(new Error("Test error"));
+
+    const req: Partial<NextApiRequest> = {
+      method: "POST",
+      body: {
+        firstName: "John",
+        lastName: "Doe",
+        phoneNumber: "1234567890",
+        email: "john.doe@test.com",
+        notes: "Test friend",
+      },
+    };
+
+    const res: Partial<NextApiResponse> = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+
+    await handler(req as NextApiRequest, res as NextApiResponse);
+
+    expect(res.status).toHaveBeenCalledWith(500);
+    expect(res.json).toHaveBeenCalledWith({ error: "Internal Server Error" });
+  });
 });
