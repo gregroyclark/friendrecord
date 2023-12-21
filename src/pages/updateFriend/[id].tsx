@@ -1,26 +1,27 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-// import { type friend } from "@prisma/client";
 
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-interface Friend {
-  id: number;
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
-  email: string;
-  notes: string;
+interface FormData {
+  firstName: "";
+  lastName: "";
+  phoneNumber: "";
+  email: "";
+  notes: "";
 }
 
-const UpdateFriend = () => {
-  const [friend, setFriend] = useState<Friend | null>(null);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [email, setEmail] = useState("");
-  const [notes, setNotes] = useState("");
+const UpdateFriend: React.FC = () => {
+  const [formData, setFormData] = useState<FormData>({
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    email: "",
+    notes: "",
+  });
 
   const router = useRouter();
   const { id } = router.query;
@@ -28,69 +29,149 @@ const UpdateFriend = () => {
 
   useEffect(() => {
     const fetchFriend = async () => {
-      const response = await fetch(`/api/getFriend${friendId}`);
-      if (!response.ok) {
-        throw new Error("Error fetching friend");
-      }
-      const friendData = (await response.json()) as Friend | null;
-      if (friendData) {
-        setFriend(friendData);
-        setFirstName(friendData.firstName);
-        setLastName(friendData.lastName);
-        setPhoneNumber(friendData.phoneNumber);
-        setEmail(friendData.email);
-        setNotes(friendData.notes);
+      try {
+        const response = await fetch(`/api/getFriend?id=${friendId}`, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        });
+        if (!response.ok) {
+          throw new Error("Error fetching friend");
+        }
+        const friendData = await response.json();
+        setFormData(friendData);
+      } catch (error) {
+        console.error("Error fetching friend: ", error);
       }
     };
     void fetchFriend();
   }, [id]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const response = await fetch(`/api/updateFriend${friendId}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ firstName, lastName, phoneNumber, email, notes }),
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ): void => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
     });
-    if (!response.ok) {
-      throw new Error("Error updating friend");
-    }
-    const updatedFriend = (await response.json()) as Friend;
-    setFriend(updatedFriend);
   };
 
-  if (!friend) {
+  const handleSubmit = async (
+    event: React.FormEvent<HTMLFormElement>,
+  ): Promise<void> => {
+    event.preventDefault();
+    try {
+      const response = await fetch(`/api/updateFriend?id=${friendId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (!response.ok) {
+        throw new Error("Error updating friend");
+      }
+      const data = await response.json();
+      console.log("Response: ", data);
+
+      void router.push(`showFriend/${friendId}`);
+    } catch (error) {
+      console.error("Error updating friend: ", error);
+    }
+  };
+
+  if (!friendId) {
     return <div className="flex justify-center">Loading...</div>;
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={firstName}
-        onChange={(e) => setFirstName(e.target.value)}
-      />
-      <input
-        type="text"
-        value={lastName}
-        onChange={(e) => setLastName(e.target.value)}
-      />
-      <input
-        type="text"
-        value={phoneNumber}
-        onChange={(e) => setPhoneNumber(e.target.value)}
-      />
-      <input
-        type="text"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="text"
-        value={notes}
-        onChange={(e) => setNotes(e.target.value)}
-      />
-      <button>Update Friend</button>
+    <form
+      onSubmit={handleSubmit}
+      className="mx-auto w-full space-y-4 bg-white p-4 shadow-md md:w-2/3"
+    >
+      <h1 className="mb-4 flex justify-center text-lg font-semibold text-gray-600">
+        Update friend
+      </h1>
+      <hr className="mb-4" />
+      <div>
+        <label className="mb-1 flex flex-col text-sm font-semibold text-gray-600">
+          First Name
+          <input
+            type="text"
+            value={formData.firstName}
+            onChange={handleChange}
+            className="rounded-md border border-gray-300 p-2"
+          />
+        </label>
+      </div>
+
+      <div>
+        <label className="mb-1 flex flex-col text-sm font-semibold text-gray-600">
+          Last Name
+          <input
+            type="text"
+            value={formData.lastName}
+            onChange={handleChange}
+            className="rounded-md border border-gray-300 p-2"
+          />
+        </label>
+      </div>
+
+      <div>
+        <label className="mb-1 flex flex-col text-sm font-semibold text-gray-600">
+          Phone Number
+          <input
+            type="text"
+            value={formData.phoneNumber}
+            onChange={handleChange}
+            className="rounded-md border border-gray-300 p-2"
+          />
+        </label>
+      </div>
+
+      <div>
+        <label className="mb-1 flex flex-col text-sm font-semibold text-gray-600">
+          Email
+          <input
+            type="text"
+            value={formData.email}
+            onChange={handleChange}
+            className="rounded-md border border-gray-300 p-2"
+          />
+        </label>
+      </div>
+
+      <div>
+        <label className="mb-1 flex flex-col text-sm font-semibold text-gray-600">
+          Notes
+          <input
+            type="text"
+            value={formData.notes}
+            onChange={handleChange}
+            className="rounded-md border border-gray-300 p-2"
+          />
+        </label>
+      </div>
+
+      <button
+        type="submit"
+        className="rounded-md bg-blue-700 p-2 text-white hover:bg-blue-800"
+      >
+        Update Friend
+      </button>
+      <button
+        className="m-4 rounded-md bg-red-500 p-2 text-white hover:bg-red-600"
+        onClick={async () => {
+          try {
+            void (await fetch(`/api/deleteFriend?id=${friendId}`, {
+              method: "DELETE",
+            }));
+            console.log("Successfully deleted friend");
+            void router.push("/MyFriends");
+          } catch (error) {
+            console.error("Error deleting friend: ", error);
+          }
+        }}
+      >
+        Delete Friend
+      </button>
     </form>
   );
 };
