@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React, { useState } from "react";
+import router from "next/router";
 
 import Link from "next/link";
 
@@ -46,6 +49,8 @@ const AddFriend: React.FC = () => {
       const data = await response.json();
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       console.log("Response:", data);
+
+      void router.push(`/showFriend/${data.id}`);
     } catch (error) {
       console.error("Error adding friend:", error);
     }
