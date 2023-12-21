@@ -72,7 +72,7 @@ const UpdateFriend: React.FC = () => {
       console.log("Response: ", data);
 
       console.log(friendId);
-      void router.push(`showFriend/${friendId}`);
+      void router.push(`/showFriend/${friendId}`);
     } catch (error) {
       console.error("Error updating friend: ", error);
     }
