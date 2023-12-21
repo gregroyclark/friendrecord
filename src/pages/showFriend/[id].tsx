@@ -100,7 +100,7 @@ const ShowFriend = () => {
             }
           }}
         >
-          delete
+          Delete Friend
         </button>
       </div>
     </>
