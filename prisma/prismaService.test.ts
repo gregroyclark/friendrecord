@@ -34,6 +34,7 @@ void describe("prismaService", async () => {
   */
 
   void describe("createFriend", async () => {
+    // happy path for createFriend service
     it("should create a friend", async () => {
       const friendData = {
         firstName: "Greg",
@@ -44,6 +45,21 @@ void describe("prismaService", async () => {
       };
       const newFriend = await createFriend(friendData);
       expect(newFriend).toEqual(expect.objectContaining(friendData));
+    });
+
+    // edge case, missing data
+    it("should return an error when data is missing", async () => {
+      try {
+        await createFriend({
+          firstName: "",
+          lastName: "",
+          phoneNumber: "",
+          email: "",
+          notes: "",
+        });
+      } catch (error) {
+        expect(error).toBeInstanceOf(Error);
+      }
     });
   });
 
