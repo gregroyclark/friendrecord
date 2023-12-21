@@ -99,7 +99,7 @@ const ShowFriend = () => {
                   method: "DELETE",
                 }));
                 console.log("Successfully deleted friend");
-                void router.push("/MyFriends");
+                void router.push("/FriendList");
               } catch (error) {
                 console.error("Error deleting friend: ", error);
               }

@@ -16,7 +16,7 @@ export default function Home() {
           </button>
 
           <button className="m-1 rounded-md bg-gray-500 p-1.5 text-white hover:bg-gray-600">
-            <Link href={"/MyFriends"}>Friends List</Link>
+            <Link href={"/FriendList"}>Friends List</Link>
           </button>
         </div>
       </div>

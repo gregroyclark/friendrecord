@@ -16,7 +16,7 @@ const Navbar = () => {
               <Link href={"/AddFriend"}>Add Friend</Link>
             </li>
             <li className="m-4 ml-10 flex items-center justify-center text-sm uppercase hover:border-b">
-              <Link href={"/MyFriends"}>My Friends</Link>
+              <Link href={"/FriendList"}>My Friends</Link>
             </li>
           </ul>
         </div>

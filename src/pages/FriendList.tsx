@@ -14,7 +14,7 @@ interface Friend {
   notes: string;
 }
 
-const MyFriends = () => {
+const FriendList = () => {
   const [friends, setFriends] = useState<Friend[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -105,4 +105,4 @@ const MyFriends = () => {
   );
 };
 
-export default MyFriends;
+export default FriendList;
