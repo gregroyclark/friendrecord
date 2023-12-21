@@ -1,6 +1,6 @@
 import { type NextApiRequest, type NextApiResponse } from "next";
 
-import { getFriend } from "prisma/prismaService";
+import { getFriend } from "../../../prisma/prismaService";
 
 export default async function handler(
   req: NextApiRequest,
