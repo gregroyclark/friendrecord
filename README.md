@@ -39,6 +39,8 @@ Currently writing unit tests to troubleshoot findUnique, PUT, and DESTROY API ro
 
 ## TODO
 
+Implement full suite of unit tests to troubleshoot why certain CRUD operations have bugs.
+
 Authorization & authentication implemention in progress.
 
 Add description of Frontend to README.
