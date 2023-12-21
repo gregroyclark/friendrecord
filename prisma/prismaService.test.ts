@@ -77,7 +77,7 @@ void describe("prismaService", async () => {
           lastName: "Doe",
           phoneNumber: "1234567890",
           email: "john.doe@email.com",
-          notes: "This is John Doe.",
+          notes: "This is John Doe unit test.",
         });
       } catch (error) {
         expect(error).toBeInstanceOf(Error);
@@ -115,7 +115,7 @@ void describe("prismaService", async () => {
           lastName: "Doe",
           phoneNumber: "1234567890",
           email: "john.doe@email.com",
-          notes: "This is John Doe. unit test",
+          notes: "This is John Doe unit test",
         },
         {
           id: 2,
@@ -135,7 +135,7 @@ void describe("prismaService", async () => {
           lastName: "Doe",
           phoneNumber: "1234567890",
           email: "john.doe@email.com",
-          notes: "This is John Doe.",
+          notes: "This is John Doe unit test",
         }),
         expect.objectContaining({
           id: 2,
@@ -143,7 +143,7 @@ void describe("prismaService", async () => {
           lastName: "Doe",
           phoneNumber: "0987654321",
           email: "jane.doe@email.com",
-          notes: "This is Jane Doe.",
+          notes: "This is Jane Doe unit test",
         }),
       ]);
     });
@@ -164,23 +164,21 @@ void describe("prismaService", async () => {
     it("should get a friend", async () => {
       // mock the prisma.friend.findUniqueOrThrow function
       prisma.friend.findUniqueOrThrow = jest.fn().mockResolvedValue({
-        id: 1,
         firstName: "John",
         lastName: "Doe",
         phoneNumber: "1234567890",
         email: "john.doe@email.com",
-        notes: "This is John Doe.",
+        notes: "This is John Doe unit test.",
       });
 
       const friend = await getFriend(1);
       expect(friend).toEqual(
         expect.objectContaining({
-          id: 1,
           firstName: "John",
           lastName: "Doe",
           phoneNumber: "1234567890",
           email: "john.doe@email.com",
-          notes: "This is John Doe.",
+          notes: "This is John Doe unit test.",
         }),
       );
     });
@@ -232,7 +230,7 @@ void describe("prismaService", async () => {
         lastName: "Doe",
         phoneNumber: "1234567890",
         email: "john.doe@email.com",
-        notes: "This is John Doe.",
+        notes: "This is John Doe unit test.",
       });
 
       // update the friend
@@ -240,7 +238,7 @@ void describe("prismaService", async () => {
         firstName: "Jane",
         lastName: "Doe",
         email: "jane.doe@email.com",
-        notes: "This is Jane Doe.",
+        notes: "This is Jane Doe unit test.",
       });
 
       // check if the friend was updated
@@ -250,7 +248,7 @@ void describe("prismaService", async () => {
           lastName: "Doe",
           phoneNumber: "1234567890",
           email: "jane.doe@email.com",
-          notes: "This is Jane Doe.",
+          notes: "This is Jane Doe unit test.",
         }),
       );
     });
@@ -305,7 +303,7 @@ void describe("prismaService", async () => {
         lastName: "Doe",
         phoneNumber: "1234567890",
         email: "john.doe@email.com",
-        notes: "This is John Doe.",
+        notes: "This is John Doe unit test.",
       });
 
       // delete the friend
