@@ -48,6 +48,7 @@ void describe("prismaService", async () => {
     });
 
     // edge case, missing data
+    // fields aren't currently required - this test is just for fun
     it("should return an error when data is missing", async () => {
       try {
         await createFriend({
@@ -61,6 +62,8 @@ void describe("prismaService", async () => {
         expect(error).toBeInstanceOf(Error);
       }
     });
+
+    // edge case, database error
   });
 
   /*
