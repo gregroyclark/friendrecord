@@ -76,10 +76,15 @@ const ShowFriend = () => {
         <hr />
         <button
           className="p-2"
-          onClick={() => {
-            void fetch(`api/deleteFriend${friend?.id}`, {
-              method: "DELETE",
-            });
+          onClick={async () => {
+            try {
+              void (await fetch(`/api/deleteFriend?id=${friendId}`, {
+                method: "DELETE",
+              }));
+              void router.push("/MyFriends");
+            } catch (error) {
+              console.error("Error deleting friend: ", error);
+            }
           }}
         >
           delete
