@@ -73,9 +73,10 @@ const MyFriends = () => {
                   <button
                     className="p-2"
                     onClick={() => {
-                      void fetch(`/api/deleteFriend${friend?.id}`, {
+                      void fetch(`/api/deleteFriend?id=${friend?.id}`, {
                         method: "DELETE",
                       });
+                      console.log("Successfully deleted friend");
                     }}
                   >
                     delete
