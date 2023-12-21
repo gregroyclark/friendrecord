@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import Link from "next/link";
@@ -72,11 +72,19 @@ const MyFriends = () => {
                   </button>
                   <button
                     className="p-2"
-                    onClick={() => {
-                      void fetch(`/api/deleteFriend?id=${friend?.id}`, {
-                        method: "DELETE",
-                      });
-                      console.log("Successfully deleted friend");
+                    onClick={async () => {
+                      try {
+                        void (await fetch(
+                          `/api/deleteFriend?id=${friend?.id}`,
+                          {
+                            method: "DELETE",
+                          },
+                        ));
+                        console.log("Successfully deleted friend");
+                        setFriends(friends.filter((f) => f.id !== friend.id));
+                      } catch (error) {
+                        console.error("Error deleting friend: ", error);
+                      }
                     }}
                   >
                     delete
