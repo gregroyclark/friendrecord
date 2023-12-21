@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -64,6 +65,34 @@ void describe("prismaService", async () => {
     });
 
     // edge case, database error
+    it("should return an error when there is a database error", async () => {
+      const createSpy = jest.spyOn(prisma.friend, "create");
+      createSpy.mockImplementation(() => {
+        return Promise.reject(new Error("Database error")) as any;
+      });
+      try {
+        await createFriend({
+          firstName: "John",
+          lastName: "Doe",
+          phoneNumber: "1234567890",
+          email: "john.doe@email.com",
+          notes: "This is John Doe.",
+        });
+      } catch (error) {
+        expect(error).toBeInstanceOf(Error);
+      }
+
+      createSpy.mockRestore(); // restore the original function after the test
+
+      /*
+      mocking prisma.friend.create directly affects all tests that follow in the same suite.
+      it always rejects with an error. be careful with this!
+      ex:
+      prisma.friend.create = jest
+        .fn()
+        .mockRejectedValue(new Error("Database error"));      
+      */
+    });
   });
 
   /*
@@ -76,6 +105,7 @@ void describe("prismaService", async () => {
   */
 
   void describe("getAllFriends", () => {
+    // happy path for getAllFriends service
     it("should get all friends", async () => {
       prisma.friend.findMany = jest.fn().mockResolvedValue([
         {
@@ -116,6 +146,7 @@ void describe("prismaService", async () => {
         }),
       ]);
     });
+    // edge cases for getAllFriends service
   });
 
   /*
