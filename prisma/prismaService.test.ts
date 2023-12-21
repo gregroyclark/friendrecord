@@ -268,6 +268,17 @@ void describe("prismaService", async () => {
       }
     });
 
-    // edge cases for deleteFriend
+    // edge case, friend does not exist
+    it("should return an error when friend does not exist", async () => {
+      try {
+        await deleteFriend(1);
+      } catch (error) {
+        expect(error).toBeInstanceOf(Error);
+      }
+    });
+
+    // edge case, id is NaN
+
+    // edge case, database error
   });
 });
