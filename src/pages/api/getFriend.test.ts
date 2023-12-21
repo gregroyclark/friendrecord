@@ -1,4 +1,4 @@
-import handler from "./addFriend";
+import handler from "./getFriend";
 import { getFriend } from "../../../prisma/prismaService";
 import { type NextApiRequest, type NextApiResponse } from "next";
 
