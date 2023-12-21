@@ -71,19 +71,19 @@ const ShowFriend = () => {
           Friend
         </h1>
         <hr />
-        <h2 className="mb-4 flex justify-center text-lg font-semibold text-gray-600">
+        <h2 className="mb-4 flex text-lg font-semibold text-gray-600">
           First Name: {friend?.firstName}
         </h2>
-        <h2 className="mb-4 flex justify-center text-lg font-semibold text-gray-600">
+        <h2 className="mb-4 flex text-lg font-semibold text-gray-600">
           Last Name: {friend?.lastName}
         </h2>
-        <p className="mb-4 flex justify-center text-lg font-semibold text-gray-600">
+        <p className="mb-4 flex text-lg font-semibold text-gray-600">
           Phone Number: {friend?.phoneNumber}
         </p>
-        <p className="mb-4 flex justify-center text-lg font-semibold text-gray-600">
+        <p className="mb-4 flex text-lg font-semibold text-gray-600">
           Email: {friend?.email}
         </p>
-        <p className="mb-4 flex justify-center text-lg font-semibold text-gray-600">
+        <p className="mb-4 flex text-lg font-semibold text-gray-600">
           Notes: {friend?.notes}
         </p>
         <hr />
