@@ -45,6 +45,6 @@ Implement full suite of unit tests to troubleshoot why these CRUD operations hav
 - update (updateFrind)
 - delete (deleteFriend)
 
-Authorization & authentication implemention in progress.
+Implement authorization & authentication.
 
 Add description of Frontend to README.
