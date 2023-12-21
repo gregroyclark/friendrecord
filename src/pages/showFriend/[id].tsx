@@ -66,7 +66,7 @@ const ShowFriend = () => {
 
   return (
     <>
-      <div className="m-2 w-auto rounded-md border p-4">
+      <div className="m-2 w-full rounded-md border p-4 md:w-1/3">
         <h1 className="mb-4 flex justify-center text-lg font-semibold text-gray-600">
           Friend
         </h1>
