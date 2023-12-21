@@ -66,16 +66,28 @@ const ShowFriend = () => {
   return (
     <>
       <div className="m-4 w-auto rounded-md border p-4">
-        <h1 className="font-semibold">Friend</h1>
+        <h1 className="mb-4 flex justify-center text-lg font-semibold text-gray-600">
+          Friend
+        </h1>
         <hr />
-        <h2 className="m-4">First Name: {friend?.firstName}</h2>
-        <h2 className="m-4">Last Name: {friend?.lastName}</h2>
-        <p className="m-4">Phone Number: {friend?.phoneNumber}</p>
-        <p className="m-4">Email: {friend?.email}</p>
-        <p className="m-4">Notes: {friend?.notes}</p>
+        <h2 className="mb-4 flex justify-center text-lg font-semibold text-gray-600">
+          First Name: {friend?.firstName}
+        </h2>
+        <h2 className="mb-4 flex justify-center text-lg font-semibold text-gray-600">
+          Last Name: {friend?.lastName}
+        </h2>
+        <p className="mb-4 flex justify-center text-lg font-semibold text-gray-600">
+          Phone Number: {friend?.phoneNumber}
+        </p>
+        <p className="mb-4 flex justify-center text-lg font-semibold text-gray-600">
+          Email: {friend?.email}
+        </p>
+        <p className="mb-4 flex justify-center text-lg font-semibold text-gray-600">
+          Notes: {friend?.notes}
+        </p>
         <hr />
         <button
-          className="p-2"
+          className="m-4 rounded-md bg-red-500 p-2 text-white hover:bg-red-600"
           onClick={async () => {
             try {
               void (await fetch(`/api/deleteFriend?id=${friendId}`, {
