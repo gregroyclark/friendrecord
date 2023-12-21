@@ -88,11 +88,11 @@ const ShowFriend = () => {
         </p>
         <hr />
         <div className="flex justify-center">
-          <button className="m-2 rounded-md bg-blue-500 p-2 text-white hover:bg-blue-600">
+          <button className="m-2 rounded-md bg-blue-500 p-1 text-white hover:bg-blue-600 sm:p-2">
             <Link href={`/updateFriend/${friendId}`}>Update Friend</Link>
           </button>
           <button
-            className="m-2 rounded-md bg-red-500 p-2 text-white hover:bg-red-600"
+            className="m-2 rounded-md bg-red-500 p-1 text-white hover:bg-red-600 sm:p-2"
             onClick={async () => {
               try {
                 void (await fetch(`/api/deleteFriend?id=${friendId}`, {
