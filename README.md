@@ -50,6 +50,11 @@ Soon: sign up or log in. Each user will have their own private data table.
 
 Continue building out test suite, starting with src/pages/api.
 
-Implement authorization & authentication.
+Implement authorization & authentication:
+
+- user SQL pool
+- CREATE user function & prisma service
+- private tables
+- UI update
 
 Add description of Frontend to README.
