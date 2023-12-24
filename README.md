@@ -61,3 +61,5 @@ Implement authorization & authentication:
 Add some sort of caching to minimize API calls
 
 Add description of Frontend to README.
+
+React Native port!?
