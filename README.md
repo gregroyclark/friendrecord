@@ -58,4 +58,6 @@ Implement authorization & authentication:
 - private tables for logged in users
 - front end update with sign up & log in UI flows
 
+Add some sort of caching to minimize API calls
+
 Add description of Frontend to README.
