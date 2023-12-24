@@ -27,6 +27,7 @@ import {
 
 void describe("prismaService", async () => {
   /*
+
     ==========================================
 
     test suites for createFriend prismaService
@@ -97,6 +98,7 @@ void describe("prismaService", async () => {
   });
 
   /*
+
     ==========================================
 
     test suites for getAllFriends prismaService
@@ -151,6 +153,7 @@ void describe("prismaService", async () => {
   });
 
   /*
+
     ==========================================
 
     test suites for getFriend prismaService
@@ -203,16 +206,17 @@ void describe("prismaService", async () => {
     it("should return an error when there is a database error", async () => {
       prisma.friend.findUniqueOrThrow = jest
         .fn()
-        .mockResolvedValue(new Error("Database error"));
+        .mockRejectedValue(new Error("Database error"));
+      try {
+        await getFriend(1);
+      } catch (error) {
+        expect(error).toBeInstanceOf(Error);
+      }
     });
-    try {
-      await getFriend(1);
-    } catch (error) {
-      expect(error).toBeInstanceOf(Error);
-    }
   });
 
   /*
+
     ==========================================
 
     test suites for updateFriend prismaService
@@ -285,6 +289,7 @@ void describe("prismaService", async () => {
   });
 
   /*
+
     ==========================================
 
     test suites for deleteFriend prismaService
@@ -347,4 +352,13 @@ void describe("prismaService", async () => {
       }
     });
   });
+});
+
+/*
+  this runs after each individual test case, resetting all mocks to their original state.
+  this prevents any mocks set up in one test from affecting others.
+*/
+
+afterEach(() => {
+  jest.clearAllMocks();
 });
