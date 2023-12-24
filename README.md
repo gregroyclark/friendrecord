@@ -54,7 +54,8 @@ Implement authorization & authentication:
 
 - user SQL pool
 - CREATE user function & prisma service
-- private tables
-- UI update
+- GET user function & prisma service
+- private tables for logged in users
+- front end update with sign up & log in UI flows
 
 Add description of Frontend to README.
