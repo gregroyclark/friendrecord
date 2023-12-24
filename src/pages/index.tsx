@@ -5,7 +5,7 @@ export default function Home() {
     <>
       <div className="m-4 flex flex-col items-center justify-center space-y-4 bg-white p-16 shadow-md">
         <h1 className="m-4 flex justify-center text-lg font-semibold text-gray-600">
-          Welcome to MyFriendBook!
+          Welcome to friendrecord!
         </h1>
         <div className="w-full">
           <hr />
