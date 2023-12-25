@@ -11,23 +11,13 @@ const Navbar = () => {
       <div className="flex h-full w-full items-center justify-between p-4 shadow-md 2xl:px-16">
         <Link href={"/"}>
           <img
-            // src="../../public/friendrecord.png"
             src={logo.src}
             alt="friendrecord logo"
-            // fetchPriority="low"
             decoding="async"
             loading="lazy"
             height={150}
             width={150}
           />
-          {/* <Image src={"/friendrecord.png"} alt={"friendrecord logo"}></Image> */}
-          {/* <Image
-            src={logo}
-            alt={"friendrecord logo"}
-            width={250}
-            height={250}
-            className="m-2 flex items-center justify-center font-semibold"
-          /> */}
         </Link>
         <div className="flex items-center justify-end">
           <ul className="flex flex-row items-center justify-between">
