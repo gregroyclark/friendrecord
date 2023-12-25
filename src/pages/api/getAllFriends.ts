@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { type NextApiRequest, type NextApiResponse } from "next";
 import { getSession } from "next-auth/react";
 
@@ -15,8 +16,9 @@ export default async function handler(
   }
 
   if (req.method === "GET") {
+    const { userId } = req.body;
     try {
-      const friends = await getAllFriends();
+      const friends = await getAllFriends(userId, userId);
       console.log("getAllFriends.ts", friends);
       res.status(200).json(friends);
     } catch (error) {

@@ -18,10 +18,11 @@ export default async function handler(
   if (req.method === "GET") {
     try {
       const { id } = req.query;
+      const { userId } = req.body;
       const friendId = Number(id);
       console.log("getFriend.ts id", id);
 
-      const friend = await getFriend(friendId);
+      const friend = await getFriend(friendId, userId);
       console.log("getFriend Friend: ", typeof friend, friend);
       res.status(200).json(friend);
     } catch (error) {
