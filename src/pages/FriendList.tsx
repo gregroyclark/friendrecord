@@ -45,7 +45,7 @@ const FriendList = () => {
 
   return (
     <>
-      <div className="m-2 mt-8 bg-[#E4E2DD] p-4 shadow-md md:w-1/2">
+      <div className="m-2 mt-8 max-h-[50vh] overflow-scroll bg-[#E4E2DD] p-4 shadow-md md:w-1/2">
         <h1 className="mb-4 flex justify-center text-lg font-semibold text-gray-600">
           My Friends
         </h1>
