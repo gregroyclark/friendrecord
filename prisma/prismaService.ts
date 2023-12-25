@@ -4,6 +4,22 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import prisma from "./prisma";
 
+export const createUser = async (data: {
+  id: string;
+  name: string;
+  email: string;
+}) => {
+  try {
+    const newUser = await prisma.user.create({
+      data,
+    });
+    return newUser;
+  } catch (error) {
+    console.error("Error creating user: ", error);
+    throw error;
+  }
+};
+
 export const createFriend = async (data: {
   firstName: string;
   lastName: string;
