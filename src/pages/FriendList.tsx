@@ -45,7 +45,7 @@ const FriendList = () => {
 
   return (
     <>
-      <div className="m-2 mt-8 bg-white p-4 shadow-md md:w-1/2">
+      <div className="m-2 mt-8 bg-[#E4E2DD] p-4 shadow-md md:w-1/2">
         <h1 className="mb-4 flex justify-center text-lg font-semibold text-gray-600">
           My Friends
         </h1>
@@ -63,7 +63,7 @@ const FriendList = () => {
           </thead>
           <tbody>
             {friends.map((friend) => (
-              <tr key={friend.id}>
+              <tr key={friend.id} className="shadow-sm">
                 <th className="border-b p-2">{friend.firstName}</th>
                 <th className="border-b p-2">{friend.lastName}</th>
                 <th className="hidden border-b p-2">{friend.phoneNumber}</th>

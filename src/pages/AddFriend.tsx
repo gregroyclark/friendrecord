@@ -57,7 +57,7 @@ const AddFriend: React.FC = () => {
   };
   return (
     <>
-      <div className="m-2 mt-8 w-full bg-white p-4 shadow-md md:w-1/2">
+      <div className="m-2 mt-8 w-full bg-[#E4E2DD] p-4 shadow-md md:w-1/2">
         <h1 className="mb-4 flex justify-center text-lg font-semibold text-gray-600">
           Add a new friend!
         </h1>
@@ -71,7 +71,7 @@ const AddFriend: React.FC = () => {
                 name="firstName"
                 value={formData.firstName}
                 onChange={handleChange}
-                className="rounded-md border border-gray-300 p-2"
+                className="rounded-md border border-gray-300 bg-gray-50 p-2"
               />
             </label>
           </div>
@@ -83,7 +83,7 @@ const AddFriend: React.FC = () => {
                 name="lastName"
                 value={formData.lastName}
                 onChange={handleChange}
-                className="rounded-md border border-gray-300 p-2"
+                className="rounded-md border border-gray-300 bg-gray-50 p-2"
               />
             </label>
           </div>
@@ -95,7 +95,7 @@ const AddFriend: React.FC = () => {
                 name="phoneNumber"
                 value={formData.phoneNumber}
                 onChange={handleChange}
-                className="rounded-md border border-gray-300 p-2"
+                className="rounded-md border border-gray-300 bg-gray-50 p-2"
               />
             </label>
           </div>
@@ -107,7 +107,7 @@ const AddFriend: React.FC = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="rounded-md border border-gray-300 p-2"
+                className="rounded-md border border-gray-300 bg-gray-50 p-2"
               />
             </label>
           </div>
@@ -118,7 +118,7 @@ const AddFriend: React.FC = () => {
                 name="notes"
                 value={formData.notes}
                 onChange={handleChange}
-                className="rounded-md border border-gray-300 p-2"
+                className="rounded-md border border-gray-300 bg-gray-50 p-2"
               />
             </label>
           </div>
