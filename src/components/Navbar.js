@@ -17,7 +17,7 @@ const Navbar = () => {
             loading="lazy"
             height={150}
             width={150}
-            className="m-2"
+            className="m-1"
           />
         </Link>
         <div className="flex items-center justify-end">

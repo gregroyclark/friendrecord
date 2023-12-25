@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <>
-      <div className="m-4 flex flex-col items-center justify-center space-y-4 bg-[#E4E2DD] p-16 shadow-md">
+      <div className="flex flex-col items-center justify-center space-y-4 bg-[#E4E2DD] p-8 shadow-md">
         <h1 className="m-4 flex justify-center text-lg font-semibold text-gray-600">
           Welcome to friendrecord!
         </h1>
