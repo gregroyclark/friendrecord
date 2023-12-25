@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { type NextApiRequest, type NextApiResponse } from "next";
 import { getSession } from "next-auth/react";
 
@@ -14,7 +15,7 @@ export default async function handler(
     return;
   }
 
-  if (req.method === "GET")
+  if (req.method === "GET") {
     try {
       const { id } = req.query;
       const friendId = Number(id);
@@ -26,4 +27,5 @@ export default async function handler(
     } catch (error) {
       res.status(500).json({ error: "Error fetching friend" });
     }
+  }
 }
