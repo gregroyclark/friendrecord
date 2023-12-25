@@ -3,15 +3,24 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import prisma from "./prisma";
+import { hash, compare } from "bcrypt";
 
-export const createUser = async (data: {
-  id: string;
+/* 
+    this is the "register/sign up" function.
+    consider if HTTP or UI resemblance is an easier mental model.
+    leaning toward refactoring createUser => register.
+*/
+export const register = async (data: {
+  id;
+  userId: string;
   name: string;
   email: string;
+  password: string;
 }) => {
+  const hashedPassword = await hash(data.password, 10);
   try {
     const newUser = await prisma.user.create({
-      data,
+      data: { ...data, hashedPassword },
     });
     return newUser;
   } catch (error) {
@@ -20,7 +29,24 @@ export const createUser = async (data: {
   }
 };
 
+export const login = async (email: string, password: string) => {
+  const user = await prisma.user.findUnique({ where: { email } });
+
+  if (!user) {
+    throw new Error("No user found with this email");
+  }
+
+  const validPassword = await compare(password, user.hashedPassword);
+
+  if (!validPassword) {
+    throw new Error("Invalid password");
+  }
+
+  return user;
+};
+
 export const createFriend = async (data: {
+  userId: string;
   firstName: string;
   lastName: string;
   phoneNumber: string;
@@ -29,7 +55,7 @@ export const createFriend = async (data: {
 }) => {
   try {
     const newFriend = await prisma.friend.create({
-      data,
+      data: { ...data, userId: data.userId },
     });
     return newFriend;
   } catch (error) {
@@ -38,9 +64,14 @@ export const createFriend = async (data: {
   }
 };
 
-export const getAllFriends = async () => {
+export const getAllFriends = async (id, userId) => {
   try {
-    const friends = await prisma.friend.findMany();
+    const friends = await prisma.friend.findMany({
+      where: {
+        id,
+        userId,
+      },
+    });
     return friends;
   } catch (error) {
     console.error("Error finding friends:", error);
@@ -48,12 +79,13 @@ export const getAllFriends = async () => {
   }
 };
 
-export const getFriend = async (id) => {
+export const getFriend = async (id, userId) => {
   console.log("getFriend id: ", id);
   try {
     const friend = await prisma.friend.findUniqueOrThrow({
       where: {
         id: id,
+        userId,
       },
     });
     console.log(friend);
@@ -67,6 +99,7 @@ export const getFriend = async (id) => {
 export const updateFriend = async (
   // friendId: number,
   id: number,
+  userId,
   data: {
     firstName?: string;
     lastName?: string;
@@ -77,7 +110,7 @@ export const updateFriend = async (
 ) => {
   try {
     const updatedFriend = await prisma.friend.update({
-      where: { id },
+      where: { id, userId },
       data,
     });
     console.log(updatedFriend);
@@ -88,10 +121,10 @@ export const updateFriend = async (
   }
 };
 
-export const deleteFriend = async (id) => {
+export const deleteFriend = async (id, userId) => {
   try {
     await prisma.friend.delete({
-      where: { id: id },
+      where: { id: id, userId },
     });
   } catch (error) {
     console.error("error deleting friend: ", error);
