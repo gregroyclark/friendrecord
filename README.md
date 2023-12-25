@@ -1,6 +1,6 @@
-# myfriendbook
+# friendrecord
 
-MyFriendBook is a full stack TypeScript contact info app demonstrating basic CRUD, clean UI, and TDD.
+friendrecord is a full stack TypeScript contact info app demonstrating basic CRUD, clean UI, and TDD.
 
 The primary purpose of this project is to demonstrate proficiency with backend software development, namely SQL and APIs (composing and consuming).
 
@@ -24,11 +24,13 @@ Available CRUD operations:
 
 Prod db provisioned courtesy of [Planetscale](https://planetscale.com/).
 
+Authorization & authentication leverage [NextAuth](https://next-auth.js.org/) and the [Sign In With Google](https://developers.google.com/identity) workflow.
+
 ---
 
 ## TDD
 
-MyFriendBook follows test driven development to enhance development speed & debugging and ensure application stability.
+friendrecord follows test driven development to enhance development speed & debugging and ensure application stability.
 
 The prismaService.test.ts test suites prove that all my prisma services work correctly.
 
@@ -52,6 +54,7 @@ Continue building out test suite, starting with src/pages/api.
 
 Implement authorization & authentication:
 
+- auth workflow
 - user SQL pool
 - CREATE user function & prisma service
 - GET user function & prisma service
