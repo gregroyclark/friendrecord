@@ -98,7 +98,7 @@ const UpdateFriend: React.FC = () => {
             type="text"
             value={formData.firstName}
             onChange={handleChange}
-            className="rounded-md border border-gray-300 p-2"
+            className="rounded-md border border-gray-300 bg-gray-50 p-2"
           />
         </label>
       </div>
@@ -110,7 +110,7 @@ const UpdateFriend: React.FC = () => {
             type="text"
             value={formData.lastName}
             onChange={handleChange}
-            className="rounded-md border border-gray-300 p-2"
+            className="rounded-md border border-gray-300 bg-gray-50 p-2"
           />
         </label>
       </div>
@@ -122,7 +122,7 @@ const UpdateFriend: React.FC = () => {
             type="text"
             value={formData.phoneNumber}
             onChange={handleChange}
-            className="rounded-md border border-gray-300 p-2"
+            className="rounded-md border border-gray-300 bg-gray-50 p-2"
           />
         </label>
       </div>
@@ -134,7 +134,7 @@ const UpdateFriend: React.FC = () => {
             type="text"
             value={formData.email}
             onChange={handleChange}
-            className="rounded-md border border-gray-300 p-2"
+            className="rounded-md border border-gray-300 bg-gray-50 p-2"
           />
         </label>
       </div>
@@ -146,7 +146,7 @@ const UpdateFriend: React.FC = () => {
             type="text"
             value={formData.notes}
             onChange={handleChange}
-            className="rounded-md border border-gray-300 p-2"
+            className="rounded-md border border-gray-300 bg-gray-50 p-2"
           />
         </label>
       </div>

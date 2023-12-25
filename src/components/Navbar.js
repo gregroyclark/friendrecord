@@ -7,8 +7,8 @@ import logo from "../assets/friendrecord-small.png";
 
 const Navbar = () => {
   return (
-    <div className="fixed z-[100] flex h-24 w-full items-center bg-[#E4E2DD]">
-      <div className="flex h-full w-full items-center justify-between p-4 shadow-md 2xl:px-16">
+    <div className="fixed z-[100] mb-4 flex h-24 w-full items-center bg-[#E4E2DD]">
+      <div className="flex h-full w-full items-center justify-between p-2 shadow-md 2xl:px-16">
         <Link href={"/"}>
           <img
             src={logo.src}
@@ -17,15 +17,15 @@ const Navbar = () => {
             loading="lazy"
             height={150}
             width={150}
-            className="m-4"
+            className="m-2"
           />
         </Link>
         <div className="flex items-center justify-end">
           <ul className="flex flex-row items-center justify-between">
-            <li className="m-2 ml-10 flex items-center justify-center rounded-md border p-2 font-medium font-semibold shadow-md hover:border-b">
+            <li className="m-2 ml-10 flex items-center justify-center rounded-md border p-2 font-semibold shadow-md hover:border-b">
               <Link href={"/AddFriend"}>Add Friend</Link>
             </li>
-            <li className="m-2 ml-10 flex items-center justify-center rounded-md border p-2 font-medium font-semibold shadow-md hover:border-b">
+            <li className="m-2 ml-10 flex items-center justify-center rounded-md border p-2 font-semibold shadow-md hover:border-b">
               <Link href={"/FriendList"}>My Friends</Link>
             </li>
           </ul>
