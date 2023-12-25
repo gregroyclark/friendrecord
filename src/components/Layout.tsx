@@ -14,7 +14,9 @@ const Layout = ({ children }: { children: ReactElement }) => {
   return (
     <>
       <Navbar />
-      <main className="m-8 flex items-center justify-center">{children}</main>
+      <main className="flex h-screen w-full items-center justify-center bg-[#E4E2DD]">
+        {children}
+      </main>
     </>
   );
 };
