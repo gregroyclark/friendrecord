@@ -7,8 +7,8 @@ import logo from "../assets/friendrecord-small.png";
 
 const Navbar = () => {
   return (
-    <div className="fixed z-[100] mb-4 flex h-24 w-full items-center bg-[#E4E2DD]">
-      <div className="flex h-full w-full items-center justify-between p-2 shadow-md 2xl:px-16">
+    <div className="fixed z-[100] mb-4 flex h-24 w-full items-center">
+      <div className="flex h-full w-full items-center justify-between bg-[#E4E2DD] p-2 shadow-md 2xl:px-16">
         <Link href={"/"}>
           <img
             src={logo.src}
