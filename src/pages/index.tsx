@@ -1,6 +1,15 @@
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 
+import LoginPage from "./Login";
+
 export default function Home() {
+  const { data: session } = useSession();
+
+  if (!session) {
+    return <LoginPage />;
+  }
+
   return (
     <>
       <div className="flex flex-col items-center justify-center space-y-4 bg-[#E4E2DD] p-8 shadow-md">
