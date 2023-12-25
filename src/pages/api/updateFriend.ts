@@ -18,9 +18,10 @@ export default async function handler(
 
   if (req.method === "PUT") {
     try {
-      const { id, firstName, lastName, phoneNumber, email, notes } = req.body;
+      const { id, firstName, lastName, phoneNumber, email, notes, userId } =
+        req.body;
       console.log(req.body);
-      const updatedFriend = await updateFriend(Number(id), {
+      const updatedFriend = await updateFriend(userId, Number(id), {
         firstName,
         lastName,
         phoneNumber,

@@ -17,13 +17,15 @@ export default async function handler(
 
   if (req.method === "POST") {
     try {
-      const { firstName, lastName, phoneNumber, email, notes } = req.body;
+      const { firstName, lastName, phoneNumber, email, notes, userId } =
+        req.body;
       const newFriend = await createFriend({
         firstName,
         lastName,
         phoneNumber,
         email,
         notes,
+        userId,
       });
       res.status(200).json(newFriend);
     } catch (error) {

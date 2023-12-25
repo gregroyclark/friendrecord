@@ -16,8 +16,8 @@ export default async function handler(
 
   if (req.method === "DELETE") {
     try {
-      const { id } = req.query;
-      await deleteFriend(Number(id));
+      const { id, userId } = req.query;
+      await deleteFriend(Number(id), userId);
       res.status(200).json({ message: "Friend deleted successfully" });
     } catch (error) {
       console.error("Error deleting friend:", error);
