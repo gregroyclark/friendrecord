@@ -4,9 +4,9 @@ import React, { type ReactElement } from "react";
 import Navbar from "./Navbar";
 
 export const metadata: Metadata = {
-  title: "MyFriendBook",
+  title: "friendrecord",
   description:
-    "Welcome to MyFfriendBook! Demo React/Next.js, MySQL CRUD web app.",
+    "Welcome to friendrecord! Demo React/Next.js, MySQL CRUD web app.",
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
