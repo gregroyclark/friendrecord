@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { type NextApiRequest, type NextApiResponse } from "next";
+import { getSession } from "next-auth/react";
 
 import { createFriend } from "../../../prisma/prismaService";
 
@@ -7,6 +8,13 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
+  const session = await getSession({ req });
+
+  if (!session) {
+    res.status(401).json({ error: "Not authenticated" });
+    return;
+  }
+
   if (req.method === "POST") {
     try {
       const { firstName, lastName, phoneNumber, email, notes } = req.body;

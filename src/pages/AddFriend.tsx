@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import router from "next/router";
 
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 type FormData = {
   firstName: string;
@@ -15,6 +16,13 @@ type FormData = {
 };
 
 const AddFriend: React.FC = () => {
+  const { data: session } = useSession();
+
+  if (!session) {
+    window.location.href = "/login";
+    return null;
+  }
+
   const [formData, setFormData] = useState<FormData>({
     firstName: "",
     lastName: "",

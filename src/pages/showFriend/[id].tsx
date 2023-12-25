@@ -4,6 +4,7 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-redundant-type-constituents */
 
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -18,6 +19,13 @@ interface Friend {
 }
 
 const ShowFriend = () => {
+  const { data: session } = useSession();
+
+  if (!session) {
+    window.location.href = "/login";
+    return null;
+  }
+
   const [friend, setFriend] = useState<Friend | null>(null);
 
   const router = useRouter();

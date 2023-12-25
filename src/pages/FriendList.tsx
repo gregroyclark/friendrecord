@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 
@@ -15,6 +16,13 @@ interface Friend {
 }
 
 const FriendList = () => {
+  const { data: session } = useSession();
+
+  if (!session) {
+    window.location.href = "/login";
+    return null;
+  }
+
   const [friends, setFriends] = useState<Friend[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 

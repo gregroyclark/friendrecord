@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
@@ -15,6 +16,13 @@ interface FormData {
 }
 
 const UpdateFriend: React.FC = () => {
+  const { data: session } = useSession();
+
+  if (!session) {
+    window.location.href = "/login";
+    return null;
+  }
+
   const [formData, setFormData] = useState<FormData>({
     firstName: "",
     lastName: "",

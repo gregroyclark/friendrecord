@@ -1,14 +1,21 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { type NextApiRequest, type NextApiResponse } from "next";
+import { getSession } from "next-auth/react";
 
-import db from "../../../prisma/db";
 import { updateFriend } from "prisma/prismaService";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
+  const session = await getSession({ req });
+
+  if (!session) {
+    res.status(401).json({ error: "Not authenticated" });
+    return;
+  }
+
   if (req.method === "PUT") {
     try {
       const { id, firstName, lastName, phoneNumber, email, notes } = req.body;
