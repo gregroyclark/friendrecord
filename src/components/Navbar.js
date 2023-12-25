@@ -3,7 +3,7 @@
 import Link from "next/link";
 import React from "react";
 
-import logo from "../assets/friendrecord.png";
+import logo from "../assets/friendrecord-small.png";
 
 const Navbar = () => {
   return (
