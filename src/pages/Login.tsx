@@ -51,16 +51,15 @@ const LoginPage = () => {
           Sign in with Google
         </button>
       </div>
-      <div className="flex w-1/3">
+      <div className="">
         <div className="w-full">
           <hr />
         </div>
-        <h3 className="m-4 flex justify-center text-lg font-semibold text-gray-600">
-          New?
-        </h3>
-        <p className="m-4 flex justify-center text-lg font-semibold text-gray-600">
-          <Link href={"/SignUp"}>Sign up!</Link>
-        </p>
+        <div className="">
+          <p className="m-4 justify-center text-lg font-semibold text-gray-600">
+            New? <Link href={"/SignUp"}>Sign up!</Link>
+          </p>
+        </div>
       </div>
     </div>
   );
