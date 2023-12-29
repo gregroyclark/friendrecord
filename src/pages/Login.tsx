@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { signIn } from "next-auth/react";
+import Link from "next/link";
 
 const LoginPage = () => {
   const handleSubmit = async (event) => {
@@ -14,7 +15,7 @@ const LoginPage = () => {
 
   return (
     <div className="flex flex-col items-center justify-center space-y-4 bg-[#e4e2DD] p-8 shadow-md">
-      <h1 className="justify center m-4 flex text-lg font-semibold text-gray-600">
+      <h1 className="m-4 flex text-lg font-semibold text-gray-600">
         Welcome to friendrecord!
       </h1>
       <div className="w-full">
@@ -26,6 +27,13 @@ const LoginPage = () => {
             type="email"
             name="email"
             placeholder="Email"
+            required
+            className="rounded-md border border-gray-300 bg-gray-50 p-2"
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
             required
             className="rounded-md border border-gray-300 bg-gray-50 p-2"
           />
@@ -42,6 +50,17 @@ const LoginPage = () => {
         >
           Sign in with Google
         </button>
+      </div>
+      <div className="flex w-1/3">
+        <div className="w-full">
+          <hr />
+        </div>
+        <h3 className="m-4 flex justify-center text-lg font-semibold text-gray-600">
+          New?
+        </h3>
+        <p className="m-4 flex justify-center text-lg font-semibold text-gray-600">
+          <Link href={"/SignUp"}>Sign up!</Link>
+        </p>
       </div>
     </div>
   );
