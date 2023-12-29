@@ -62,7 +62,7 @@ const SignUpPage = () => {
           />
           <button
             type="submit"
-            className="bg--blue-700 m-1 rounded-md bg-green-700 p-1.5 text-white hover:bg-green-800"
+            className="bg--blue-700 m-1 rounded-md bg-blue-700 p-1.5 text-white hover:bg-blue-800"
           >
             Sign Up
           </button>
