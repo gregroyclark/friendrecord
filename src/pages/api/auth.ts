@@ -6,13 +6,14 @@ import { v4 as uuidv4 } from "uuid";
 
 import { register, login } from "prisma/prismaService";
 
-export default async function handler(req, res) {
+export default async function authHandler(req, res) {
   if (req.method === "POST") {
-    const { userId, name, email, password } = req.body;
+    const { id, userId, name, email, password } = req.body;
 
     if (req.url.includes("/SignUp")) {
       try {
         const user = await register({
+          id,
           userId: uuidv4(userId),
           name,
           email,
@@ -36,4 +37,7 @@ export default async function handler(req, res) {
   } else {
     res.status(405).json({ status: "error", message: "Method not allowed" });
   }
+
+  // default response
+  res.status(404).json({ status: "error", message: "Not found" });
 }
