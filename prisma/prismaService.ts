@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import prisma from "./prisma";
-import { hash, compare } from "bcrypt";
+import { hash, compare } from "bcryptjs";
 
 /* 
     this is the "register/sign up" function.
