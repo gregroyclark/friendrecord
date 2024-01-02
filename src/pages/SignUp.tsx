@@ -2,9 +2,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { useState } from "react";
-// import { signIn } from "next-auth/react";
-import { login } from "prisma/prismaService";
 import Link from "next/link";
+// import { signIn } from "next-auth/react";
+
+import authHandler from "./api/auth";
 
 const SignUpPage = () => {
   const [email, setEmail] = useState("");
@@ -14,15 +15,23 @@ const SignUpPage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const response = await fetch("/api/register", {
+    /*
+      terminal: API resolved without sending a response for /api/auth, this may result in stalled requests.
+      probably need to split auth methods into different files and call the specific route
+      oh. duh. i'm using a prisma service, not the auth API.
+      use the auth API. can't use bcrypt (in prismaService) on the frontend.
+      */
+
+    const response = await fetch("/api/auth", {
       method: "POST",
       body: JSON.stringify({ name, email, password }),
       headers: { "Content-Type": "application/json" },
     });
 
     if (response.ok) {
-      void login(email, password);
+      await authHandler(email, password);
     } else {
+      console.log("there was an error");
     }
   };
 
