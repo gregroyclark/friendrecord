@@ -2,9 +2,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-// import { signIn } from "next-auth/react";
+
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { signIn } from "next-auth/react";
 import { useState } from "react";
 
 const LoginPage = () => {
@@ -15,21 +16,32 @@ const LoginPage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // const email = event.target.email.value;
-    // const password = event.target.password.value;
-
-    const response = await fetch("/api/login", {
-      method: "POST",
-      body: JSON.stringify({ email, password }),
-      headers: { "Content-Type": "application/json" },
+    const result = await signIn("credentials", {
+      redirect: false,
+      email: email,
+      password: password,
     });
-    if (response.ok) {
-      const { user, token } = await response.json();
-      console.log("Login successfull");
-      void router.push("/");
+
+    if (result?.error) {
+      console.log("Error signing in");
     } else {
-      console.log("error signing in");
+      console.log("Login successful");
+      void router.push("/");
     }
+
+    // ...NextAuth handles this with sessions. facepalm
+    // const response = await fetch("/api/login", {
+    //   method: "POST",
+    //   body: JSON.stringify({ email, password }),
+    //   headers: { "Content-Type": "application/json" },
+    // });
+    // if (response.ok) {
+    //   const { user, token } = await response.json();
+    //   console.log("Login successfull");
+    //   void router.push("/");
+    // } else {
+    //   console.log("error signing in");
+    // }
   };
 
   return (
