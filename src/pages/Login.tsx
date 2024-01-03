@@ -28,20 +28,6 @@ const LoginPage = () => {
       console.log("Login successful");
       void router.push("/");
     }
-
-    // ...NextAuth handles this with sessions. facepalm
-    // const response = await fetch("/api/login", {
-    //   method: "POST",
-    //   body: JSON.stringify({ email, password }),
-    //   headers: { "Content-Type": "application/json" },
-    // });
-    // if (response.ok) {
-    //   const { user, token } = await response.json();
-    //   console.log("Login successfull");
-    //   void router.push("/");
-    // } else {
-    //   console.log("error signing in");
-    // }
   };
 
   return (
