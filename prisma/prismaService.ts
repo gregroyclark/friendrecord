@@ -24,7 +24,10 @@ export const register = async (email: string, password: string) => {
 };
 
 export const login = async (email: string, password: string) => {
-  const user = await prisma.user.findUnique({ where: { email } });
+  const normalizedEmail = email.trim().toLowerCase();
+  const user = await prisma.user.findUnique({
+    where: { email: normalizedEmail },
+  });
 
   if (!user) {
     throw new Error("No user found with this email");
