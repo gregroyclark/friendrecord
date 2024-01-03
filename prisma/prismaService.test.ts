@@ -82,6 +82,22 @@ void describe("prismaService", async () => {
 
   */
 
+  // void describe("login", () => {
+  //   it("should log in a user", async () => {
+  //     const user = {
+  //       id: 1,
+  //       userId: "abc123",
+  //       name: "John Doe",
+  //       email: "john.doe@example.com",
+  //       hashedPassword:
+  //         "$2b$10$QY2WX9w9Zwu6C/Fq5RpL6UHkz9iK3JO9NKZQKqGhT8Z3y6jU2Z6a",
+  //     };
+
+  //     prisma.user.findUnique = jest.fn().mockResolvedValue(user);
+  //     // bcrypt.
+  //   });
+  // });
+
   /*
 
     ==========================================
@@ -189,7 +205,7 @@ void describe("prismaService", async () => {
         },
       ]);
 
-      const friends = await getAllFriends();
+      const friends = await getAllFriends({}, {});
       expect(friends).toEqual([
         expect.objectContaining({
           id: 1,
