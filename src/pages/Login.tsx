@@ -1,16 +1,34 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-import { signIn } from "next-auth/react";
+// import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 const LoginPage = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const email = event.target.email.value;
+    // const email = event.target.email.value;
+    // const password = event.target.password.value;
 
-    void signIn("google", { email });
+    const response = await fetch("/api/login", {
+      method: "POST",
+      body: JSON.stringify({ email, password }),
+      headers: { "Content-Type": "application/json" },
+    });
+    if (response.ok) {
+      const { user, token } = await response.json();
+      void router.push("/index.tsx");
+    } else {
+      console.log("error signing in");
+    }
   };
 
   return (
@@ -44,12 +62,12 @@ const LoginPage = () => {
             Log In
           </button>
         </form>
-        <button
+        {/* <button
           type="submit"
           className="m-1 rounded-md bg-green-700 p-1.5 text-white hover:bg-green-800"
         >
           Sign in with Google
-        </button>
+        </button> */}
       </div>
       <div className="">
         <div className="w-full">
