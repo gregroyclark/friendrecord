@@ -1,28 +1,22 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import prisma from "./prisma";
-import { hash, compare } from "bcrypt";
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
-/* 
-    this is the "register/sign up" function.
-    consider if HTTP or UI resemblance is an easier mental model.
-    leaning toward refactoring createUser => register.
-*/
-export const register = async (data: {
-  id;
-  userId: string;
-  name: string;
-  email: string;
-  password: string;
-}) => {
-  const hashedPassword = await hash(data.password, 10);
+import prisma from "./prisma";
+import jwt from "jsonwebtoken";
+import { hash, compare } from "bcryptjs";
+import { type Prisma } from "@prisma/client";
+
+export const register = async (email: string, password: string) => {
+  const hashedPassword = await hash(password, 10);
   try {
-    const newUser = await prisma.user.create({
-      data: { ...data, hashedPassword },
+    const user = await prisma.user.create({
+      data: { email, hashedPassword } as Prisma.userCreateInput,
     });
-    return newUser;
+    const token = jwt.sign({ userId: user.userId }, process.env.JWT_SECRET_KEY);
+    return { user: user, token };
   } catch (error) {
     console.error("Error creating user: ", error);
     throw error;
@@ -30,11 +24,17 @@ export const register = async (data: {
 };
 
 export const login = async (email: string, password: string) => {
-  const user = await prisma.user.findUnique({ where: { email } });
+  const normalizedEmail = email.trim().toLowerCase();
+  const user = await prisma.user.findUnique({
+    where: { email: normalizedEmail },
+  });
 
   if (!user) {
+    console.log("No user found");
     throw new Error("No user found with this email");
   }
+
+  console.log(`Found user: ${JSON.stringify(user)}`);
 
   const validPassword = await compare(password, user.hashedPassword);
 
@@ -42,7 +42,8 @@ export const login = async (email: string, password: string) => {
     throw new Error("Invalid password");
   }
 
-  return user;
+  const token = jwt.sign({ userId: user.userId }, process.env.JWT_SECRET_KEY);
+  return { user, token };
 };
 
 export const createFriend = async (data: {
@@ -55,7 +56,7 @@ export const createFriend = async (data: {
 }) => {
   try {
     const newFriend = await prisma.friend.create({
-      data: { ...data, userId: data.userId },
+      data: { ...data },
     });
     return newFriend;
   } catch (error) {

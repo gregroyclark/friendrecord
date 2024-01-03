@@ -1,20 +1,38 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
+
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
+import { useState } from "react";
 
 const LoginPage = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const email = event.target.email.value;
+    const result = await signIn("credentials", {
+      redirect: false,
+      email: email,
+      password: password,
+    });
 
-    void signIn("google", { email });
+    if (result?.error) {
+      console.log("Error signing in");
+    } else {
+      console.log("Login successful");
+      void router.push("/");
+    }
   };
 
   return (
     <div className="flex flex-col items-center justify-center space-y-4 bg-[#e4e2DD] p-8 shadow-md">
-      <h1 className="justify center m-4 flex text-lg font-semibold text-gray-600">
+      <h1 className="m-4 flex text-lg font-semibold text-gray-600">
         Welcome to friendrecord!
       </h1>
       <div className="w-full">
@@ -27,6 +45,17 @@ const LoginPage = () => {
             name="email"
             placeholder="Email"
             required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="rounded-md border border-gray-300 bg-gray-50 p-2"
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             className="rounded-md border border-gray-300 bg-gray-50 p-2"
           />
           <button
@@ -36,12 +65,22 @@ const LoginPage = () => {
             Log In
           </button>
         </form>
-        <button
+        {/* <button
           type="submit"
           className="m-1 rounded-md bg-green-700 p-1.5 text-white hover:bg-green-800"
         >
           Sign in with Google
-        </button>
+        </button> */}
+      </div>
+      <div className="">
+        <div className="w-full">
+          <hr />
+        </div>
+        <div className="">
+          <p className="m-4 justify-center text-lg font-semibold text-gray-600">
+            New? <Link href={"/SignUp"}>Sign up!</Link>
+          </p>
+        </div>
       </div>
     </div>
   );

@@ -13,6 +13,7 @@ import {
   getFriend,
   updateFriend,
   deleteFriend,
+  register,
 } from "./prismaService";
 
 /*
@@ -26,6 +27,77 @@ import {
   */
 
 void describe("prismaService", async () => {
+  /*
+
+    ==========================================
+
+    test suites for register prismaService
+
+    ==========================================
+
+  */
+
+  void describe("register", async () => {
+    it("should register a user", async () => {
+      const userData = {
+        id: 1,
+        userId: "abc123",
+        name: "John Doe",
+        email: "john.doe@example.com",
+        password: "password",
+      };
+
+      prisma.user.create = jest.fn().mockResolvedValue(userData);
+
+      const newUser = await register(userData);
+      expect(newUser).toEqual(expect.objectContaining(userData));
+    });
+
+    it("should throw an error when there is a database error", async () => {
+      prisma.user.create = jest
+        .fn()
+        .mockRejectedValue(new Error("Database error"));
+    });
+
+    try {
+      await register({
+        id: 1,
+        userId: "abc123",
+        name: "John Doe",
+        email: "john.doe@example.com",
+        password: "password",
+      });
+    } catch (error) {
+      expect(error).toBeInstanceOf(Error);
+    }
+  });
+
+  /*
+
+    ==========================================
+
+    test suites for login prismaService
+
+    ==========================================
+
+  */
+
+  // void describe("login", () => {
+  //   it("should log in a user", async () => {
+  //     const user = {
+  //       id: 1,
+  //       userId: "abc123",
+  //       name: "John Doe",
+  //       email: "john.doe@example.com",
+  //       hashedPassword:
+  //         "$2b$10$QY2WX9w9Zwu6C/Fq5RpL6UHkz9iK3JO9NKZQKqGhT8Z3y6jU2Z6a",
+  //     };
+
+  //     prisma.user.findUnique = jest.fn().mockResolvedValue(user);
+  //     // bcrypt.
+  //   });
+  // });
+
   /*
 
     ==========================================
@@ -45,6 +117,7 @@ void describe("prismaService", async () => {
         phoneNumber: "1234567890",
         email: "test@email.com",
         notes: "This is a jest unit test",
+        userId: "",
       };
       const newFriend = await createFriend(friendData);
       expect(newFriend).toEqual(expect.objectContaining(friendData));
@@ -79,6 +152,7 @@ void describe("prismaService", async () => {
           phoneNumber: "1234567890",
           email: "john.doe@email.com",
           notes: "This is John Doe unit test.",
+          userId: "",
         });
       } catch (error) {
         expect(error).toBeInstanceOf(Error);
@@ -118,6 +192,7 @@ void describe("prismaService", async () => {
           phoneNumber: "1234567890",
           email: "john.doe@email.com",
           notes: "This is John Doe unit test",
+          userId: "abc123",
         },
         {
           id: 2,
@@ -126,10 +201,11 @@ void describe("prismaService", async () => {
           phoneNumber: "0987654321",
           email: "jane.doe@email.com",
           notes: "This is Jane Doe. unit test",
+          userId: "abc123",
         },
       ]);
 
-      const friends = await getAllFriends();
+      const friends = await getAllFriends({}, {});
       expect(friends).toEqual([
         expect.objectContaining({
           id: 1,
@@ -138,6 +214,7 @@ void describe("prismaService", async () => {
           phoneNumber: "1234567890",
           email: "john.doe@email.com",
           notes: "This is John Doe unit test",
+          userId: "abc123",
         }),
         expect.objectContaining({
           id: 2,
@@ -146,6 +223,7 @@ void describe("prismaService", async () => {
           phoneNumber: "0987654321",
           email: "jane.doe@email.com",
           notes: "This is Jane Doe unit test",
+          userId: "abc123",
         }),
       ]);
     });
@@ -172,9 +250,10 @@ void describe("prismaService", async () => {
         phoneNumber: "1234567890",
         email: "john.doe@email.com",
         notes: "This is John Doe unit test.",
+        userId: "abc123",
       });
 
-      const friend = await getFriend(1);
+      const friend = await getFriend(1, "abc123");
       expect(friend).toEqual(
         expect.objectContaining({
           firstName: "John",
@@ -182,6 +261,7 @@ void describe("prismaService", async () => {
           phoneNumber: "1234567890",
           email: "john.doe@email.com",
           notes: "This is John Doe unit test.",
+          userId: "abc123",
         }),
       );
     });
@@ -189,14 +269,14 @@ void describe("prismaService", async () => {
     // edge case, query is null
     it("should return null when friend does not exist", async () => {
       prisma.friend.findUniqueOrThrow = jest.fn().mockResolvedValue(null);
-      const friend = await getFriend(1);
+      const friend = await getFriend(1, "abc123");
       expect(friend).toBeNull();
     });
 
     // edge case, id is NaN
     it("should return an error when id is not a number", async () => {
       try {
-        await getFriend("invalidId");
+        await getFriend("invalidId", "invalidUserId");
       } catch (error) {
         expect(error).toBeInstanceOf(error);
       }
@@ -208,7 +288,7 @@ void describe("prismaService", async () => {
         .fn()
         .mockRejectedValue(new Error("Database error"));
       try {
-        await getFriend(1);
+        await getFriend(1, "abc123");
       } catch (error) {
         expect(error).toBeInstanceOf(Error);
       }
@@ -235,12 +315,14 @@ void describe("prismaService", async () => {
         phoneNumber: "1234567890",
         email: "john.doe@email.com",
         notes: "This is John Doe unit test.",
+        userId: "abc123",
       });
 
       // update the friend
-      const updatedFriend = await updateFriend(newFriend.id, {
+      const updatedFriend = await updateFriend(newFriend.id, newFriend.userId, {
         firstName: "Jane",
         lastName: "Doe",
+        phoneNumber: "1234567890",
         email: "jane.doe@email.com",
         notes: "This is Jane Doe unit test.",
       });
@@ -253,6 +335,7 @@ void describe("prismaService", async () => {
           phoneNumber: "1234567890",
           email: "jane.doe@email.com",
           notes: "This is Jane Doe unit test.",
+          userId: "abc123",
         }),
       );
     });
@@ -260,7 +343,7 @@ void describe("prismaService", async () => {
     // edge case, friend does not exist
     it("should return an error when friend does not exist", async () => {
       try {
-        await updateFriend(1, { firstName: "Jane" });
+        await updateFriend(1, "abc123", { firstName: "Jane" });
       } catch (error) {
         expect(error).toBeInstanceOf(Error);
       }
@@ -269,7 +352,7 @@ void describe("prismaService", async () => {
     //edge case, id is NaN
     it("should return an error when id is not a number", async () => {
       try {
-        await updateFriend("invalidId" as any, { firstName: "Jane" });
+        await updateFriend("invalidId" as any, "abc123", { firstName: "Jane" });
       } catch (error) {
         expect(error).toBeInstanceOf(Error);
       }
@@ -281,7 +364,7 @@ void describe("prismaService", async () => {
         .fn()
         .mockRejectedValue(new Error("Database error"));
       try {
-        await updateFriend(1, { firstName: "Jane" });
+        await updateFriend(1, "abc123", { firstName: "Jane" });
       } catch (error) {
         expect(error).toBeInstanceOf(Error);
       }
@@ -309,14 +392,15 @@ void describe("prismaService", async () => {
         phoneNumber: "1234567890",
         email: "john.doe@email.com",
         notes: "This is John Doe unit test.",
+        userId: "abc123",
       });
 
       // delete the friend
-      await deleteFriend(newFriend.id);
+      await deleteFriend(newFriend.id, newFriend.userId);
 
       // check if the friend was deleted
       try {
-        await getFriend(newFriend.id);
+        await getFriend(newFriend.id, newFriend.userId);
       } catch (error) {
         expect(error).toBeInstanceOf(Error);
       }
@@ -325,7 +409,7 @@ void describe("prismaService", async () => {
     // edge case, friend does not exist
     it("should return an error when friend does not exist", async () => {
       try {
-        await deleteFriend(1);
+        await deleteFriend(1, "abc123");
       } catch (error) {
         expect(error).toBeInstanceOf(Error);
       }
@@ -334,7 +418,7 @@ void describe("prismaService", async () => {
     // edge case, id is NaN
     it("should return an error when id is not a number", async () => {
       try {
-        await deleteFriend("invalidId" as any);
+        await deleteFriend("invalidId" as any, "invalid" as any);
       } catch (error) {
         expect(error).toBeInstanceOf(Error);
       }
@@ -346,7 +430,7 @@ void describe("prismaService", async () => {
         .fn()
         .mockRejectedValue(new Error("Database error"));
       try {
-        await deleteFriend(1);
+        await deleteFriend(1, "");
       } catch (error) {
         expect(error).toBeInstanceOf(Error);
       }

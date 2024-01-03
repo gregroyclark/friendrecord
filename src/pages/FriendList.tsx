@@ -19,7 +19,7 @@ const FriendList = () => {
   const { data: session } = useSession();
 
   if (!session) {
-    window.location.href = "/login";
+    window.location.href = "/Login";
     return null;
   }
 

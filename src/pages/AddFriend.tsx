@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import React, { useState } from "react";
-import router from "next/router";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 import Link from "next/link";
 import { useSession } from "next-auth/react";
@@ -16,12 +16,15 @@ type FormData = {
 };
 
 const AddFriend: React.FC = () => {
-  const { data: session } = useSession();
+  const router = useRouter();
+  // const { data: session } = useSession();
+  const session = typeof window !== "undefined" ? useSession() : null;
 
-  if (!session) {
-    window.location.href = "/login";
-    return null;
-  }
+  useEffect(() => {
+    if (!session) {
+      void router.push("/Login");
+    }
+  }, []);
 
   const [formData, setFormData] = useState<FormData>({
     firstName: "",
@@ -46,19 +49,23 @@ const AddFriend: React.FC = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch("/api/addFriend", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-      if (!response.ok) {
-        throw new Error("Error adding friend");
-      }
-      const data = await response.json();
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      console.log("Response:", data);
+      if (session && session.status === "authenticated" && session.data) {
+        const response = await fetch("/api/addFriend", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...formData, userId: session.data.user.id }),
+        });
 
-      void router.push(`/showFriend/${data.id}`);
+        if (!response.ok) {
+          throw new Error("Error adding friend");
+        }
+        const data = await response.json();
+        console.log("Response:", data);
+
+        void router.push(`/showFriend/${data.id}`);
+      } else {
+        throw new Error("No user session found");
+      }
     } catch (error) {
       console.error("Error adding friend:", error);
     }
