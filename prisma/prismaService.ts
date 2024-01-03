@@ -1,30 +1,22 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import prisma from "./prisma";
-import { hash, compare } from "bcryptjs";
-import jwt from "jsonwebtoken";
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
-/* 
-    this is the "register/sign up" function.
-    consider if HTTP or UI resemblance is an easier mental model.
-    leaning toward refactoring createUser => register.
-*/
-export const register = async (data: {
-  id;
-  userId: string;
-  name: string;
-  email: string;
-  password: string;
-}) => {
-  const hashedPassword = await hash(data.password, 10);
+import prisma from "./prisma";
+import jwt from "jsonwebtoken";
+import { hash, compare } from "bcryptjs";
+import { type Prisma } from "@prisma/client";
+
+export const register = async (email: string, password: string) => {
+  const hashedPassword = await hash(password, 10);
   try {
-    const newUser = await prisma.user.create({
-      data: { ...data, hashedPassword },
+    const user = await prisma.user.create({
+      data: { email, hashedPassword } as Prisma.userCreateInput,
     });
-    const token = jwt.sign({ userId: newUser.id }, process.env.JWT_SECRET_KEY);
-    return { user: newUser, token };
+    const token = jwt.sign({ userId: user.userId }, process.env.JWT_SECRET_KEY);
+    return { user: user, token };
   } catch (error) {
     console.error("Error creating user: ", error);
     throw error;
