@@ -30,8 +30,11 @@ export const login = async (email: string, password: string) => {
   });
 
   if (!user) {
+    console.log("No user found");
     throw new Error("No user found with this email");
   }
+
+  console.log(`Found user: ${JSON.stringify(user)}`);
 
   const validPassword = await compare(password, user.hashedPassword);
 
