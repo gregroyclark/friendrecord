@@ -56,7 +56,7 @@ export const createFriend = async (data: {
 }) => {
   try {
     const newFriend = await prisma.friend.create({
-      data: { ...data, userId: data.userId },
+      data: { ...data },
     });
     return newFriend;
   } catch (error) {
