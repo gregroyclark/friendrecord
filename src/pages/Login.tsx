@@ -25,7 +25,8 @@ const LoginPage = () => {
     });
     if (response.ok) {
       const { user, token } = await response.json();
-      void router.push("/index.tsx");
+      console.log("Login successfull");
+      void router.push("/");
     } else {
       console.log("error signing in");
     }
@@ -46,6 +47,8 @@ const LoginPage = () => {
             name="email"
             placeholder="Email"
             required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="rounded-md border border-gray-300 bg-gray-50 p-2"
           />
           <input
@@ -53,6 +56,8 @@ const LoginPage = () => {
             name="password"
             placeholder="Password"
             required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             className="rounded-md border border-gray-300 bg-gray-50 p-2"
           />
           <button
