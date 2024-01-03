@@ -23,6 +23,7 @@ export default NextAuth({
           ? process.env.NEXTAUTH_PROD_API_URL
           : process.env.NEXTAUTH_LOCAL_API_URL;
 
+        console.log(process.env.NEXTAUTH_URL);
         if (!apiUrl) {
           throw new Error("API URL is not defined");
         }
