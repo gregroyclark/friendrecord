@@ -21,23 +21,31 @@ export default NextAuth({
         const isProduction = process.env.NODE_ENV === "production";
         const apiUrl = isProduction
           ? process.env.NEXTAUTH_PROD_API_URL
-          : process.env.NEXTAUTH_LOVAL_API_URL;
+          : process.env.NEXTAUTH_LOCAL_API_URL;
 
         if (!apiUrl) {
           throw new Error("API URL is not defined");
         }
 
-        const res = await fetch(apiUrl, {
-          method: "POST",
-          body: JSON.stringify(credentials),
-          headers: { "Content-Type": "application/json" },
-        });
+        try {
+          const res = await fetch(apiUrl, {
+            method: "POST",
+            body: JSON.stringify(credentials),
+            headers: { "Content-Type": "application/json" },
+          });
 
-        const user = await res.json();
+          if (!res.ok) {
+            throw new Error("Failed to authenticate");
+          }
+          const user = await res.json();
 
-        if (user) {
-          return Promise.resolve(user);
-        } else {
+          if (user) {
+            return Promise.resolve(user);
+          } else {
+            return Promise.resolve(null);
+          }
+        } catch (error) {
+          console.error(error);
           return Promise.resolve(null);
         }
       },
