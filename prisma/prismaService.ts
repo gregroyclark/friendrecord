@@ -4,6 +4,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import prisma from "./prisma";
 import { hash, compare } from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 /* 
     this is the "register/sign up" function.
@@ -22,7 +23,8 @@ export const register = async (data: {
     const newUser = await prisma.user.create({
       data: { ...data, hashedPassword },
     });
-    return newUser;
+    const token = jwt.sign({ userId: newUser.id }, process.env.JWT_SECRET_KEY);
+    return { user: newUser, token };
   } catch (error) {
     console.error("Error creating user: ", error);
     throw error;
@@ -42,7 +44,8 @@ export const login = async (email: string, password: string) => {
     throw new Error("Invalid password");
   }
 
-  return user;
+  const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET_KEY);
+  return { user, token };
 };
 
 export const createFriend = async (data: {
