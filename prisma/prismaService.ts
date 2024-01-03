@@ -42,7 +42,7 @@ export const login = async (email: string, password: string) => {
     throw new Error("Invalid password");
   }
 
-  const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET_KEY);
+  const token = jwt.sign({ userId: user.userId }, process.env.JWT_SECRET_KEY);
   return { user, token };
 };
 
