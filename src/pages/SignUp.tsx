@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-import { useState } from "react";
 import Link from "next/link";
-// import { signIn } from "next-auth/react";
-
-import authHandler from "./api/auth";
+import { useState } from "react";
+import { useRouter } from "next/router";
 
 const SignUpPage = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+
+  const router = useRouter();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -22,14 +22,14 @@ const SignUpPage = () => {
       use the auth API. can't use bcrypt (in prismaService) on the frontend.
       */
 
-    const response = await fetch("/api/auth", {
+    const response = await fetch("/api/register", {
       method: "POST",
       body: JSON.stringify({ name, email, password }),
       headers: { "Content-Type": "application/json" },
     });
 
     if (response.ok) {
-      await authHandler(email, password);
+      void router.push("/Login");
     } else {
       console.log("there was an error");
     }
