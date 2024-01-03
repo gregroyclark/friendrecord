@@ -47,8 +47,7 @@ model session {
 }
 
 model user {
-  id              Int
-  userId          String    @id @unique
+  userId          String    @id @default(uuid()) @unique
   name            String?
   email           String?   @unique(map: "User_email_key")
   emailVerified   DateTime?
