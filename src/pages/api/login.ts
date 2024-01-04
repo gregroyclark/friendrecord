@@ -14,15 +14,22 @@ export default async function handler(
 ) {
   if (req.method === "POST") {
     const { email, password } = req.body;
+
+    console.log("Attempting to sign in with email: ", email);
+
     if (typeof window !== "undefined") {
       try {
         await signIn("credentials", {
           email: email,
           password: password,
+          redirect: false,
         });
+
+        console.log("Successfully signed in");
+
         res.status(200).json({ status: "Login successful" });
       } catch (error) {
-        console.error(error);
+        console.error("Error signing in: ", error);
         res.status(500).json({ error: error });
       }
     } else {
