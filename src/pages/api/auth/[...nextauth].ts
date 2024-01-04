@@ -4,6 +4,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 
 console.log("NEXTAUTH_URL: ", process.env.NEXTAUTH_URL);
 console.log("NEXTAUTH_API_URL: ", process.env.NEXTAUTH_API_URL);
