@@ -3,24 +3,36 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 
+import { useState } from "react";
+
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { signIn } from "next-auth/react";
-import { useState } from "react";
+import { signIn, useSession } from "next-auth/react";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const router = useRouter();
+
+  const { data: session } = useSession();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    console.log("Attempting to sign in with email: ", email);
+
+    if (session) {
+      void router.push("/");
+    }
 
     const result = await signIn("credentials", {
       redirect: false,
       email: email,
       password: password,
     });
+
+    console.log("Sign-in result: ", result);
 
     if (result?.error) {
       console.log("Error signing in");
