@@ -1,8 +1,9 @@
 import { type NextApiRequest, type NextApiResponse } from "next";
 import { getServerSession } from "next-auth/next";
 
-import { deleteFriend } from "prisma/prismaService";
 import { authOptions } from "./auth/[...nextauth]";
+
+import { deleteFriend } from "prisma/prismaService";
 
 export default async function handler(
   req: NextApiRequest,

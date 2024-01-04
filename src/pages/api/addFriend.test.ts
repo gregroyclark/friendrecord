@@ -1,6 +1,7 @@
+import { type NextApiRequest, type NextApiResponse } from "next";
+
 import handler from "./addFriend";
 import { createFriend } from "../../../prisma/prismaService";
-import { type NextApiRequest, type NextApiResponse } from "next";
 
 /*
     ==========================================

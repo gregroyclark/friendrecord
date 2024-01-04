@@ -1,6 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
 import { type NextApiRequest, type NextApiResponse } from "next";
 import getServerSession from "next-auth/next";
 

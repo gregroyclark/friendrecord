@@ -4,9 +4,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
-import prisma from "./prisma";
-
 import { hash, compare } from "bcryptjs";
+
+import prisma from "./prisma";
 import { type Prisma } from "@prisma/client";
 
 export const register = async (email: string, password: string) => {
