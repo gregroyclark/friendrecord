@@ -27,6 +27,7 @@ export const login = async (email: string, password: string) => {
   const normalizedEmail = email.trim().toLowerCase();
   const user = await prisma.user.findUnique({
     where: { email: normalizedEmail },
+    select: { userId: true, email: true, name: true, hashedPassword: true },
   });
 
   if (!user) {
@@ -42,7 +43,7 @@ export const login = async (email: string, password: string) => {
     throw new Error("Invalid password");
   }
 
-  return { user };
+  return { userId: user.userId, email: user.email, name: user.name };
 };
 
 export const createFriend = async (data: {
