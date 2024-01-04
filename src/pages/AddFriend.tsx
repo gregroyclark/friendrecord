@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+
 import React, { useEffect, useState } from "react";
 
 import Link from "next/link";
@@ -57,6 +58,8 @@ const AddFriend: React.FC = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ ...formData, userId: session.data.user.id }),
         });
+
+        console.log("response:", response);
 
         if (!response.ok) {
           throw new Error("Error adding friend");
