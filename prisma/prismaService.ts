@@ -4,9 +4,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
-import prisma from "./prisma";
-import jwt from "jsonwebtoken";
 import { hash, compare } from "bcryptjs";
+
+import prisma from "./prisma";
 import { type Prisma } from "@prisma/client";
 
 export const register = async (email: string, password: string) => {
@@ -15,8 +15,8 @@ export const register = async (email: string, password: string) => {
     const user = await prisma.user.create({
       data: { email, hashedPassword } as Prisma.userCreateInput,
     });
-    const token = jwt.sign({ userId: user.userId }, process.env.JWT_SECRET_KEY);
-    return { user: user, token };
+
+    return { user: user };
   } catch (error) {
     console.error("Error creating user: ", error);
     throw error;
@@ -27,6 +27,7 @@ export const login = async (email: string, password: string) => {
   const normalizedEmail = email.trim().toLowerCase();
   const user = await prisma.user.findUnique({
     where: { email: normalizedEmail },
+    select: { userId: true, email: true, name: true, hashedPassword: true },
   });
 
   if (!user) {
@@ -42,8 +43,7 @@ export const login = async (email: string, password: string) => {
     throw new Error("Invalid password");
   }
 
-  const token = jwt.sign({ userId: user.userId }, process.env.JWT_SECRET_KEY);
-  return { user, token };
+  return { userId: user.userId, email: user.email, name: user.name };
 };
 
 export const createFriend = async (data: {

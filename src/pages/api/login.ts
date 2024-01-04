@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -13,9 +14,13 @@ export default async function handler(
 ) {
   if (req.method === "POST") {
     const { email, password } = req.body;
+
+    console.log("Attempting to sign in with email: ", email);
+
     try {
-      const { user, token } = await login(email, password);
-      res.status(200).json({ user, token });
+      const user = await login(email, password);
+      res.status(200).json(user);
+      console.log("Successfully signed in");
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: error });

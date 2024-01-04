@@ -1,9 +1,8 @@
+import { type AppType } from "next/app";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
-import { type AppType } from "next/app";
-import Layout from "~/components/Layout";
 
-// import { api } from "~/utils/api";
+import Layout from "~/components/Layout";
 
 import "~/styles/globals.css";
 

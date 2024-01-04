@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
+
 import { type NextApiRequest, type NextApiResponse } from "next";
 import getServerSession from "next-auth/next";
 
@@ -27,11 +31,12 @@ export default async function handler(
         phoneNumber,
         email,
         notes,
-        userId,
+        userId: userId,
       });
       res.status(200).json(newFriend);
     } catch (error) {
       console.error("Error adding friend:", error);
+      console.error(error.stack);
       res.status(500).json({ error: "Internal Server Error" });
     }
   } else {

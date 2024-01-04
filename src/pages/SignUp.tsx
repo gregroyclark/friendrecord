@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
+
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/router";
@@ -29,7 +30,7 @@ const SignUpPage = () => {
     });
 
     if (response.ok) {
-      void router.push("/Login");
+      void router.push("/");
     } else {
       console.log("there was an error");
     }

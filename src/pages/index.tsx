@@ -1,14 +1,19 @@
-import { useSession } from "next-auth/react";
-import Link from "next/link";
+import { useEffect } from "react";
 
-import LoginPage from "./Login";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 export default function Home() {
   const { data: session } = useSession();
 
-  if (!session) {
-    return <LoginPage />;
-  }
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!session) {
+      void router.push("/Login");
+    }
+  }, [session]);
 
   return (
     <>

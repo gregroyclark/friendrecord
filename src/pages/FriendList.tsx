@@ -27,7 +27,7 @@ const FriendList = () => {
     if (!session) {
       void router.push("/Login");
     }
-  }, []);
+  }, [session]);
 
   const [friends, setFriends] = useState<Friend[]>([]);
   const [isLoading, setIsLoading] = useState(true);

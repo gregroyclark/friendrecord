@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
+
 import React, { useEffect, useState } from "react";
 
 import Link from "next/link";
@@ -18,13 +20,13 @@ type FormData = {
 const AddFriend: React.FC = () => {
   const router = useRouter();
   // const { data: session } = useSession();
-  const session = typeof window !== "undefined" ? useSession() : null;
+  const session = useSession();
 
   useEffect(() => {
     if (!session) {
       void router.push("/Login");
     }
-  }, []);
+  }, [session]);
 
   const [formData, setFormData] = useState<FormData>({
     firstName: "",
@@ -50,11 +52,15 @@ const AddFriend: React.FC = () => {
 
     try {
       if (session && session.status === "authenticated" && session.data) {
+        console.log("Form data: ", formData);
+        console.log("Session data: ", session);
         const response = await fetch("/api/addFriend", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ ...formData, userId: session.data.user.id }),
         });
+
+        console.log("response:", response);
 
         if (!response.ok) {
           throw new Error("Error adding friend");

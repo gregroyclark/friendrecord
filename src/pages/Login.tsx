@@ -1,32 +1,49 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
+
+import { useState } from "react";
 
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { signIn } from "next-auth/react";
-import { useState } from "react";
+import { signIn, useSession } from "next-auth/react";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const router = useRouter();
+
+  const { data: session } = useSession();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const result = await signIn("credentials", {
-      redirect: false,
-      email: email,
-      password: password,
-    });
+    console.log("Attempting to sign in with email: ", email);
 
-    if (result?.error) {
-      console.log("Error signing in");
-    } else {
-      console.log("Login successful");
+    if (session) {
       void router.push("/");
+    }
+
+    try {
+      const result = await signIn("credentials", {
+        email: email,
+        password: password,
+        redirect: false,
+      });
+
+      console.log("Sign-in result: ", result);
+
+      if (result?.error) {
+        console.log("Error signing in: ");
+        void router.push("/Login");
+      } else {
+        console.log("Login successful");
+        void router.push("/");
+      }
+    } catch (error) {
+      console.error("Error signing in: ", error);
     }
   };
 
