@@ -2,8 +2,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { useSession } from "next-auth/react";
+
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
+
 import React, { useState, useEffect } from "react";
 
 interface Friend {
@@ -16,12 +19,15 @@ interface Friend {
 }
 
 const FriendList = () => {
+  const router = useRouter();
+
   const { data: session } = useSession();
 
-  if (!session) {
-    window.location.href = "/Login";
-    return null;
-  }
+  useEffect(() => {
+    if (!session) {
+      void router.push("/Login");
+    }
+  }, []);
 
   const [friends, setFriends] = useState<Friend[]>([]);
   const [isLoading, setIsLoading] = useState(true);
