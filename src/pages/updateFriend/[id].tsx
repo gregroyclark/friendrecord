@@ -3,9 +3,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 interface FormData {
   firstName: "";
@@ -16,12 +17,15 @@ interface FormData {
 }
 
 const UpdateFriend: React.FC = () => {
+  const router = useRouter();
+
   const { data: session } = useSession();
 
-  if (!session) {
-    window.location.href = "/Login";
-    return null;
-  }
+  useEffect(() => {
+    if (!session) {
+      void router.push("/Login");
+    }
+  }, []);
 
   const [formData, setFormData] = useState<FormData>({
     firstName: "",
@@ -31,7 +35,6 @@ const UpdateFriend: React.FC = () => {
     notes: "",
   });
 
-  const router = useRouter();
   const { id } = router.query;
   const friendId = Array.isArray(id) ? Number(id[0]) : Number(id);
 

@@ -4,10 +4,11 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-redundant-type-constituents */
 
-import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 
 interface Friend {
   id: number;
@@ -19,16 +20,18 @@ interface Friend {
 }
 
 const ShowFriend = () => {
+  const router = useRouter();
+
   const { data: session } = useSession();
 
-  if (!session) {
-    window.location.href = "/Login";
-    return null;
-  }
+  useEffect(() => {
+    if (!session) {
+      void router.push("/Login");
+    }
+  }, []);
 
   const [friend, setFriend] = useState<Friend | null>(null);
 
-  const router = useRouter();
   const { id } = router.query;
   console.log("showFriend id: ", typeof id, id);
 
