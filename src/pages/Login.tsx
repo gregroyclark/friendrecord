@@ -26,19 +26,23 @@ const LoginPage = () => {
       void router.push("/");
     }
 
-    const result = await signIn("credentials", {
-      redirect: false,
-      email: email,
-      password: password,
-    });
+    try {
+      const result = await signIn("credentials", {
+        email: email,
+        password: password,
+        redirect: false,
+      });
 
-    console.log("Sign-in result: ", result);
+      console.log("Sign-in result: ", result);
 
-    if (result?.error) {
-      console.log("Error signing in");
-    } else {
-      console.log("Login successful");
-      void router.push("/");
+      if (result?.error) {
+        console.log("Error signing in: ");
+      } else {
+        console.log("Login successful");
+        void router.push("/");
+      }
+    } catch (error) {
+      console.error("Error signing in: ", error);
     }
   };
 
