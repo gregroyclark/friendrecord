@@ -5,7 +5,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
 import prisma from "./prisma";
-import jwt from "jsonwebtoken";
+
 import { hash, compare } from "bcryptjs";
 import { type Prisma } from "@prisma/client";
 
@@ -15,8 +15,8 @@ export const register = async (email: string, password: string) => {
     const user = await prisma.user.create({
       data: { email, hashedPassword } as Prisma.userCreateInput,
     });
-    const token = jwt.sign({ userId: user.userId }, process.env.JWT_SECRET_KEY);
-    return { user: user, token };
+
+    return { user: user };
   } catch (error) {
     console.error("Error creating user: ", error);
     throw error;
@@ -42,8 +42,7 @@ export const login = async (email: string, password: string) => {
     throw new Error("Invalid password");
   }
 
-  const token = jwt.sign({ userId: user.userId }, process.env.JWT_SECRET_KEY);
-  return { user, token };
+  return { user };
 };
 
 export const createFriend = async (data: {
