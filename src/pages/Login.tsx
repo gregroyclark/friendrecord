@@ -37,6 +37,7 @@ const LoginPage = () => {
 
       if (result?.error) {
         console.log("Error signing in: ");
+        void router.push("/Login");
       } else {
         console.log("Login successful");
         void router.push("/");
