@@ -20,15 +20,14 @@ export const authOptions: NextAuthOptions = {
         password: { label: "password", type: "password" },
       },
       authorize: async (credentials) => {
-        const isProduction = process.env.NODE_ENV === "production";
-        const apiUrl = isProduction
-          ? process.env.NEXTAUTH_PROD_API_URL
-          : process.env.NEXTAUTH_LOCAL_API_URL;
+        const apiUrl = process.env.NEXTAUTH_API_URL;
 
-        console.log(process.env.NEXTAUTH_URL);
         if (!apiUrl) {
+          console.error("API URL is not defined");
           throw new Error("API URL is not defined");
         }
+
+        console.log("Calling API with credentials: ", credentials);
 
         try {
           const res = await fetch(apiUrl, {
@@ -37,18 +36,25 @@ export const authOptions: NextAuthOptions = {
             headers: { "Content-Type": "application/json" },
           });
 
+          console.log("Received response from API: ", res);
+
           if (!res.ok) {
+            console.error("Failed to authenticate");
             throw new Error("Failed to authenticate");
           }
+
           const user = await res.json();
+
+          console.log("Received user from API: ", user);
 
           if (user) {
             return Promise.resolve(user);
           } else {
+            console.error("No user received from API");
             return Promise.resolve(null);
           }
         } catch (error) {
-          console.error(error);
+          console.error("Error occurred during authorization: ", error);
           return Promise.resolve(null);
         }
       },
