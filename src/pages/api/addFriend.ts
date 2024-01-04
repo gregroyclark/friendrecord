@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { type NextApiRequest, type NextApiResponse } from "next";
@@ -27,11 +28,12 @@ export default async function handler(
         phoneNumber,
         email,
         notes,
-        userId,
+        userId: userId,
       });
       res.status(200).json(newFriend);
     } catch (error) {
       console.error("Error adding friend:", error);
+      console.error(error.stack);
       res.status(500).json({ error: "Internal Server Error" });
     }
   } else {
