@@ -14,7 +14,13 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
+  console.log("Request method: ", req.method);
+  console.log("Request headers: ", req.headers);
+  console.log("Request body: ", req.body);
+
   const session = await getServerSession(req, res, authOptions);
+
+  console.log("Session: ", session);
 
   if (!session) {
     res.status(401).json({ error: "Not authenticated" });

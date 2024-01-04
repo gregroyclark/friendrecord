@@ -19,8 +19,9 @@ type FormData = {
 
 const AddFriend: React.FC = () => {
   const router = useRouter();
-  // const { data: session } = useSession();
-  const session = useSession();
+  const { data: session } = useSession();
+  // const session = useSession();
+  // console.log(session);
 
   useEffect(() => {
     if (!session) {
@@ -51,27 +52,24 @@ const AddFriend: React.FC = () => {
     event.preventDefault();
 
     try {
-      if (session && session.status === "authenticated" && session.data) {
-        console.log("Form data: ", formData);
-        console.log("Session data: ", session);
-        const response = await fetch("/api/addFriend", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ...formData, userId: session.data.user.id }),
-        });
+      console.log("Form data: ", formData);
+      console.log("Session data: ", session);
 
-        console.log("response:", response);
+      const response = await fetch("/api/addFriend", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...formData, userId: session?.user.id }),
+      });
 
-        if (!response.ok) {
-          throw new Error("Error adding friend");
-        }
-        const data = await response.json();
-        console.log("Response:", data);
+      console.log("response:", response);
 
-        void router.push(`/showFriend/${data.id}`);
-      } else {
-        throw new Error("No user session found");
+      if (!response.ok) {
+        throw new Error("Error adding friend");
       }
+      const data = await response.json();
+      console.log("Response:", data);
+
+      void router.push(`/showFriend/${data.id}`);
     } catch (error) {
       console.error("Error adding friend:", error);
     }
