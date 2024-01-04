@@ -18,7 +18,7 @@ type FormData = {
 const AddFriend: React.FC = () => {
   const router = useRouter();
   // const { data: session } = useSession();
-  const session = typeof window !== "undefined" ? useSession() : null;
+  const session = useSession();
 
   useEffect(() => {
     if (!session) {
