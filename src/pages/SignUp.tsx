@@ -29,7 +29,7 @@ const SignUpPage = () => {
     });
 
     if (response.ok) {
-      void router.push("/Login");
+      void router.push("/");
     } else {
       console.log("there was an error");
     }

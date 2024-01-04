@@ -50,6 +50,7 @@ export const authOptions: NextAuthOptions = {
             console.error(
               `API call failed with status ${response.status}: ${errorMessage}`,
             );
+            throw new Error("No user found with this email");
           }
 
           console.log("Received user from API: ", user);
