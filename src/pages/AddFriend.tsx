@@ -50,6 +50,8 @@ const AddFriend: React.FC = () => {
 
     try {
       if (session && session.status === "authenticated" && session.data) {
+        console.log("Form data: ", formData);
+        console.log("Session data: ", session);
         const response = await fetch("/api/addFriend", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
