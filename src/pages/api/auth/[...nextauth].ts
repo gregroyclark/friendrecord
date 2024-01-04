@@ -6,6 +6,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
 console.log("NEXTAUTH_URL: ", process.env.NEXTAUTH_URL);
+console.log("NEXTAUTH_API_URL: ", process.env.NEXTAUTH_API_URL);
 
 import NextAuth, { type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -16,46 +17,47 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: { label: "email", type: "text" },
-        password: { label: "password", type: "password" },
+        email: {},
+        password: {},
       },
-      authorize: async (credentials) => {
-        const apiUrl = process.env.NEXTAUTH_API_URL;
-
-        if (!apiUrl) {
-          console.error("API URL is not defined");
-          throw new Error("API URL is not defined");
-        }
-
-        console.log("Calling API with credentials: ", credentials);
-
+      async authorize(credentials): Promise<any> {
         try {
-          const res = await fetch(apiUrl, {
+          const { email, password } = credentials as {
+            email: string;
+            password: string;
+          };
+
+          console.log("Calling API with email: ", email);
+
+          const response = await fetch(process.env.NEXTAUTH_API_URL!, {
             method: "POST",
-            body: JSON.stringify(credentials),
+            body: JSON.stringify({ email, password }),
             headers: { "Content-Type": "application/json" },
           });
 
-          console.log("Received response from API: ", res);
-
-          if (!res.ok) {
-            console.error("Failed to authenticate");
-            throw new Error("Failed to authenticate");
+          if (!response.ok) {
+            const errorMessage = await response.text();
+            console.error(
+              `API call failed with status ${response.status}: ${errorMessage}`,
+            );
+            throw new Error(errorMessage);
           }
 
-          const user = await res.json();
+          const user = await response.json();
+
+          if (!user) {
+            const errorMessage = "No user found with this email";
+            console.error(
+              `API call failed with status ${response.status}: ${errorMessage}`,
+            );
+          }
 
           console.log("Received user from API: ", user);
 
-          if (user) {
-            return Promise.resolve(user);
-          } else {
-            console.error("No user received from API");
-            return Promise.resolve(null);
-          }
+          return user;
         } catch (error) {
           console.error("Error occurred during authorization: ", error);
-          return Promise.resolve(null);
+          throw new Error("Next Auth - Authorize: Authentication error", error);
         }
       },
     }),
