@@ -43,13 +43,14 @@ void describe("prismaService", async () => {
         id: 1,
         userId: "abc123",
         name: "John Doe",
+        phone: "1234567890",
         email: "john.doe@example.com",
         password: "password",
       };
 
       prisma.user.create = jest.fn().mockResolvedValue(userData);
 
-      const newUser = await register(userData);
+      const newUser = await register("john.dow@example.com", "password");
       expect(newUser).toEqual(expect.objectContaining(userData));
     });
 
@@ -60,13 +61,7 @@ void describe("prismaService", async () => {
     });
 
     try {
-      await register({
-        id: 1,
-        userId: "abc123",
-        name: "John Doe",
-        email: "john.doe@example.com",
-        password: "password",
-      });
+      await register("john.dow@example.com", "password");
     } catch (error) {
       expect(error).toBeInstanceOf(Error);
     }
