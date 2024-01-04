@@ -24,7 +24,7 @@ const AddFriend: React.FC = () => {
     if (!session) {
       void router.push("/Login");
     }
-  }, []);
+  }, [session]);
 
   const [formData, setFormData] = useState<FormData>({
     firstName: "",

@@ -28,7 +28,7 @@ const ShowFriend = () => {
     if (!session) {
       void router.push("/Login");
     }
-  }, []);
+  }, [session]);
 
   const [friend, setFriend] = useState<Friend | null>(null);
 
