@@ -1,11 +1,12 @@
 import './index.css';
 
+import Navbar from './components/Navbar';
 import AddFriend from './components/AddFriend';
 
 function App() {
   return (
     <>
-      <div>navbar</div>
+      <Navbar />
       <AddFriend />
     </>
   );
