@@ -8,9 +8,12 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/api/login', {
+      const response = await fetch('http://localhost:5000/api/users/login', {
         method: 'POST',
-        headers: { Content_Type: 'application/json' },
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({ email, password }),
       });
 
@@ -32,30 +35,32 @@ const Login = () => {
       </h1>
       <hr className='mb-4' />
 
-      <form onSubmit={handleSubmit}></form>
-      <div className='flex flex-col sm:flex-row m-2'>
-        <label className='flex items-center m-2'>Email:</label>
-        <input
-          type='text'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className='m-2 shadow-md rounded-sm p-2'
-        />
+      <form onSubmit={handleSubmit}>
+        <div className='flex flex-col sm:flex-row m-2'>
+          <label className='flex items-center m-2'>Email:</label>
+          <input
+            type='text'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className='m-2 shadow-md rounded-sm p-2'
+          />
 
-        <label className='flex items-center m-2'>Password:</label>
-        <input
-          type='password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className='m-2 shadow-md rounded-sm p-2'
-        />
-      </div>
-      <button
-        type='submit'
-        className='border m-4 p-2 rounded-md shadow-sm bg-blue-200 hover:bg-blue-300'
-      >
-        Log In
-      </button>
+          <label className='flex items-center m-2'>Password:</label>
+          <input
+            type='password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className='m-2 shadow-md rounded-sm p-2'
+          />
+        </div>
+        <button
+          type='submit'
+          className='border m-4 p-2 rounded-md shadow-sm bg-blue-200 hover:bg-blue-300'
+        >
+          Log In
+        </button>
+      </form>
+
       <div className='m-4'>
         Don't have an account?{' '}
         <Link to='/SignUp'>
