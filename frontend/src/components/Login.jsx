@@ -26,28 +26,48 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Email:
-        <input
-          type='text'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </label>
-      <label>
-        Password:
-        <input
-          type='password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </label>
-      <button type='submit'>Log In</button>
-      <div>
-        Dont have an account? <Link to='/SignUp'>Sign up.</Link>
+    <div className='border m-2 p-2 rounded-sm shadow-sm '>
+      <h1 className='m-4 flex justify-center text-lg font-semibold text-gray-600'>
+        Login
+      </h1>
+      <hr className='mb-4' />
+
+      <form onSubmit={handleSubmit}></form>
+      <div className='flex flex-col p-2'>
+        <label>
+          Email:
+          <input
+            type='text'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className='m-2 shadow-md rounded-sm p-2'
+          />
+        </label>
       </div>
-    </form>
+      <div className='flex flex-col p-2'>
+        <label>
+          Password:
+          <input
+            type='password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className='m-2 shadow-md rounded-sm p-2'
+          />
+        </label>
+      </div>
+      <button
+        type='submit'
+        className='border m-2 p-2 rounded-md shadow-sm bg-blue-200 hover:bg-blue-300'
+      >
+        Log In
+      </button>
+      <div>
+        Don't have an account?{' '}
+        <Link to='/SignUp'>
+          <span className='hover:text-blue-400'>Sign up.</span>
+        </Link>
+      </div>
+    </div>
   );
 };
 
