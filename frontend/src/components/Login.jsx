@@ -33,35 +33,30 @@ const Login = () => {
       <hr className='mb-4' />
 
       <form onSubmit={handleSubmit}></form>
-      <div className='flex flex-col p-2'>
-        <label>
-          Email:
-          <input
-            type='text'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className='m-2 shadow-md rounded-sm p-2'
-          />
-        </label>
-      </div>
-      <div className='flex flex-col p-2'>
-        <label>
-          Password:
-          <input
-            type='password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className='m-2 shadow-md rounded-sm p-2'
-          />
-        </label>
+      <div className='flex flex-col sm:flex-row m-2'>
+        <label className='m-2'>Email:</label>
+        <input
+          type='text'
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className='m-2 shadow-md rounded-sm p-2'
+        />
+
+        <label className='m-2'>Password:</label>
+        <input
+          type='password'
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className='m-2 shadow-md rounded-sm p-2'
+        />
       </div>
       <button
         type='submit'
-        className='border m-2 p-2 rounded-md shadow-sm bg-blue-200 hover:bg-blue-300'
+        className='border m-4 p-2 rounded-md shadow-sm bg-blue-200 hover:bg-blue-300'
       >
         Log In
       </button>
-      <div>
+      <div className='m-4'>
         Don't have an account?{' '}
         <Link to='/SignUp'>
           <span className='hover:text-blue-400'>Sign up.</span>

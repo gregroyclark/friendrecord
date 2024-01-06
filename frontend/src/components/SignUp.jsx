@@ -33,34 +33,30 @@ const SignUp = () => {
       <hr className='mb-4' />
       <form onSubmit={handleSubmit}>
         <div className='flex flex-col sm:flex-row m-2'>
-          <label>
-            Email:
-            <input
-              type='text'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className='m-2 p-2 rounded-sm shadow-md'
-            />
-          </label>
+          <label className='m-2'>Email:</label>
+          <input
+            type='text'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className='m-2 p-2 rounded-sm shadow-md'
+          />
 
-          <label>
-            Password:
-            <input
-              type='password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className='m-2 p-2 rounded-sm shadow-md'
-            />
-          </label>
+          <label className='m-2'>Password:</label>
+          <input
+            type='password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className='m-2 p-2 rounded-sm shadow-md'
+          />
         </div>
 
         <button
           type='submit'
-          className='border m-2 p-2 rounded-md shadow-sm bg-blue-200 hover:bg-blue-300'
+          className='border m-4 p-2 rounded-md shadow-sm bg-blue-200 hover:bg-blue-300'
         >
           Sign Up
         </button>
-        <div className='m-2'>
+        <div className='m-4'>
           Already have an account?{' '}
           <Link to='/Login'>
             <span className='hover:text-blue-400'>Log in.</span>
