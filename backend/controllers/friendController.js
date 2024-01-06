@@ -13,7 +13,7 @@ const db = require('../models/friendModel');
 
 // Create friend
 
-exports.createFriend = async (req, res) => {
+const createFriend = async (req, res) => {
   try {
     const result = await db.createFriend(
       req.body.firstName,
@@ -31,7 +31,7 @@ exports.createFriend = async (req, res) => {
 
 // Read all friends
 
-exports.readAllFriends = async (req, res) => {
+const readAllFriends = async (req, res) => {
   try {
     const result = await db.readAllFriends(req.params.userId);
     res.send(result);
@@ -42,7 +42,7 @@ exports.readAllFriends = async (req, res) => {
 
 // Read one friend
 
-exports.readOneFriend = async (req, res) => {
+const readOneFriend = async (req, res) => {
   try {
     const result = await db.readOneFriend(req.params.id);
     res.send(result);
@@ -53,7 +53,7 @@ exports.readOneFriend = async (req, res) => {
 
 // Update friend
 
-exports.updateFriend = async (req, res) => {
+const updateFriend = async (req, res) => {
   try {
     const result = await db.updateFriend(
       req.params.id,
@@ -72,11 +72,19 @@ exports.updateFriend = async (req, res) => {
 
 // Delete friend
 
-exports.deleteFriend = async (req, res) => {
+const deleteFriend = async (req, res) => {
   try {
     const result = await db.deleteFriend(req.params.id);
     res.send(result);
   } catch (err) {
     res.status(500).send(err);
   }
+};
+
+module.exports = {
+  createFriend,
+  readAllFriends,
+  readOneFriend,
+  updateFriend,
+  deleteFriend,
 };
