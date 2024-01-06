@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import logo from '../assets/friendrecord.png';
 
 const Navbar = () => {
@@ -14,12 +16,17 @@ const Navbar = () => {
       </a>
       <div className='m-2'>
         <ul className='flex flex-row'>
-          <li className='p-2 m-2 border shadow-md rounded-md text-sm'>
-            Add Friend
-          </li>
-          <li className='p-2 m-2 border shadow-md rounded-md text-sm'>
-            Friends List
-          </li>
+          <Link to='/AddFriend'>
+            <li className='border m-2 p-2 rounded-md shadow-sm text-sm'>
+              Add Friend
+            </li>
+          </Link>
+
+          <Link to='/FriendList'>
+            <li className='border m-2 p-2 rounded-md shadow-sm text-sm'>
+              Friends List
+            </li>
+          </Link>
         </ul>
       </div>
     </div>
