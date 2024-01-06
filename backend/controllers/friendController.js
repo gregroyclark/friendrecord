@@ -28,6 +28,7 @@ exports.createFriend = async (req, res) => {
     res.status(500).send(err);
   }
 };
+
 // Read all friends
 
 exports.readAllFriends = async (req, res) => {
@@ -43,7 +44,8 @@ exports.readAllFriends = async (req, res) => {
 
 exports.readOneFriend = async (req, res) => {
   try {
-    // stuff
+    const result = await db.readOneFriend(req.params.id);
+    res.send(result);
   } catch (err) {
     res.status(500).send(err);
   }
