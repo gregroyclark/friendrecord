@@ -13,7 +13,7 @@ const AddFriend = () => {
   const createFriend = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('/friend', {
+      const response = await fetch('/friends', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(friend),
