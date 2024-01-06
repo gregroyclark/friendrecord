@@ -32,10 +32,10 @@ exports.createFriend = (
 
 // readAllFriends
 
-exports.readAllFriends = () => {
+exports.readAllFriends = (userId) => {
   return new Promise((resolve, reject) => {
     const query = 'SELECT * FROM friends';
-    db.query(query, (err, result) => {
+    db.query(query, [userId], (err, result) => {
       if (err) reject(err);
       resolve(result);
     });
@@ -43,6 +43,16 @@ exports.readAllFriends = () => {
 };
 
 // readOneFriend
+
+exports.readOneFriend = (id) => {
+  return new Promise((resolve, reject) => {
+    const query = 'SELECT * FROM friends WHERE id = ?';
+    db.query(query, [id], (err, result) => {
+      if (err) reject(err);
+      resolve(result);
+    });
+  });
+};
 
 // updateFriend
 
