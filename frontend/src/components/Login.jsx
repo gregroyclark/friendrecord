@@ -34,7 +34,7 @@ const Login = () => {
 
       <form onSubmit={handleSubmit}></form>
       <div className='flex flex-col sm:flex-row m-2'>
-        <label className='m-2'>Email:</label>
+        <label className='flex items-center m-2'>Email:</label>
         <input
           type='text'
           value={email}
@@ -42,7 +42,7 @@ const Login = () => {
           className='m-2 shadow-md rounded-sm p-2'
         />
 
-        <label className='m-2'>Password:</label>
+        <label className='flex items-center m-2'>Password:</label>
         <input
           type='password'
           value={password}
