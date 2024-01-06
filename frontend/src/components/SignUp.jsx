@@ -4,15 +4,17 @@ import { Link } from 'react-router-dom';
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/api/register', {
+      const response = await fetch('http://localhost:5000/api/users/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ firstName, lastName, email, password }),
       });
 
       const text = await response.text();
@@ -40,6 +42,22 @@ const SignUp = () => {
       </h1>
       <hr className='mb-4' />
       <form onSubmit={handleSubmit}>
+        <div className='flex flex-col sm:flex-row m-2'>
+          <label className='flex items-center m-2'>First Name: </label>
+          <input
+            type='text'
+            value={firstName}
+            className='m-2 p-2 rounded-sm shadow-md'
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+          <label className='flex items-center m-2'>Last Name: </label>
+          <input
+            type='text'
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            className='m-2 p-2 rounded-sm shadow-md'
+          />
+        </div>
         <div className='flex flex-col sm:flex-row m-2'>
           <label className='flex items-center m-2'>Email:</label>
           <input
