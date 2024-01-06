@@ -1,4 +1,5 @@
 const express = require('express');
+
 const logger = require('morgan');
 const cors = require('cors');
 const path = require('path');
@@ -17,4 +18,6 @@ app.set('view engine', 'pug');
 app.use('/friends', friendsRoutes);
 app.use('/users', usersRoutes);
 
-app.listen(port, () => console.log(`Server running on port ${port}`));
+app.listen(port, () =>
+  console.log(`🌎 ==> API Server now listening on port ${port}`)
+);
