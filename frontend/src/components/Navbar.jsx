@@ -2,7 +2,7 @@ import logo from '../assets/friendrecord.png';
 
 const Navbar = () => {
   return (
-    <div className='shadow-md p-2 flex items-center'>
+    <div className='flex border-b items-center mb-4 p-2 shadow-sm'>
       <a>
         <img
           src={logo}
