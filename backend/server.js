@@ -10,18 +10,18 @@ const routes = require('./routes');
 const app = express();
 
 // auth goes here
-function authenticateToken(req, res, next) {
-  const token = req.cookies.jwt;
-  if (token == null)
-    return res.status(401).send({ message: 'No token provided' });
+// function authenticateToken(req, res, next) {
+//   const token = req.cookies.jwt;
+//   if (token == null)
+//     return res.status(401).send({ message: 'No token provided' });
 
-  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-    if (err)
-      return res.status(403).send({ message: 'Failed to authenticate token' });
-    req.user = user;
-    next();
-  });
-}
+//   jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+//     if (err)
+//       return res.status(403).send({ message: 'Failed to authenticate token' });
+//     req.user = user;
+//     next();
+//   });
+// }
 
 const port = process.env.PORT || 5000;
 
