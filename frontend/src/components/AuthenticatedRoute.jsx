@@ -1,7 +1,7 @@
 import { Redirect, Route } from 'react-router-dom';
 
 const AuthenticatedRoute = ({ component: Component, ...rest }) => {
-  const isAuthenticated = null;
+  const isAuthenticated = !!localStorage.getItem('jwt');
 
   return (
     <Route
