@@ -22,6 +22,7 @@ const app = express();
 //     next();
 //   });
 // }
+// module.exports.authenticateToken = authenticateToken;
 
 const port = process.env.PORT || 5000;
 
@@ -32,7 +33,11 @@ app.use(cors());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-// module.exports.authenticateToken = authenticateToken;
+// app.use(express.static(path.join(__dirname, 'frontend/dist')));
+
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'frontend/dist', 'index.html'));
+// });
 
 app.use(routes);
 
