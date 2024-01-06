@@ -1,16 +1,9 @@
-import { Redirect, Route } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
-const AuthenticatedRoute = ({ component: Component, ...rest }) => {
+const AuthenticatedRoute = ({ children }) => {
   const isAuthenticated = !!localStorage.getItem('jwt');
 
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        isAuthenticated ? <Component {...props} /> : <Redirect to='/login' />
-      }
-    />
-  );
+  return isAuthenticated ? children : <Navigate to='/Login' />;
 };
 
 export default AuthenticatedRoute;
