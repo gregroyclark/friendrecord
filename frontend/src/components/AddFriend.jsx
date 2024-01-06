@@ -13,7 +13,7 @@ const AddFriend = () => {
   const createFriend = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('/friends', {
+      const response = await fetch('http://localhost:5000/api/friends/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(friend),
@@ -22,8 +22,8 @@ const AddFriend = () => {
       console.log(`Response status: ${response.status} ${response.statusText}`);
 
       if (!response.ok) {
-        console.error('Network response was not ok');
-        throw new Error('Network response was not ok');
+        console.error('HTTP error');
+        throw new Error('HTTP error: ', response.status);
       }
 
       const data = await response.json();
@@ -41,18 +41,6 @@ const AddFriend = () => {
       console.log(data);
     } catch (error) {
       console.error('Error reading all friends: ', error);
-    }
-  };
-
-  const deleteFriend = async (id) => {
-    try {
-      const response = await fetch(`/friends/${id}`, {
-        method: 'DELETE',
-      });
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.error('Error deleting friend: ', error);
     }
   };
 
@@ -131,12 +119,6 @@ const AddFriend = () => {
         className='rounded-md m-2 p-2 border shadow-sm bg-blue-200 hover:bg-blue-300'
       >
         Friends List
-      </button>
-      <button
-        onClick={() => deleteFriend(friend.id)}
-        className='rounded-md m-2 p-2 border shadow-sm bg-red-200 hover:bg-red-300'
-      >
-        Delete Friend
       </button>
     </div>
   );
