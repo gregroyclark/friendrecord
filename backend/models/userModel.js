@@ -20,7 +20,7 @@ exports.findUserByEmail = (email) => {
     const query = 'SELECT * FROM users WHERE email = ?';
     db.query(query, [email], (err, result) => {
       if (err) reject(err);
-      resolve(result);
+      resolve(result[0]);
     });
   });
 };
