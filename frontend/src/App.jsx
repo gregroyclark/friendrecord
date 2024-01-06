@@ -1,10 +1,12 @@
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import './index.css';
 
 import AuthenticatedRoute from './components/AuthenticatedRoute';
 
 import Navbar from './components/Navbar';
+import Login from './components/Login';
+import SignUp from './components/SignUp';
 import AddFriend from './components/AddFriend';
 // import FriendList from './components/FriendList';
 // import UpdateFriend from './components/UpdateFriend'
@@ -13,11 +15,22 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <Switch>
-        <AuthenticatedRoute exact path='/' component={AddFriend} />
-        {/* <AuthenticatedRoute exact path='/' component={FriendList} /> */}
-        {/* <AuthenticatedRoute exact path='/' component={UpdateFriend} /> */}
-      </Switch>
+
+      <Routes>
+        <Login />
+        <SignUp />
+        <Route
+          path='/'
+          element={
+            <AuthenticatedRoute>
+              <AddFriend />
+            </AuthenticatedRoute>
+          }
+        />
+
+        {/* <AuthenticatedRoute path='/' element={FriendList} /> */}
+        {/* <AuthenticatedRoute path='/' element={UpdateFriend} /> */}
+      </Routes>
     </Router>
   );
 }
