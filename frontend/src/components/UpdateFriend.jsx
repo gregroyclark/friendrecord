@@ -11,7 +11,10 @@ const UpdateFriend = ({ friend }) => {
         `http://localhost:5000/api/friends/${friend.id}`,
         {
           method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
           body: JSON.stringify(updatedFriend),
         }
       );
@@ -26,6 +29,7 @@ const UpdateFriend = ({ friend }) => {
     try {
       const response = await fetch(`http://localhost:5000/api/friends/${id}`, {
         method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();
       console.log(data);

@@ -15,7 +15,10 @@ const AddFriend = () => {
     try {
       const response = await fetch('http://localhost:5000/api/friends/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(friend),
       });
 
