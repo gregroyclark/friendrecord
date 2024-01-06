@@ -77,3 +77,13 @@ exports.updateFriend = (
 };
 
 // deleteFriend
+
+exports.deleteFriend = (id) => {
+  return new Promise((resolve, reject) => {
+    const query = 'DELETE FROM friends WHERE id = ?';
+    db.query(query, [id], (err, result) => {
+      if (err) reject(err);
+      resolve(result);
+    });
+  });
+};
