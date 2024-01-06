@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -14,14 +15,21 @@ const SignUp = () => {
         body: JSON.stringify({ email, password }),
       });
 
+      const text = await response.text();
+      console.log('Raw response: ', text);
       if (!response.ok) {
         throw new Error('HTTP error: ' + response.status);
       }
 
-      const data = await response.json();
+      const data = JSON.parse(text);
+      // const data = await response.json();
       console.log('Success: ', data);
     } catch (error) {
       console.error('Error: ', error);
+      setErrorMessage('Error signing up');
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 5000);
     }
   };
 
@@ -56,6 +64,11 @@ const SignUp = () => {
         >
           Sign Up
         </button>
+        {errorMessage && (
+          <div className='m-2 p-2 bg-red-200 animate-fade'>
+            <p>{errorMessage}</p>
+          </div>
+        )}
         <div className='m-4'>
           Already have an account?{' '}
           <Link to='/Login'>
