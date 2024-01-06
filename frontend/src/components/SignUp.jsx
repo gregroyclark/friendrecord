@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -25,7 +26,7 @@ const SignUp = () => {
   };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <label>
         Email:
         <input
@@ -43,6 +44,9 @@ const SignUp = () => {
         />
       </label>
       <button type='submit'>Sign Up</button>
+      <div>
+        Already have an account? <Link to='/Login'>Log in.</Link>
+      </div>
     </form>
   );
 };
