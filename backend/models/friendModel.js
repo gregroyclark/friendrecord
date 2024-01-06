@@ -56,4 +56,24 @@ exports.readOneFriend = (id) => {
 
 // updateFriend
 
+exports.updateFriend = (
+  id,
+  firstName,
+  lastName,
+  email,
+  phoneNumber,
+  notes,
+  userId
+) => {
+  return new Promise((resolve, reject) => {
+    const query =
+      'UPDATE friends SET firstName = ?, lastName = ?, email = ?, phoneNumber = ?, notes = ?, userId = ? WHERE id = ?';
+    const values = [firstName, lastName, email, phoneNumber, notes, userId, id];
+    db.query(query, values, (err, result) => {
+      if (err) reject(err);
+      resolve(result);
+    });
+  });
+};
+
 // deleteFriend
