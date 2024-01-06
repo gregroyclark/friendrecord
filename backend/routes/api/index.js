@@ -9,8 +9,8 @@ router.use('/friends', friendRoutes);
 // User routes
 router.use('/users', userRoutes);
 
-router.use(function (req, res) {
-  res.sendFile(path.join(__dirname, '../../../frontend/build/index.html'));
-});
+// router.use(function (req, res) {
+//   res.sendFile(path.join(__dirname, '../../../frontend/', 'index.html'));
+// });
 
 module.exports = router;
