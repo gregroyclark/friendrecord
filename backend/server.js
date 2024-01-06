@@ -32,9 +32,9 @@ app.use(cors());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(routes);
+// module.exports.authenticateToken = authenticateToken;
 
-module.exports.authenticateToken = authenticateToken;
+app.use(routes);
 
 app.listen(port, () =>
   console.log(`🌎 ==> API Server now listening on port ${port}`)
