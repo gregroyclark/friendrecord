@@ -2,12 +2,11 @@ const db = require('../models/friendModel');
 
 // Read all friends
 
-exports.readAllFriends = () => {
-  return new Promise((resolve, reject) => {
-    const query = 'SELECT * FROM friends';
-    db.query(query, (err, result) => {
-      if (err) reject(err);
-      resolve(result);
-    });
-  });
+exports.readAllFriends = async (req, res) => {
+  try {
+    const result = await db.readAllFriends();
+    res.send(result);
+  } catch (err) {
+    res.status(500).send(err);
+  }
 };
