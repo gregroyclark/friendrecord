@@ -55,7 +55,16 @@ exports.readOneFriend = async (req, res) => {
 
 exports.updateFriend = async (req, res) => {
   try {
-    // stuff
+    const result = await db.updateFriend(
+      req.params.id,
+      req.body.firstName,
+      req.body.lastName,
+      req.body.email,
+      req.body.phoneNumber,
+      req.body.notes,
+      req.body.userId
+    );
+    res.send(result);
   } catch (err) {
     res.status(500).send(err);
   }
