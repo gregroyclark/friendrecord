@@ -74,7 +74,8 @@ exports.updateFriend = async (req, res) => {
 
 exports.deleteFriend = async (req, res) => {
   try {
-    // stuff
+    const result = await db.deleteFriend(req.params.id);
+    res.send(result);
   } catch (err) {
     res.status(500).send(err);
   }
