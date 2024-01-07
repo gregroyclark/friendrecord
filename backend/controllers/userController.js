@@ -14,16 +14,21 @@ const jwt = require('jsonwebtoken');
 */
 
 const register = async (req, res) => {
-  const hashedPassword = await bcrypt.hash(req.body.password, 10);
-  const user = await db.createUser(
-    req.body.firstName,
-    req.body.lastName,
-    req.body.email,
-    hashedPassword,
-    'user'
-  );
-  console.log('User registered: ', user);
-  res.status(201).send(user);
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const user = await db.createUser(
+      req.body.firstName,
+      req.body.lastName,
+      req.body.email,
+      hashedPassword,
+      'user'
+    );
+    console.log('User registered: ', user);
+    res.status(201).send(user);
+  } catch (error) {
+    console.error(error);
+    res.status(400).send('Email already taken');
+  }
 };
 
 const login = async (req, res) => {

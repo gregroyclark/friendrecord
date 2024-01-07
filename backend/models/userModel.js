@@ -2,7 +2,13 @@ const { v4: uuidv4 } = require('uuid');
 
 const { db } = require('../config/database');
 
-exports.createUser = (firstName, lastName, email, hashedPassword) => {
+exports.createUser = async (firstName, lastName, email, hashedPassword) => {
+  try {
+    const existingUser = await exports.findUserByEmail(email);
+    if (existingUser) {
+      throw new Error('Email already taken');
+    }
+  } catch (error) {}
   return new Promise((resolve, reject) => {
     const userId = uuidv4();
     const query =
