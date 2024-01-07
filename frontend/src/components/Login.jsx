@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -25,6 +26,10 @@ const Login = () => {
       console.log('Success: ', data);
     } catch (error) {
       console.error('Error: ', error);
+      setErrorMessage('Error logging in');
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 5000);
     }
   };
 
@@ -59,6 +64,11 @@ const Login = () => {
         >
           Log In
         </button>
+        {errorMessage && (
+          <div className='m-4 p-2 bg-red-200 animate-fade rounded-sm shadow-sm'>
+            <p>{errorMessage}</p>
+          </div>
+        )}
       </form>
 
       <div className='m-4'>
