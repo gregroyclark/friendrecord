@@ -83,7 +83,7 @@ const SignUp = () => {
           Sign Up
         </button>
         {errorMessage && (
-          <div className='m-2 p-2 bg-red-200 animate-fade'>
+          <div className='m-4 p-2 bg-red-200 animate-fade'>
             <p>{errorMessage}</p>
           </div>
         )}
