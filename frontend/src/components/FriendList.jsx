@@ -4,12 +4,19 @@ const FriendList = ({ userId }) => {
   const [friends, setFriends] = useState(null);
 
   useEffect(() => {
-    const readFriends = async () => {
+    const readAllFriends = async () => {
       try {
+        const token = localStorage.getItem('jwt');
+        console.log('token: ', token);
+        const userId = localStorage.getItem('userId');
+        console.log('userId: ', userId);
         const response = await fetch(
-          `http://localhost:5000/api/friends/${userId}`,
+          `http://localhost:5000/api/friends/readAllFriends/${userId}`,
           {
-            headers: { Authorization: `Bearer ${token}` },
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
         );
         // const text = await response.text();
@@ -22,11 +29,11 @@ const FriendList = ({ userId }) => {
       }
     };
 
-    readFriends();
+    readAllFriends();
   }, [userId]);
 
   if (friends === null) {
-    return <div>Loading...</div>;
+    return <div className='flex justify-center items-center'>Loading...</div>;
   }
 
   return (
