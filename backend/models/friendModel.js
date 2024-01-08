@@ -1,4 +1,4 @@
-const db = require('../config/database');
+const { db } = require('../config/database');
 
 /* 
 
@@ -21,10 +21,14 @@ exports.createFriend = (
   userId
 ) => {
   return new Promise((resolve, reject) => {
-    const query = 'INSERT INTO friends SET ?';
-    const values = { firstName, lastName, email, phoneNumber, notes, userId };
+    const query =
+      'INSERT INTO friends (firstName, lastName, email, phoneNumber, notes, userId) VALUES (?, ?, ?, ?, ?, ?)';
+    const values = [firstName, lastName, email, phoneNumber, notes, userId];
     db.query(query, values, (err, result) => {
-      if (err) reject(err);
+      if (err) {
+        console.log(err);
+        reject({ err: 'An error occurred while executing the SQL query.' });
+      }
       resolve(result);
     });
   });
