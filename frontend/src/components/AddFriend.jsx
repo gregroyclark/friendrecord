@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const AddFriend = () => {
   const [friend, setFriend] = useState({
@@ -7,20 +8,29 @@ const AddFriend = () => {
     email: '',
     phoneNumber: '',
     notes: '',
-    userId: '',
+    userId: localStorage.getItem('userId'),
   });
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const createFriend = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/api/friends/', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(friend),
-      });
+      const token = localStorage.getItem('jwt');
+      console.log('token: ', token);
+      const userId = localStorage.getItem('userId');
+      console.log('userId: ', userId);
+      setFriend({ ...friend, userId });
+      const response = await fetch(
+        'http://localhost:5000/api/friends/createFriend',
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(friend),
+        }
+      );
 
       console.log(`Response status: ${response.status} ${response.statusText}`);
 
@@ -30,20 +40,13 @@ const AddFriend = () => {
       }
 
       const data = await response.json();
-
       console.log('Response data: ', data);
     } catch (error) {
       console.error('Error creating friend: ', error);
-    }
-  };
-
-  const readFriends = async (userId) => {
-    try {
-      const response = await fetch(`/friends/${userId}`);
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.error('Error reading all friends: ', error);
+      setErrorMessage('Failed to add friend. Please try again.');
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 5000);
     }
   };
 
@@ -53,7 +56,7 @@ const AddFriend = () => {
         Add a new friend!
       </h1>
       <hr className='mb-4' />
-      <form onSubmit={createFriend}>
+      <form onSubmit={handleSubmit}>
         <div className='flex flex-col p-2'>
           <label className=''>First Name: </label>
           <input
@@ -114,14 +117,19 @@ const AddFriend = () => {
         >
           Add Friend
         </button>
+        {errorMessage && (
+          <div className='m-2 p-2 bg-red-200 animate-fade rounded-sm shadow-sm'>
+            <p>{errorMessage}</p>
+          </div>
+        )}
         <hr className='mb-4' />
       </form>
 
       <button
-        onClick={() => readFriends(friend.userId)}
+        onClick={() => goToFriendList()}
         className='rounded-md m-2 p-2 border shadow-sm bg-blue-200 hover:bg-blue-300'
       >
-        Friends List
+        <Link to='/FriendList'>Friends List</Link>
       </button>
     </div>
   );
