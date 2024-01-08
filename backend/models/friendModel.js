@@ -37,10 +37,15 @@ exports.createFriend = (
 // readAllFriends
 
 exports.readAllFriends = (userId) => {
+  console.log('Reading friends for userId: ', userId);
   return new Promise((resolve, reject) => {
-    const query = 'SELECT * FROM friends';
+    const query = 'SELECT * FROM friends where userId = ?';
     db.query(query, [userId], (err, result) => {
-      if (err) reject(err);
+      if (err) {
+        console.log('Error executing query: ', err);
+        reject(err);
+      }
+      console.log('Query result: ', result);
       resolve(result);
     });
   });
