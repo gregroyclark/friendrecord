@@ -49,10 +49,16 @@ const createFriend = async (req, res) => {
 // Read all friends
 
 const readAllFriends = async (req, res) => {
+  console.log(
+    'Received request to read all friends for userId: ',
+    req.params.userId
+  );
   try {
     const result = await db.readAllFriends(req.params.userId);
+    console.log('Sending friends list: ', result);
     res.send(result);
   } catch (err) {
+    console.error('Error reading all friends: ', err);
     res.status(500).send(err);
   }
 };
