@@ -14,6 +14,15 @@ const jwt = require('jsonwebtoken');
 */
 
 const register = async (req, res) => {
+  if (
+    !req.body ||
+    !req.body.firstName ||
+    !req.body.lastName ||
+    !req.body.email ||
+    !req.body.password
+  ) {
+    return res.status(400).send('Missing required fields');
+  }
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const user = await db.createUser(
@@ -33,6 +42,10 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   console.log('Handling login request...');
+
+  if (!req.body || !req.body.email || !req.body.password) {
+    return res.status(400).send('Missing required fields');
+  }
 
   const user = await db.findUserByEmail(req.body.email);
   console.log('User found: ', user);
@@ -54,7 +67,7 @@ const login = async (req, res) => {
     console.log('Generated JWT: ', token);
 
     res.cookie('jwt', token, { httpOnly: true });
-    res.status(200).send(user);
+    res.status(200).send({ user, userId: user.userId, token });
   } else {
     console.log('Authentication failed');
     res.status(401).send('Invalid username or password');
