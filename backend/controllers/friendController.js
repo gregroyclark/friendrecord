@@ -14,18 +14,35 @@ const db = require('../models/friendModel');
 // Create friend
 
 const createFriend = async (req, res) => {
+  const { firstName, lastName, email, phoneNumber, notes, userId } = req.body;
+  if (
+    !req.body ||
+    !firstName ||
+    !lastName ||
+    !email ||
+    !phoneNumber ||
+    !notes ||
+    !userId
+  ) {
+    return res.status(400).send('Missing required fields');
+  }
+
   try {
-    const result = await db.createFriend(
-      req.body.firstName,
-      req.body.lastName,
-      req.body.email,
-      req.body.phoneNumber,
-      req.body.notes,
-      req.body.userId
+    const friend = await db.createFriend(
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      notes,
+      userId
     );
-    res.send(result);
-  } catch (err) {
-    res.status(500).send(err);
+    console.log('Friend created: ', friend);
+    res.status(201).send(friend);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      error: error.message || 'An error occurred while creating the friend.',
+    });
   }
 };
 
