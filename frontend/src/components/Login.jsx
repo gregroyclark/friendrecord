@@ -25,6 +25,9 @@ const Login = () => {
       const data = await response.json();
       console.log('Success: ', data);
       localStorage.setItem('jwt', data.token);
+      console.log('Storing jwt: ', data.token);
+      localStorage.setItem('userId', data.userId);
+      console.log('Storing userId: ', data.userId);
       window.location.href = '/AddFriend';
     } catch (error) {
       console.error('Error: ', error);
