@@ -36,8 +36,7 @@ function authenticateToken(req, res, next) {
   });
 }
 
-app.use(authenticateToken);
-// module.exports.authenticateToken = authenticateToken;
+module.exports = { authenticateToken };
 
 // app.use(express.static(path.join(__dirname, 'frontend/dist')));
 
