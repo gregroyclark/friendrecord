@@ -12,7 +12,7 @@ const Login = () => {
       const response = await fetch('http://localhost:5000/api/users/login', {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${token}`,
+          // Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password }),
@@ -24,6 +24,8 @@ const Login = () => {
 
       const data = await response.json();
       console.log('Success: ', data);
+      localStorage.setItem('jwt', data.token);
+      window.location.href = '/AddFriend';
     } catch (error) {
       console.error('Error: ', error);
       setErrorMessage('Error logging in');
