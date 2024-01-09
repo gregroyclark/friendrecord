@@ -1,4 +1,6 @@
 const express = require('express');
+const pgp = require('pg-promise')();
+const fs = require('fs');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -6,7 +8,14 @@ const cors = require('cors');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 
+const { database } = require('./config/database');
 const routes = require('./routes');
+
+const db = pgp(database);
+
+db.none(fs.readFileSync('./createTable.sql').toString())
+  .then(() => console.log('Table created'))
+  .catch((error) => console.log('ERROR: ', error));
 
 const app = express();
 
@@ -17,7 +26,30 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(logger('combined'));
 app.use(express.json());
-app.use(cors());
+
+app.use(
+  cors({
+    origin: ['https://friendrecord.netlify.app', 'http://localhost:5137'],
+    credentials: true,
+  })
+);
+
+app.use(function (req, res, next) {
+  res.setHeader(
+    'Access-control-Allow-Origin',
+    'https://friendrecord.netlify.app'
+  );
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET, POST, OPTIONS, PUT, PATCH, DELETE'
+  );
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'X-Requested-With,content-type'
+  );
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  next();
+});
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -37,12 +69,6 @@ function authenticateToken(req, res, next) {
 }
 
 module.exports = { authenticateToken };
-
-// app.use(express.static(path.join(__dirname, 'frontend/dist')));
-
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'frontend/dist', 'index.html'));
-// });
 
 app.use(routes);
 
