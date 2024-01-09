@@ -4,16 +4,16 @@ friendrecord is a full stack JavaScript contact info app demonstrating basic CRU
 
 The primary purpose of this project is to demonstrate proficiency with backend software development, namely SQL and APIs (composing and consuming).
 
-Tools used include React.js, TailwindCSS, Node.js, MySQL, and test driven development with Jest.
+Tools used include React.js, TailwindCSS, Node.js, PostgreSQL, and test driven development with Jest.
 
-Prod MySQL db provisioned by Planetscale.
-Deployed to Netlify.
+Prod PostgreSQL db provisioned by [Render](https://render.com).
+React frontend deployed to Netlify, Express backend deployed to Render.
 
 ---
 
 ## Backend
 
-Database CRUD functions written with MySQL.
+Database CRUD functions written with PostgreSQL.
 
 Available CRUD operations:
 
@@ -25,9 +25,9 @@ Available CRUD operations:
 - UPDATE/PUT a record.
 - DELETE a record.
 
-Prod db provisioned courtesy of [Planetscale](https://planetscale.com/).
+Prod db provisioned courtesy of [Render](https://render.com/).
 
-Authorization & authentication leverage [JWT](https://jwt.io/) workflow.
+<!-- Authorization & authentication leverage [JWT](https://jwt.io/) workflow. -->
 
 ---
 
@@ -39,7 +39,7 @@ friendrecord follows test driven development to enhance development speed & debu
 
 ## UI/UX & functionality:
 
-Land on [friendrecord](https://friendrecord.com).
+Land on [friendrecord](https://friendrecord.netlify.app).
 
 Sign up & log in. Each user has private data.
 
