@@ -1,4 +1,4 @@
-const db = require('../models/userModel');
+const pool = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -25,7 +25,7 @@ const register = async (req, res) => {
   }
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    const user = await db.createUser(
+    const user = await pool.createUser(
       req.body.firstName,
       req.body.lastName,
       req.body.email,
@@ -36,27 +36,36 @@ const register = async (req, res) => {
     res.status(201).send(user);
   } catch (error) {
     console.error(error);
-    res.status(400).send('Email already taken');
+    res.status(400).send('Error registering user');
   }
 };
 
 const login = async (req, res) => {
   console.log('Handling login request...');
+  console.log('Request body: ', req.body);
+  console.log('Email from request body: ', req.body.email);
+  console.log('Password from request body: ', req.body.password);
 
   if (!req.body || !req.body.email || !req.body.password) {
     return res.status(400).send('Missing required fields');
   }
 
-  const user = await db.findUserByEmail(req.body.email);
+  const user = await pool.findUserByEmail(req.body.email);
   console.log('User found: ', user);
+
+  console.log('Comparing password: ', req.body.password);
+  console.log('With hashedPassword: ', user.hashedPassword);
 
   let isAuthenticated = false;
 
-  if (user) {
+  try {
     isAuthenticated = await bcrypt.compare(
       req.body.password,
       user.hashedPassword
     );
+  } catch (error) {
+    console.error('Error comparing passwords: ', error);
+  } finally {
     console.log('Authentication result: ', isAuthenticated);
   }
 
@@ -72,17 +81,6 @@ const login = async (req, res) => {
     console.log('Authentication failed');
     res.status(401).send('Invalid username or password');
   }
-
-  // if (user && (await bcrypt.compare(req.body.password, user.password))) {
-  //   const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-  //     expiresIn: '1h',
-  //   });
-
-  //   res.cookie('jwt', token, { httpOnly: true });
-  //   res.status(200).send(user);
-  // } else {
-  //   res.status(401).send('Invalid username or password');
-  // }
 };
 
 module.exports = { register, login };
