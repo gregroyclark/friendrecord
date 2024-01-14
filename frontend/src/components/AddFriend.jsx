@@ -21,13 +21,14 @@ const AddFriend = () => {
       console.log('userId: ', userId);
       setFriend({ ...friend, userId });
       const response = await fetch(
-        'http://localhost:5000/api/friends/createFriend',
+        'https://friendrecord-express.onrender.com/api/friends/createFriend',
         {
           method: 'POST',
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
+          credentials: 'include',
           body: JSON.stringify(friend),
         }
       );
@@ -51,7 +52,7 @@ const AddFriend = () => {
   };
 
   return (
-    <div className='shadow-md p-2 m-2 rounded-sm'>
+    <div className='m-2 p-2 rounded-sm shadow-md'>
       <h1 className='mb-4 flex justify-center text-lg font-semibold text-gray-600'>
         Add a new friend!
       </h1>
@@ -125,12 +126,11 @@ const AddFriend = () => {
         <hr className='mb-4' />
       </form>
 
-      <button
-        onClick={() => goToFriendList()}
-        className='rounded-md m-2 p-2 border shadow-sm bg-blue-200 hover:bg-blue-300'
-      >
-        <Link to='/FriendList'>Friends List</Link>
-      </button>
+      <Link to={'/FriendList'}>
+        <button className='rounded-md m-2 p-2 border shadow-sm bg-blue-200 hover:bg-blue-300'>
+          Friends List
+        </button>
+      </Link>
     </div>
   );
 };
